@@ -1,9 +1,12 @@
 /**
  * Created by Sarm_Brights on 3/31/2016.
  */
+
 function validateEmail(email) {
-    var _csrf = $("input[name=_csrf]").val();
-    var _data = {'_csrf': _csrf, 'email': email};
+    var _data = {
+        'LoginForm[email]': email,
+        'action': 'validateEmail'
+    };
     $.ajax({
         type: 'POST',
         url: validateEmailUrl,
@@ -14,17 +17,19 @@ function validateEmail(email) {
 
         },
         success: function (json) {
-            if(json.status == 'ok')
-            {
-                event.preventDefault();
+            if (json.status == 'ok') {
                 $("#second-form div.field-loginform-password").removeClass("has-error");
                 $("#second-form div.field-loginform-password p").empty();
                 $("#first-form").hide();
+                $("#email-display").text(email);
                 $("#back-arrow").fadeIn("slow");
                 $("#second-form").fadeIn("slow", function () {
                     $("#back-arrow").fadeIn("slow");
                     $("#loginform-password").focus();
                 });
+            } else {
+                $("#first-form div.field-loginform-email").addClass("has-error");
+                $("#first-form div.field-loginform-email p").text(json.message);
             }
         },
         complete: function () {
@@ -35,6 +40,7 @@ function validateEmail(email) {
 $("#next").on("click", function (event) {
     var email = $.trim($("#loginform-email").val());
     if (email != "") {
+        event.preventDefault();
         validateEmail(email);
     }
 });

@@ -59,17 +59,21 @@ class LoginForm extends Model
      */
     public function validateEmail($attribute)
     {
-        if (!$this->hasErrors()) {
-            $validator = new EmailValidator();
-            if ($validator->validate($this->email)) {
-                if (!$this->getUser()) {
-                    $this->addError($attribute, 'Incorrect email.');
-                }
-            } else {
-                $this->addError($attribute, 'Please enter a valid email address. ');
-            }
+        if ($this->hasErrors())
+            return false;
 
+        $validator = new EmailValidator();
+        if (!$validator->validate($this->email)) {
+            $this->addError($attribute, 'Please enter a valid email address. ');
+            return false;
         }
+
+        if (!$this->getUser()) {
+            $this->addError($attribute, 'Incorrect email.');
+            return false;
+        }
+
+        return true;
     }
 
     /**

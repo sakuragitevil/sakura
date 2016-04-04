@@ -45,7 +45,7 @@ $this->registerJsFile(Yii::$app->request->baseUrl.'/js/sakuraLogin.js',['depends
                 <div id="second-form" style="display: none">
 
                     <div>
-                        <span id="email-display">thuanevil@gmail.com</span>
+                        <span id="email-display"></span>
                     </div>
 
                     <?= $form->field($model, 'password')
@@ -62,5 +62,5 @@ $this->registerJsFile(Yii::$app->request->baseUrl.'/js/sakuraLogin.js',['depends
     </div>
 </div>
 <script type="text/javascript">
-    var validateEmailUrl = '<?php echo yii\helpers\Url::to(['site/validateEmail']);?>';
+    var validateEmailUrl = '<?php echo yii\helpers\Url::to(['site/login']);?>';
 </script>
