@@ -27,6 +27,7 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="wrap">
+
     <div class="g-Ue-ad">
         <div class="g-Qx">
             <div class="g-Qx-eb X5yjGb">
@@ -38,10 +39,16 @@ AppAsset::register($this);
             <div class="g-Qx-n5VRYe"></div>
         </div>
     </div>
+    <div class="clearboth"></div>
     <div class="container-fluid">
         <?= Alert::widget() ?>
-        <?= $this->render('@app/views/layouts/header') ?>
+
+        <?php if (!\Yii::$app->user->isGuest): ?>
+            <?= $this->render('@app/views/layouts/header') ?>
+        <?php endif; ?>
+
         <?= $content ?>
+
     </div>
 </div>
 
