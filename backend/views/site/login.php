@@ -26,7 +26,7 @@ $this->registerJsFile(Yii::$app->request->baseUrl.'/js/sakuraLogin.js',['depends
         <div class="circle-mask">
             <canvas id="canvas" class="circle" width="96" height="96"></canvas>
         </div>
-        <img id="back-arrow" class="back-arrow" aria-label="Back" style="display: none;" src="../web/img/arrow_back_grey600_24dp.png">
+        <img id="back-arrow" class="back-arrow" aria-label="Back" src="../web/icons/navigation/1x_web/ic_arrow_back_grey_24dp.png">
         <div class="row">
             <div class="col-lg-12">
                 <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>

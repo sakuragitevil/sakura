@@ -1,18 +1,64 @@
 html,
 body {
     height: 100%;
-    font-family: Roboto,Arial,sans-serif;
+    margin: 0;
+    width: 100%;
+    font-family: Roboto, Arial, sans-serif;
+    display: block;
 }
 
 .wrap {
-    min-height: 100%;
-    height: auto;
-    margin: 0 auto -60px;
-    padding: 0 0 60px;
+    min-height: 500px;
+    min-width: 900px;
+    position: relative;
+    height: 100%;
+
 }
 
-.wrap > .container {
-    padding: 70px 15px 20px;
+.g-Ue-ad {
+    background-color: #000;
+    height: 100%;
+    left: 0;
+    min-height: 500px;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.g-Qx {
+    position: relative;
+}
+
+.g-Qx, .g-Qx-eb {
+    height: 100%;
+    width: 100%;
+}
+
+.kFx1Ae-xdwExf-eb-m {
+    width: 100%;
+    height: 100%;
+}
+
+.kFx1Ae-xdwExf-eb {
+    position: absolute;
+    -webkit-transition: opacity 1s linear;
+    transition: opacity 1s linear;
+    opacity: 1;
+    width: 100%;
+    height: 100%;
+}
+
+.g-Qx-n5VRYe {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    height: 100%;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0);
+    background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, .6) 75%, rgba(0, 0, 0, .8) 100%);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, .6) 75%, rgba(0, 0, 0, .8) 100%);
 }
 
 .footer {
@@ -108,9 +154,11 @@ a.desc:after {
 .banner {
     text-align: center;
 }
+
 .banner h2 {
     margin-bottom: 15px;
 }
+
 .banner h2 {
     font-family: 'Open Sans', arial;
     -webkit-font-smoothing: antialiased;
@@ -119,23 +167,29 @@ a.desc:after {
     font-weight: 400;
     margin-bottom: 20px;
 }
+
 .card-sigin {
     height: 280px;
 }
+
 .card-sigin {
     position: relative;
     overflow: hidden;
 }
+
 .card-sigin {
     width: 320px;
     padding: 40px 40px;
 }
+
 .card {
     margin-bottom: 0;
 }
+
 .card {
     margin-bottom: 20px;
 }
+
 .card {
     background-color: #f7f7f7;
     padding: 20px 25px 30px;
@@ -161,7 +215,26 @@ a.desc:after {
     margin-bottom: 10px;
     background-size: 96px;
     background-repeat: no-repeat;
-    background-image: url(../img/avatar_2x.png);
+    background-image: url(../icons/avatar_2x.png);
+    -webkit-transition: opacity 0.075s;
+    -moz-transition: opacity 0.075s;
+    -ms-transition: opacity 0.075s;
+    -o-transition: opacity 0.075s;
+    transition: opacity 0.075s;
+}
+
+.ac-circle-mask{
+    display: block;
+    height: 32px;
+    width: 32px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 100;
+    background-size: 32px;
+    background-repeat: no-repeat;
+    background-image: url(../icons/avatar_2x.png);
     -webkit-transition: opacity 0.075s;
     -moz-transition: opacity 0.075s;
     -ms-transition: opacity 0.075s;
@@ -173,17 +246,21 @@ a.desc:after {
     border: 0;
     height: 83px;
 }
+
 .sakura-header-bar {
     overflow: hidden;
 }
+
 .sakura-header-bar .content {
     padding: 0 44px;
     text-align: center;
 }
+
 .need-help {
     float: right;
     text-align: right;
 }
+
 .back-arrow {
     position: absolute;
     top: 37px;
@@ -193,6 +270,7 @@ a.desc:after {
     border-style: none;
     cursor: pointer;
 }
+
 .card-sigin #email-display {
     display: block;
     padding: 0px 8px;
@@ -207,4 +285,63 @@ a.desc:after {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
+}
+
+.noLRpadding {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.sakura-header-bar {
+    min-width: 900px;
+    left: 0;
+    right: 0;
+    top: 0;
+    padding-left: 25px;
+    position: fixed;
+    z-index: 101;
+    -webkit-transition: all .27s ease-in-out;
+    transition: all .27s ease-in-out;
+    height: 60px;
+}
+
+.pTh3n{
+    fill: rgba(255,255,255,0.87);
+    cursor: pointer;
+}
+
+.xjKiLb {
+    position: relative;
+    top: 50%;
+}
+
+.xjKiLb>span {
+    display: inline-block;
+    position: relative;
+}
+
+.form-title{
+    color: rgba(255,255,255,0.87);
+    font-size: x-large;
+    cursor: default;
+}
+.user-title{
+    color: #fff;
+    opacity: .7;
+    font-size: 13px;
+    cursor: default;
+}
+.div-inline{
+    float: left;
+}
+.clearboth{
+    clear: both;
+}
+.pl30{
+    padding-left: 30px;
+}
+.symbols{
+    color: rgba(255,255,255,0.87);
+    cursor: pointer;
+    font-size: x-large;
 }
