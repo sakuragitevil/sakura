@@ -298,6 +298,7 @@ a.desc:after {
     right: 0;
     top: 0;
     padding-left: 25px;
+    padding-right: 25px;
     position: fixed;
     z-index: 101;
     -webkit-transition: all .27s ease-in-out;
@@ -331,8 +332,11 @@ a.desc:after {
     font-size: 13px;
     cursor: default;
 }
-.div-inline{
+.div-inline-left{
     float: left;
+}
+.div-inline-right{
+    float: right;
 }
 .clearboth{
     clear: both;
