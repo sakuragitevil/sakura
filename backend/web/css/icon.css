@@ -1,0 +1,12 @@
+svg {
+    cursor: pointer;
+}
+
+.white svg path {
+    fill: rgba(255, 255, 255, 0.87);
+}
+
+.yellow svg path {
+    fill: rgba(255, 235, 59, 0.87);
+}
+

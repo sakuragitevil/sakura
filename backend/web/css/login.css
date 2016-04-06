@@ -1,0 +1,100 @@
+
+.site-login-bn {
+    text-align: center;
+}
+
+.site-login-h2 {
+    font-family: 'Open Sans', arial;
+    -webkit-font-smoothing: antialiased;
+    color: #555;
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.site-login-cs {
+    height: 280px;
+    width: 320px;
+    padding: 40px 40px;
+    position: relative;
+    overflow: hidden;
+}
+
+.site-login-cRd {
+    background-color: #f7f7f7;
+    padding: 20px 25px 30px;
+    margin: 0 auto 25px;
+    width: 330px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    margin-bottom: 20px;
+}
+
+.site-login-cIrM {
+    display: block;
+    height: 96px;
+    width: 96px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 100;
+    margin-bottom: 10px;
+    background-size: 96px;
+    background-repeat: no-repeat;
+    background-image: url(../icons/avatar_2x.png);
+    -webkit-transition: opacity 0.075s;
+    -moz-transition: opacity 0.075s;
+    -ms-transition: opacity 0.075s;
+    -o-transition: opacity 0.075s;
+    transition: opacity 0.075s;
+}
+
+.site-login-cTr{
+    border: 0;
+    height: 83px;
+}
+
+.site-login-hDr {
+    overflow: hidden;
+}
+
+.site-login-cTn {
+    padding: 0 44px;
+    text-align: center;
+}
+
+.site-login-hlF {
+    float: right;
+    text-align: right;
+}
+
+.site-login-bR {
+    position: absolute;
+    top: 37px;
+    width: 24px;
+    height: 24px;
+    display: block;
+    border-style: none;
+    cursor: pointer;
+}
+
+.site-login-emDpl {
+    display: block;
+    padding: 0px 8px;
+    color: rgb(64, 64, 64);
+    line-height: initial;
+    margin-bottom: 16px;
+    font-size: 14px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}

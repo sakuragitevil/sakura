@@ -1,0 +1,55 @@
+
+.common-header {
+    min-width: 900px;
+    left: 0;
+    right: 0;
+    top: 0;
+    padding-left: 25px;
+    padding-right: 25px;
+    position: fixed;
+    z-index: 101;
+    -webkit-transition: all .27s ease-in-out;
+    transition: all .27s ease-in-out;
+    height: 60px;
+}
+
+.common-header-ac-mk {
+    display: block;
+    height: 32px;
+    width: 32px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 100;
+    background-size: 32px;
+    background-repeat: no-repeat;
+    background-image: url(../icons/avatar_2x.png);
+    -webkit-transition: opacity 0.075s;
+    -moz-transition: opacity 0.075s;
+    -ms-transition: opacity 0.075s;
+    -o-transition: opacity 0.075s;
+    transition: opacity 0.075s;
+}
+
+.common-header-ft {
+    color: rgba(255, 255, 255, 0.87);
+    font-size: x-large;
+    cursor: default;
+}
+
+.common-header-ut {
+    color: #fff;
+    opacity: .7;
+    font-size: 13px;
+    cursor: default;
+}
+
+.common-header-cr {
+
+    width: 23px;
+    height: 23px;
+    border-radius: 100%;
+    padding: 2px;
+    background-color: rgba(255, 255, 255, 0.87);
+}

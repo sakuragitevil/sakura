@@ -9,7 +9,6 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
-
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -21,34 +20,31 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <link href="../web/img/sakura.ico" rel="shortcut icon" type="image/x-icon"/>
+    <link href="../web/css/icon.css" rel="stylesheet" type="text/css">
     <?php $this->head() ?>
 </head>
 <body>
 <?php $this->beginBody() ?>
 
 <div class="wrap">
-
-    <div class="g-Ue-ad">
-        <div class="g-Qx">
-            <div class="g-Qx-eb X5yjGb">
-                <div class="kFx1Ae-xdwExf-eb-m">
-                    <img id=":0.la" class="kFx1Ae-xdwExf-eb"
-                         src="https://lh3.googleusercontent.com/4zsirp7PvHet1HV-6JWjLsTbzNkAFOJo9coBYcLXgt5WK7A-2zo3ShS4zDs-OKElEDgsgv_IdJNWRmk=w1920-h1080-p-k-nd-no">
+    <?php if (!\Yii::$app->user->isGuest): ?>
+        <div class="g-Ue-ad">
+            <div class="g-Qx">
+                <div class="g-Qx-eb X5yjGb">
+                    <div class="kFx1Ae-xdwExf-eb-m">
+                        <img id=":0.la" class="kFx1Ae-xdwExf-eb"
+                             src="https://lh3.googleusercontent.com/4zsirp7PvHet1HV-6JWjLsTbzNkAFOJo9coBYcLXgt5WK7A-2zo3ShS4zDs-OKElEDgsgv_IdJNWRmk=w1920-h1080-p-k-nd-no">
+                    </div>
                 </div>
+                <div class="g-Qx-n5VRYe"></div>
             </div>
-            <div class="g-Qx-n5VRYe"></div>
         </div>
-    </div>
-    <div class="clearboth"></div>
+        <div class="clearboth"></div>
+        <?php echo $this->render('@app/views/layouts/header') ?>
+    <?php endif; ?>
     <div class="container-fluid">
-        <?= Alert::widget() ?>
-
-        <?php if (!\Yii::$app->user->isGuest): ?>
-            <?= $this->render('@app/views/layouts/header') ?>
-        <?php endif; ?>
-
-        <?= $content ?>
-
+        <?php echo Alert::widget() ?>
+        <?php echo $content ?>
     </div>
 </div>
 
