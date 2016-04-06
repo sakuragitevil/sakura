@@ -1,0 +1,97 @@
+.home-page {
+    color: #fff;
+    display: table;
+    height: 100%;
+    left: 96px;
+    margin-left: 300px;
+    max-width: 80%;
+    max-width: -webkit-calc(100% - 300px);
+    max-width: calc(100% - 576px);
+    max-width: -webkit-calc(100% - 300px);
+    min-height: 400px;
+    min-width: 400px;
+    position: relative;
+    text-align: left;
+}
+
+.home-page-T-R {
+    display: table-row;
+}
+
+.home-page-T-J {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.home-page-ma{
+    font-weight: 300;
+    font-size: 45px;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.home-page-zr-ma{
+    font-size: 18px;
+    font-weight: 200;
+    margin-top: 8px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+.home-page-zr-ba{
+    font: 500 14px Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    text-transform: uppercase;
+}
+.home-page-ul{
+    display: inline-block;
+    margin-bottom: 64px;
+    margin-left: 0;
+    margin-top: 64px;
+    padding-left: 0;
+    white-space: nowrap;
+}
+
+.home-page-li{
+    display: inline-block;
+    list-style: none;
+    margin-right: 48px;
+    text-align: center;
+    text-indent: 0;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.home-page-mUbCce{
+    border: 2px solid #fff;
+    -webkit-border-radius: 100%;
+    border-radius: 100%;
+    display: inline-block;
+    height: 76px;
+    width: 76px;
+    -webkit-transition: all .27s ease-in-out;
+    transition: all .27s ease-in-out;
+    -webkit-user-select: none;
+    cursor: pointer;
+    outline: none;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    -webkit-tap-highlight-color: transparent;
+    z-index: 0;
+    webkit-box-shadow: 0 0 4px rgba(0,0,0,0.5);
+    box-shadow: 0 0 4px rgba(0,0,0,0.5);
+    margin-bottom: 24px;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+
+}
+
+.home-page-mUbCce:hover{
+    background: rgba(255,255,255,0.12);
+    -webkit-box-shadow: 0 0 16px rgba(0,0,0,0.5);
+    box-shadow: 0 0 16px rgba(0,0,0,0.5);
+    cursor: pointer;
+}

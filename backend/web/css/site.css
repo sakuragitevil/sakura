@@ -7,14 +7,13 @@ body {
     display: block;
 }
 
-.wrap {
+.wrap,.container-fluid {
     min-height: 500px;
     min-width: 900px;
     position: relative;
     height: 100%;
 
 }
-
 .g-Ue-ad {
     background-color: #000;
     height: 100%;
@@ -151,164 +150,10 @@ a.desc:after {
     text-decoration: none;
 }
 
-.banner {
-    text-align: center;
-}
-
-.banner h2 {
-    margin-bottom: 15px;
-}
-
-.banner h2 {
-    font-family: 'Open Sans', arial;
-    -webkit-font-smoothing: antialiased;
-    color: #555;
-    font-size: 18px;
-    font-weight: 400;
-    margin-bottom: 20px;
-}
-
-.card-sigin {
-    height: 280px;
-}
-
-.card-sigin {
-    position: relative;
-    overflow: hidden;
-}
-
-.card-sigin {
-    width: 320px;
-    padding: 40px 40px;
-}
-
-.card {
-    margin-bottom: 0;
-}
-
-.card {
-    margin-bottom: 20px;
-}
-
-.card {
-    background-color: #f7f7f7;
-    padding: 20px 25px 30px;
-    margin: 0 auto 25px;
-    width: 330px;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-}
-
-.circle-mask {
-    display: block;
-    height: 96px;
-    width: 96px;
-    overflow: hidden;
-    border-radius: 50%;
-    margin-left: auto;
-    margin-right: auto;
-    z-index: 100;
-    margin-bottom: 10px;
-    background-size: 96px;
-    background-repeat: no-repeat;
-    background-image: url(../icons/avatar_2x.png);
-    -webkit-transition: opacity 0.075s;
-    -moz-transition: opacity 0.075s;
-    -ms-transition: opacity 0.075s;
-    -o-transition: opacity 0.075s;
-    transition: opacity 0.075s;
-}
-
-.ac-circle-mask{
-    display: block;
-    height: 32px;
-    width: 32px;
-    overflow: hidden;
-    border-radius: 50%;
-    margin-left: auto;
-    margin-right: auto;
-    z-index: 100;
-    background-size: 32px;
-    background-repeat: no-repeat;
-    background-image: url(../icons/avatar_2x.png);
-    -webkit-transition: opacity 0.075s;
-    -moz-transition: opacity 0.075s;
-    -ms-transition: opacity 0.075s;
-    -o-transition: opacity 0.075s;
-    transition: opacity 0.075s;
-}
-
-.sakura-header-bar .centered {
-    border: 0;
-    height: 83px;
-}
-
-.sakura-header-bar {
-    overflow: hidden;
-}
-
-.sakura-header-bar .content {
-    padding: 0 44px;
-    text-align: center;
-}
-
-.need-help {
-    float: right;
-    text-align: right;
-}
-
-.back-arrow {
-    position: absolute;
-    top: 37px;
-    width: 24px;
-    height: 24px;
-    display: block;
-    border-style: none;
-    cursor: pointer;
-}
-
-.card-sigin #email-display {
-    display: block;
-    padding: 0px 8px;
-    color: rgb(64, 64, 64);
-    line-height: initial;
-    margin-bottom: 16px;
-    font-size: 14px;
-    text-align: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-}
 
 .noLRpadding {
     padding-left: 0 !important;
     padding-right: 0 !important;
-}
-
-.sakura-header-bar {
-    min-width: 900px;
-    left: 0;
-    right: 0;
-    top: 0;
-    padding-left: 25px;
-    padding-right: 25px;
-    position: fixed;
-    z-index: 101;
-    -webkit-transition: all .27s ease-in-out;
-    transition: all .27s ease-in-out;
-    height: 60px;
-}
-
-.pTh3n{
-    fill: rgba(255,255,255,0.87);
-    cursor: pointer;
 }
 
 .xjKiLb {
@@ -316,36 +161,35 @@ a.desc:after {
     top: 50%;
 }
 
-.xjKiLb>span {
+.xjKiLb > span {
     display: inline-block;
     position: relative;
 }
 
-.form-title{
-    color: rgba(255,255,255,0.87);
-    font-size: x-large;
-    cursor: default;
-}
-.user-title{
-    color: #fff;
-    opacity: .7;
-    font-size: 13px;
-    cursor: default;
-}
-.div-inline-left{
+.div-inline-left {
     float: left;
 }
-.div-inline-right{
+
+.div-inline-right {
     float: right;
 }
-.clearboth{
+
+.clearboth {
     clear: both;
 }
-.pl30{
+
+.pl30 {
     padding-left: 30px;
 }
-.symbols{
-    color: rgba(255,255,255,0.87);
-    cursor: pointer;
-    font-size: x-large;
+
+.pr30 {
+    padding-right: 30px;
+}
+
+.pl20 {
+    padding-left: 20px;
+}
+
+.pr20 {
+    padding-right: 20px;
 }
