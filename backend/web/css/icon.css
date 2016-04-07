@@ -10,3 +10,6 @@ svg {
     fill: rgba(255, 235, 59, 0.87);
 }
 
+.blue svg path{
+    fill: rgba(65, 132, 243, 1);
+}
