@@ -84,7 +84,7 @@ $this->registerCssFile(Yii::$app->request->baseUrl . '/css/header.css');
                             <div class="cmhd-X6Wtlf">
                                 <div class="cmhd-CQb">
                                     <div class="cmhd-Kza">All caught up!</div>
-                                    <img class="cmhd-m4a" src="../web/icons/notifications_1x.png"/>
+                                    <img class="cmhd-m4a" src="../web/icons/social/2x_web/ic_notifications_88px.png"/>
                                 </div>
                             </div>
                         </div>

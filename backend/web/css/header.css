@@ -407,7 +407,7 @@
     position: absolute;
     left: 3.5px;
     top: 38px;
-    z-index: 1;
+    z-index: 3;
     height: 0;
     width: 0;
     -webkit-animation: gb__a .2s;
@@ -420,7 +420,7 @@
     border-width: 0 8.5px 8.5px;
     position: absolute;
     left: 3.5px;
-    z-index: 1;
+    z-index: 3;
     height: 0;
     width: 0;
     -webkit-animation: gb__a .2s;
@@ -436,6 +436,7 @@
     min-height: 196px;
     overflow-y: auto;
     width: 340px;
+    z-index: 2;
 }
 
 .cmhd-gb_ia {
