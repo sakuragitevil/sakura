@@ -6,6 +6,7 @@
  * Time: 10:57 AM
  */
 $this->registerCssFile(Yii::$app->request->baseUrl . '/css/header.css');
+$this->registerJsFile(Yii::$app->request->baseUrl . '/js/sakuraHeader.js');
 ?>
 
 <div class="row-fluid cmhd">
