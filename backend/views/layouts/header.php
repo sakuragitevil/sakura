@@ -5,11 +5,10 @@
  * Date: 4/4/2016
  * Time: 10:57 AM
  */
-$this->registerCssFile(Yii::$app->request->baseUrl . '/css/header.css');
-$this->registerJsFile(Yii::$app->request->baseUrl . '/js/sakuraHeader.js');
+$this->registerJsFile(Yii::$app->request->baseUrl . '/js/sakuraHeader.js', ['depends' => [\yii\web\AngularAsset::className()],'position'=> $this::POS_HEAD]);
 ?>
 
-<div class="row-fluid cmhd">
+<div class="row-fluid cmhd" ng-app="sakuraHeader" ng-controller="headerController as data">
     <div class="col-sm-12 col-md-12 col-lg-12 noLRpadding">
         <div class="row-fluid">
             <div class="col-sm-5 col-md-5 col-lg-5 noLRpadding">
@@ -23,7 +22,7 @@ $this->registerJsFile(Yii::$app->request->baseUrl . '/js/sakuraHeader.js');
                 <div class="div-inline-left pl30" style="min-width: 120px">
                     <content class="xjKiLb">
                     <span style="top: 11px">
-                        <span class="cmhd-ft">Sakura Inc.</span>
+                        <span class="cmhd-ft">Sakura Inc.{{data.header.name}}</span>
                     </span>
                     </content>
                 </div>
@@ -179,3 +178,4 @@ $this->registerJsFile(Yii::$app->request->baseUrl . '/js/sakuraHeader.js');
             </div>
         </div>
     </div>
+</div>
