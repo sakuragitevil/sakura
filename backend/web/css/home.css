@@ -12,6 +12,7 @@
     min-width: 400px;
     position: relative;
     text-align: left;
+    z-index: 2;
 }
 
 .home-page-T-R {

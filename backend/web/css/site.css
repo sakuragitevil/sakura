@@ -7,12 +7,19 @@ body {
     display: block;
 }
 
-.wrap,.container-fluid {
+.wrap {
     min-height: 500px;
     min-width: 900px;
     position: relative;
     height: 100%;
+    z-index: 1;
+}
 
+.container-fluid {
+    min-height: 500px;
+    min-width: 900px;
+    height: 100%;
+    z-index: 1;
 }
 .g-Ue-ad {
     background-color: #000;
