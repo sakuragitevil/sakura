@@ -8,8 +8,8 @@
 $this->registerJsFile(Yii::$app->request->baseUrl . '/js/sakuraHeader.js', ['depends' => [\yii\web\AngularAsset::className()],'position'=> $this::POS_HEAD]);
 ?>
 
-<div class="row-fluid cmhd" ng-app="sakuraHeader" ng-controller="headerController as data">
-    <div class="col-sm-12 col-md-12 col-lg-12 noLRpadding">
+<div ng-app="sakuraHeader" class="row-fluid cmhd">
+    <div ng-controller="headerController as skHeader" class="col-sm-12 col-md-12 col-lg-12 noLRpadding"  >
         <div class="row-fluid">
             <div class="col-sm-5 col-md-5 col-lg-5 noLRpadding">
                 <div class="div-inline-left" style="min-width: 24px">
@@ -22,7 +22,7 @@ $this->registerJsFile(Yii::$app->request->baseUrl . '/js/sakuraHeader.js', ['dep
                 <div class="div-inline-left pl30" style="min-width: 120px">
                     <content class="xjKiLb">
                     <span style="top: 11px">
-                        <span class="cmhd-ft">Sakura Inc.{{data.header.name}}</span>
+                        <span class="cmhd-ft">Home</span>
                     </span>
                     </content>
                 </div>
@@ -30,16 +30,16 @@ $this->registerJsFile(Yii::$app->request->baseUrl . '/js/sakuraHeader.js', ['dep
             </div>
             <div class="col-sm-7 col-md-7 col-lg-7 noLRpadding">
                 <div class="div-inline-right pl20">
-                    <content class="xjKiLb" id="acIf">
+                    <content id="acIcon" class="xjKiLb" ng-click="openAccInfo()">
                         <span style="top: 11px">
                             <div class="cmhd-ac-mk">
                                 <canvas class="circle" width="32" height="32"></canvas>
                             </div>
                         </span>
-                        <div class="cmhd-gb_db acDlg_rl"></div>
-                        <div class="cmhd-gb_cb acDlg_rl"></div>
+                        <div class="cmhd-gb_db acDlg_rl" style="display: none"></div>
+                        <div class="cmhd-gb_cb acDlg_rl" style="display: none"></div>
                     </content>
-                    <div id="acDlg" class="cmhd-gb_eb cmhd-gb_ga cmhd-gb_g" style="display: block">
+                    <div id="acDlg" class="cmhd-gb_eb cmhd-gb_ga cmhd-gb_g" style="display: none">
                         <div class="cmhd-gb_tb">
                             <div id="gbpbt">This account is managed by <b>sakura.inc</b>.</div>
                             <a class="cmhd-gb_fb" href="#" target="_blank">Learn more.</a>
@@ -65,7 +65,7 @@ $this->registerJsFile(Yii::$app->request->baseUrl . '/js/sakuraHeader.js', ['dep
                     </div>
                 </div>
                 <div class="div-inline-right pl20">
-                    <content class="xjKiLb" id="ntfIf">
+                    <content id="notifyInfo" class="xjKiLb"  ng-click="openNotifications()">
                         <span style="top: 15px">
                             <div class="cmhd-cr">
                                 <?php echo file_get_contents("../web/icons/social/svg/production/ic_notifications_black_18px.svg") ?>
@@ -92,7 +92,7 @@ $this->registerJsFile(Yii::$app->request->baseUrl . '/js/sakuraHeader.js', ['dep
                     </div>
                 </div>
                 <div class="div-inline-right">
-                    <content class="xjKiLb" id="appIf">
+                    <content id="appIf" class="xjKiLb" ng-click="openAppInfo()">
                         <span class="white" style="top: 15px">
                             <?php echo file_get_contents("../web/icons/navigation/svg/production/ic_apps_24px.svg") ?>
                         </span>

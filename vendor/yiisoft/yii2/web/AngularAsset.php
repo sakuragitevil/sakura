@@ -26,4 +26,8 @@ class AngularAsset extends AssetBundle
         'angular.min.js',
         'angular-animate.min.js'
     ];
+
+    public $jsOptions = [
+        'position' => View::POS_HEAD,
+    ];
 }
