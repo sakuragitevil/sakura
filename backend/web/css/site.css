@@ -20,6 +20,10 @@ body {
     min-width: 900px;
     height: 100%;
     z-index: 1;
+    padding-top: 60px;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-bottom: 10px;
 }
 .g-Ue-ad {
     background-color: #000;

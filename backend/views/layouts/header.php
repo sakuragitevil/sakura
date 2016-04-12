@@ -5,6 +5,9 @@
  * Date: 4/4/2016
  * Time: 10:57 AM
  */
+use yii\helpers\Html;
+use yii\bootstrap\ActiveForm;
+
 $this->registerJsFile(Yii::$app->request->baseUrl . '/js/sakuraHeader.js', ['depends' => [\yii\web\AngularAsset::className()],'position'=> $this::POS_HEAD]);
 ?>
 
@@ -60,7 +63,9 @@ $this->registerJsFile(Yii::$app->request->baseUrl . '/js/sakuraHeader.js', ['dep
                             </div>
                         </div>
                         <div class="cmhd-gb_qb" align="right">
-                            <button type="button" class="btn btn-default btn-sm">Sign out</button>
+                            <?php $form = ActiveForm::begin(['method' => 'post', 'action' => ['site/logout']]); ?>
+                                <button type="submit" class="btn btn-default btn-sm">Sign out</button>
+                            <?php ActiveForm::end(); ?>
                         </div>
                     </div>
                 </div>
