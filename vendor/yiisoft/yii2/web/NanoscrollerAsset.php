@@ -2,7 +2,7 @@
 /**
  * Created by PhpStorm.
  * User: Thuan
- * Date: 4/8/2016
+ * Date: 4/15/2016
  * Time: 10:28 AM
  */
 namespace yii\web;
@@ -15,16 +15,15 @@ use yii\web\AssetBundle;
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-class AngularAsset extends AssetBundle
+class NanoscrollerAsset extends AssetBundle
 {
-    public $sourcePath = '@bower/angular-1.5.3';
+    public $sourcePath = '@bower/nanoscroller';
     public $css = [
-        'angular-csp.css',
+        'nanoscroller.css',
     ];
 
     public $js = [
-        'angular.min.js',
-        'angular-animate.min.js'
+        'jquery.nanoscroller.min.js',
     ];
 
     public $jsOptions = [
