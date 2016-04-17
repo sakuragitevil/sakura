@@ -99,7 +99,7 @@
 }
 
 .acc_zkJiu, .acc_pUstR {
-    height: 550px !important;
+    height: 600px !important;
     min-height: 540px;
     padding-top: 15px;
 }
@@ -315,12 +315,4 @@
     padding: 8px 0 8px 48px;
     text-decoration: none;
     display: block;
-}
-
-.nano .nano-pane {
-    background: #888;
-}
-
-.nano .nano-slider {
-    background: #111;
 }

@@ -25,6 +25,7 @@ body {
     padding-left: 25px;
     padding-right: 25px;
 }
+
 .g-Ue-ad {
     background-color: #000;
     height: 100%;
@@ -161,7 +162,6 @@ a.desc:after {
     text-decoration: none;
 }
 
-
 .noLRpadding {
     padding-left: 0 !important;
     padding-right: 0 !important;
@@ -203,4 +203,15 @@ a.desc:after {
 
 .pr20 {
     padding-right: 20px;
+}
+
+.nano .nano-pane {
+    background: transparent !important;
+    width: 6px !important;
+    border-radius: 0 !important;
+}
+
+.nano .nano-slider {
+    background: #4184f3 !important;
+    width: 6px !important;
 }

@@ -27,5 +27,6 @@ class AppAsset extends AssetBundle
         'yii\web\YiiAsset',
         'yii\web\NanoscrollerAsset',
         'yii\bootstrap\BootstrapAsset',
+        'common\widgets\sakura\Xhr2UploadAsset',
     ];
 }

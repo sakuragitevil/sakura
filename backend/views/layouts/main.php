@@ -5,10 +5,8 @@
 
 use backend\assets\AppAsset;
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
+
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -19,7 +17,7 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-    <link href="../web/img/sakura.ico" rel="shortcut icon" type="image/x-icon"/>
+    <link href="../web/icons/sakura.ico" rel="shortcut icon" type="image/x-icon"/>
     <link href="../web/css/icon.css" rel="stylesheet" type="text/css">
     <?php $this->head() ?>
 </head>
@@ -44,6 +42,7 @@ AppAsset::register($this);
     <?php endif; ?>
     <div class="container-fluid">
         <?php echo Alert::widget() ?>
+        <?php echo Xhr2Upload::widget();?>
         <?php echo $content ?>
     </div>
 </div>
