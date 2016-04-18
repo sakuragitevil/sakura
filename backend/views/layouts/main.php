@@ -6,6 +6,8 @@
 use backend\assets\AppAsset;
 use yii\helpers\Html;
 use common\widgets\Alert;
+use common\widgets\sakura\Xhr2UploadAsset;
+use common\widgets\sakura\Xhr2Upload;
 
 AppAsset::register($this);
 ?>
