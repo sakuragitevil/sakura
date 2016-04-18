@@ -8,6 +8,7 @@
 namespace common\widgets\sakura;
 
 use yii\web\AssetBundle;
+use yii\web\View;
 
 /**
  * @author Thuan <vuvanthuan081288@gmail.com>
@@ -25,7 +26,7 @@ class Xhr2UploadAsset extends AssetBundle
     ];
 
     public $jsOptions = [
-//        'position' => View::POS_HEAD,
+        'position' => View::POS_END,
     ];
 
     public $depends = [

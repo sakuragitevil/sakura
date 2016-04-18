@@ -10,6 +10,7 @@ use common\widgets\sakura\Xhr2UploadAsset;
 use common\widgets\sakura\Xhr2Upload;
 
 AppAsset::register($this);
+Xhr2UploadAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
