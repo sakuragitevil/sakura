@@ -75,6 +75,15 @@ $this->registerJsFile(Yii::$app->request->baseUrl . '/js/sakuraHeader.js', ['dep
                     </div>
                 </div>
                 <div class="div-inline-right pl20">
+                    <a href="<?php echo Yii::$app->getHomeUrl();?>">
+                        <content class="xjKiLb">
+                            <span class="white" style="top: 15px">
+                                <?php echo file_get_contents("../web/icons/action/svg/production/ic_home_24px.svg") ?>
+                            </span>
+                        </content>
+                    </a>
+                </div>
+                <div class="div-inline-right pl20">
                     <content id="notifyInfo" class="xjKiLb" ng-click="openNotifications()">
                         <span style="top: 15px">
                             <div class="cmhd-cr">

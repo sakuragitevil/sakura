@@ -5,12 +5,17 @@
 
 use backend\assets\AppAsset;
 use yii\helpers\Html;
+use yii\web\NanoscrollerAsset;
+use yii\web\AngularAsset;
 use common\widgets\Alert;
-use common\widgets\sakura\Xhr2UploadAsset;
 use common\widgets\sakura\Xhr2Upload;
+use common\widgets\sakura\Xhr2UploadAsset;
 
 AppAsset::register($this);
+AngularAsset::register($this);
 Xhr2UploadAsset::register($this);
+NanoscrollerAsset::register($this);
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
