@@ -30,6 +30,7 @@ class Xhr2UploadAsset extends AssetBundle
     ];
 
     public $depends = [
+        'yii\bootstrap\BootstrapPluginAsset',
         'yii\bootstrap\BootstrapAsset',
         'yii\web\JqueryAsset'
     ];

@@ -7,9 +7,12 @@
 
 namespace common\widgets\sakura;
 
+use Yii;
+use yii\helpers\Json;
+
 class Xhr2Upload extends \yii\bootstrap\Widget
 {
-    public $option = [];
+    public $options = [];
 
     /**
      * Initializes the widget.
@@ -17,6 +20,7 @@ class Xhr2Upload extends \yii\bootstrap\Widget
     public function init()
     {
         parent::init();
+        $this->registerClientEvents();
     }
 
     /**
@@ -24,17 +28,20 @@ class Xhr2Upload extends \yii\bootstrap\Widget
      */
     public function run()
     {
-        echo $this->render("xhr2", []);
+        parent::run();
+        echo $this->render("xhr2", $this->options);
     }
 
-
-    /**
-     * Registers the needed client assets
-     *
-     * @return void
-     */
-    public function registerAssets()
+    public function registerClientEvents()
     {
+        //events
+        $js = [];
+        $options = Json::htmlEncode($this->options);
+        $js[] = "jQuery('#" . $this->options['id'] . "').yiiXhr2Upload($options)";
 
+        //register events
+        $view = $this->getView();
+        $view->registerJs(implode("\n", $js));
     }
+
 }

@@ -27,7 +27,18 @@
             }
         };
 
-        $scope.openNotifications = function(){
+        $scope.closeAccInfo = function () {
+
+            var container_1 = $("#acIcon");
+            var container_2 = $("#acDlg");
+            var parent = container_2.parent('div');
+            parent.find("div.acDlg_rl").hide();
+            parent.find("div#acDlg").hide();
+            $scope.openAccInfoStatus = 0;
+
+        };
+
+        $scope.openNotifications = function () {
             var parent = $(event.currentTarget).parent('div');
             if ($scope.openNotifyStatus == 0) {
                 parent.find("div.ntfDlg_rl").show();
@@ -40,7 +51,7 @@
             }
         };
 
-        $scope.openAppInfo = function(){
+        $scope.openAppInfo = function () {
             var parent = $(event.currentTarget).parent('div');
             if ($scope.openAppInfoStatus == 0) {
                 parent.find("div.appDlg_rl").show();
@@ -95,8 +106,6 @@
                     $scope.openAppInfoStatus = 0;
                 }
             }
-
-
 
         });
     });

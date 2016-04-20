@@ -49,7 +49,7 @@ $this->registerJsFile(Yii::$app->request->baseUrl . '/js/sakuraHeader.js', ['dep
                             <a class="cmhd-gb_fb" href="#" target="_blank">Learn more.</a>
                         </div>
                         <div class="cmhd-gb_hb">
-                            <a class="cmhd-gb_ib cmhd-gb_kb" href="#">
+                            <a id="profileIcon" class="cmhd-gb_ib cmhd-gb_kb" href="#" ng-click="closeAccInfo()">
                                 <div class="cmhd-gb_lb cmhd-gbip"></div>
                                 <span class="cmhd-gb_mb">Change</span>
                             </a>
