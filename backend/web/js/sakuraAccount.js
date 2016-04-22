@@ -3,5 +3,5 @@
  */
 
 $(document).ready( function() {
-    $(".nano").nanoScroller();
+    $(".acc-scroll").nanoScroller();
 });

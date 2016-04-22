@@ -40,7 +40,7 @@ $this->title = "My Account";
                                     </div>
                                 </div>
                             </div>
-                            <div class="acc_pUstR col-sm-10 col-md-10 col-lg-10 nano">
+                            <div class="acc_pUstR col-sm-10 col-md-10 col-lg-10 nano acc-scroll">
                                 <div class="nano-content">
                                     <div class="acc_Ti acc_nE acc_Jl">
                                         <h3 class="acc_ah" id="personalinfo" tabindex="-1">Your personal info</h3>
