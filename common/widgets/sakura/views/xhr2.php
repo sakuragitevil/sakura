@@ -6,8 +6,7 @@
                         aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">Select Profile Photo</h4>
             </div>
-            <div class="modal-body nano xhr2-scroll">
-                <div class="nano-content">
+            <div class="modal-body">
                 <div class="xhr2-hn-Pn-eb">
                     <div class="xhr2-hn-Pn-hc xhr2-hn-On-Zb-Nd">
                         <div class="xhr2-hn-On-Zb-li-Yb-en">
@@ -25,8 +24,9 @@
                             </div>
                         </div>
                     </div>
+                    <div class="clearboth"></div>
                     <div class="tab-content">
-                        <div role="tabpanel" class="xhr2-hn-On-Zb-eb tab-pane fade in active" id="uploadTab">
+                        <div role="tabpanel" class="xhr2-hn-On-Zb-eb xhr2-pcursor tab-pane fade in active" id="uploadTab">
                             <div class="xhr2-hn-Rn-Qn">
                                 <div class="xhr2-hn-eb">
                                     <div class="xhr2-hn-Vt">
@@ -46,13 +46,32 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="clearboth"></div>
                         <div role="tabpanel" class="xhr2-hn-On-Zb-eb tab-pane fade" id="photoTab">
                             <div class="xhr2-hn-Rn-Qn">
-                                <div class="xhr2-hn-eb-up">
-<!--                                    <div class="nano-content">-->
+                                <div class="xhr2-hn-eb-up nano xhr2-scroll" id="authvv">
+                                    <div class="nano-content">
                                         <div class="xhr2-hn-xs-oo-en">
                                             <div class="xhr2-hn-xs-oo-tm xhr2-active">
-                                                <div class="xhr2-hn-xs-oo-yj"></div>
+                                                <div class="xhr2-hn-xs-oo-yj">
+                                                    <span class="glyphicon glyphicon-ok-sign"></span>
+                                                </div>
+                                                <img class="xhr2-hn-xs-oo-hm" src="../web/icons/vvthuan.jpg"/>
+                                            </div>
+                                        </div>
+                                        <div class="xhr2-hn-xs-oo-en">
+                                            <div class="xhr2-hn-xs-oo-tm">
+                                                <div class="xhr2-hn-xs-oo-yj">
+                                                    <span class="glyphicon glyphicon-ok-sign"></span>
+                                                </div>
+                                                <img class="xhr2-hn-xs-oo-hm" src="../web/icons/vvthuan.jpg"/>
+                                            </div>
+                                        </div>
+                                        <div class="xhr2-hn-xs-oo-en">
+                                            <div class="xhr2-hn-xs-oo-tm">
+                                                <div class="xhr2-hn-xs-oo-yj">
+                                                    <span class="glyphicon glyphicon-ok-sign"></span>
+                                                </div>
                                                 <img class="xhr2-hn-xs-oo-hm" src="../web/icons/vvthuan.jpg"/>
                                             </div>
                                         </div>
@@ -110,24 +129,11 @@
                                                 <img class="xhr2-hn-xs-oo-hm" src="../web/icons/vvthuan.jpg"/>
                                             </div>
                                         </div>
-                                        <div class="xhr2-hn-xs-oo-en">
-                                            <div class="xhr2-hn-xs-oo-tm">
-                                                <div class="xhr2-hn-xs-oo-yj"></div>
-                                                <img class="xhr2-hn-xs-oo-hm" src="../web/icons/vvthuan.jpg"/>
-                                            </div>
-                                        </div>
-                                        <div class="xhr2-hn-xs-oo-en">
-                                            <div class="xhr2-hn-xs-oo-tm">
-                                                <div class="xhr2-hn-xs-oo-yj"></div>
-                                                <img class="xhr2-hn-xs-oo-hm" src="../web/icons/vvthuan.jpg"/>
-                                            </div>
-                                        </div>
-<!--                                    </div>-->
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 </div>
             </div>
             <div class="modal-footer">

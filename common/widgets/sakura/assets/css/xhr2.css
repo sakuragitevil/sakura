@@ -79,14 +79,17 @@
 }
 
 .xhr2-hn-On-Zb-eb {
-    width: 100%;
-    height: 100%;
+    width: 898px;
+    height: 350px;
+}
+
+.xhr2-pcursor{
     cursor: pointer;
 }
 
 .xhr2-hn-Rn-Qn {
-    width: 100%;
-    height: 100%;
+    width: 898px;
+    height: 350px;
 }
 
 .xhr2-hn-eb{
@@ -142,10 +145,9 @@
     color: #aaa;
 }
 .xhr2-hn-eb-up{
-    /*padding: 20px;*/
-    width: 898px !important;
-    height: 350px !important;
-    min-height: 350px;
+    padding: 20px;
+    width: 898px;
+    height: 350px;
 }
 
 .xhr2-hn-xs-oo-en {
@@ -163,6 +165,7 @@
     height: 140px;
     opacity: 1;
     padding: 5px;
+    position: relative;
 }
 
 .xhr2-active{
@@ -173,8 +176,6 @@
 .xhr2-hn-xs-oo-yj {
     filter: alpha(opacity=100);
     opacity: 1;
-    top: 5px;
-    left: 5px;
     -webkit-transition: opacity .218s;
     -moz-transition: opacity .218s;
     -o-transition: opacity .218s;
@@ -182,6 +183,23 @@
     position: absolute;
     width: 24px;
     height: 24px;
+    padding: 2px;
+    text-align: center;
+    z-index: 1000;
+}
+
+.xhr2-hn-xs-oo-yj > .glyphicon-ok-sign{
+    font-size: 20px;
+}
+.xhr2-hn-xs-oo-tm > .xhr2-hn-xs-oo-yj{
+    display: none;
+}
+.xhr2-hn-xs-oo-tm:hover > .xhr2-hn-xs-oo-yj{
+    display: block;
+}
+
+.xhr2-hn-xs-oo-tm:focus > .glyphicon-ok-sign{
+    background-color: #009900;
 }
 
 .xhr2-hn-xs-oo-hm {
