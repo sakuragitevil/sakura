@@ -1,3 +1,5 @@
+/*@import '../fonts/google/roboto/google.roboto.font.css';*/
+@import '../fonts/google/material/google.material.font.css';
 html,
 body {
     height: 100%;
@@ -7,13 +9,22 @@ body {
     display: block;
 }
 
-.wrap,.container-fluid {
-    min-height: 500px;
+.wrap {
+    min-height: 600px;
     min-width: 900px;
     position: relative;
     height: 100%;
-
 }
+
+.container-fluid {
+    min-height: 600px;
+    min-width: 900px;
+    height: 100%;
+    padding-top: 60px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
 .g-Ue-ad {
     background-color: #000;
     height: 100%;
@@ -150,7 +161,6 @@ a.desc:after {
     text-decoration: none;
 }
 
-
 .noLRpadding {
     padding-left: 0 !important;
     padding-right: 0 !important;
@@ -192,4 +202,15 @@ a.desc:after {
 
 .pr20 {
     padding-right: 20px;
+}
+
+.nano .nano-pane {
+    background: transparent !important;
+    width: 6px !important;
+    border-radius: 0 !important;
+}
+
+.nano .nano-slider {
+    background: #4184f3 !important;
+    width: 6px !important;
 }

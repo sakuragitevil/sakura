@@ -11,8 +11,13 @@ return [
     'name' => 'Sakura',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
-    'bootstrap' => ['log'],
-    'modules' => [],
+    'bootstrap' => ['log', 'gii'],
+    'modules' => [
+        'gii' => [
+            'class' => 'yii\gii\Module',
+            'allowedIPs' => ['*'],
+        ]
+    ],
     'components' => [
         'user' => [
             'identityClass' => 'common\models\User',
