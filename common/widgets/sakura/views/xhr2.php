@@ -26,7 +26,8 @@
                     </div>
                     <div class="clearboth"></div>
                     <div class="tab-content">
-                        <div role="tabpanel" class="xhr2-hn-On-Zb-eb xhr2-pcursor tab-pane fade in active" id="uploadTab">
+                        <div role="tabpanel" class="xhr2-hn-On-Zb-eb xhr2-pcursor tab-pane fade in active"
+                             id="uploadTab">
                             <div class="xhr2-hn-Rn-Qn">
                                 <div class="xhr2-hn-eb">
                                     <div class="xhr2-hn-Vt">
@@ -49,84 +50,107 @@
                         <div class="clearboth"></div>
                         <div role="tabpanel" class="xhr2-hn-On-Zb-eb tab-pane fade" id="photoTab">
                             <div class="xhr2-hn-Rn-Qn">
-                                <div class="xhr2-hn-eb-up nano xhr2-scroll" id="authvv">
+                                <div class="nano xhr2-scroll" id="authvv">
                                     <div class="nano-content">
-                                        <div class="xhr2-hn-xs-oo-en">
-                                            <div class="xhr2-hn-xs-oo-tm xhr2-active">
-                                                <div class="xhr2-hn-xs-oo-yj">
-                                                    <span class="glyphicon glyphicon-ok-sign"></span>
+                                        <div class="xhr2-hn-eb-up">
+                                            <div class="xhr2-hn-xs-oo-en">
+                                                <div class="xhr2-hn-xs-oo-tm">
+                                                    <div class="xhr2-hn-xs-oo-yj">
+                                                        <i class="material-icons md-26 md-light">brightness_1</i>
+                                                        <i class="material-icons md-24 md_green">check_circle</i>
+                                                    </div>
+                                                    <img class="xhr2-hn-xs-oo-hm" src="../web/icons/vvthuan.jpg"/>
                                                 </div>
-                                                <img class="xhr2-hn-xs-oo-hm" src="../web/icons/vvthuan.jpg"/>
                                             </div>
-                                        </div>
-                                        <div class="xhr2-hn-xs-oo-en">
-                                            <div class="xhr2-hn-xs-oo-tm">
-                                                <div class="xhr2-hn-xs-oo-yj">
-                                                    <span class="glyphicon glyphicon-ok-sign"></span>
+                                            <div class="xhr2-hn-xs-oo-en">
+                                                <div class="xhr2-hn-xs-oo-tm">
+                                                    <div class="xhr2-hn-xs-oo-yj">
+                                                        <i class="material-icons md-26 md-light">brightness_1</i>
+                                                        <i class="material-icons md-24 md_green">check_circle</i>
+                                                    </div>
+                                                    <img class="xhr2-hn-xs-oo-hm" src="../web/icons/vvthuan.jpg"/>
                                                 </div>
-                                                <img class="xhr2-hn-xs-oo-hm" src="../web/icons/vvthuan.jpg"/>
                                             </div>
-                                        </div>
-                                        <div class="xhr2-hn-xs-oo-en">
-                                            <div class="xhr2-hn-xs-oo-tm">
-                                                <div class="xhr2-hn-xs-oo-yj">
-                                                    <span class="glyphicon glyphicon-ok-sign"></span>
+                                            <div class="xhr2-hn-xs-oo-en">
+                                                <div class="xhr2-hn-xs-oo-tm">
+                                                    <div class="xhr2-hn-xs-oo-yj">
+                                                        <i class="material-icons md-26 md-light">brightness_1</i>
+                                                        <i class="material-icons md-24 md_green">check_circle</i>
+                                                    </div>
+                                                    <img class="xhr2-hn-xs-oo-hm" src="../web/icons/vvthuan.jpg"/>
                                                 </div>
-                                                <img class="xhr2-hn-xs-oo-hm" src="../web/icons/vvthuan.jpg"/>
                                             </div>
-                                        </div>
-                                        <div class="xhr2-hn-xs-oo-en">
-                                            <div class="xhr2-hn-xs-oo-tm">
-                                                <div class="xhr2-hn-xs-oo-yj"></div>
-                                                <img class="xhr2-hn-xs-oo-hm" src="../web/icons/vvthuan.jpg"/>
+                                            <div class="xhr2-hn-xs-oo-en">
+                                                <div class="xhr2-hn-xs-oo-tm">
+                                                    <div class="xhr2-hn-xs-oo-yj">
+                                                        <i class="material-icons md-26 md-light">brightness_1</i>
+                                                        <i class="material-icons md-24 md_green">check_circle</i>
+                                                    </div>
+                                                    <img class="xhr2-hn-xs-oo-hm" src="../web/icons/vvthuan.jpg"/>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="xhr2-hn-xs-oo-en">
-                                            <div class="xhr2-hn-xs-oo-tm">
-                                                <div class="xhr2-hn-xs-oo-yj"></div>
-                                                <img class="xhr2-hn-xs-oo-hm" src="../web/icons/vvthuan.jpg"/>
+                                            <div class="xhr2-hn-xs-oo-en">
+                                                <div class="xhr2-hn-xs-oo-tm">
+                                                    <div class="xhr2-hn-xs-oo-yj">
+                                                        <i class="material-icons md-26 md-light">brightness_1</i>
+                                                        <i class="material-icons md-24 md_green">check_circle</i>
+                                                    </div>
+                                                    <img class="xhr2-hn-xs-oo-hm" src="../web/icons/vvthuan.jpg"/>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="xhr2-hn-xs-oo-en">
-                                            <div class="xhr2-hn-xs-oo-tm">
-                                                <div class="xhr2-hn-xs-oo-yj"></div>
-                                                <img class="xhr2-hn-xs-oo-hm" src="../web/icons/vvthuan.jpg"/>
+                                            <div class="xhr2-hn-xs-oo-en">
+                                                <div class="xhr2-hn-xs-oo-tm">
+                                                    <div class="xhr2-hn-xs-oo-yj">
+                                                        <i class="material-icons md-26 md-light">brightness_1</i>
+                                                        <i class="material-icons md-24 md_green">check_circle</i>
+                                                    </div>
+                                                    <img class="xhr2-hn-xs-oo-hm" src="../web/icons/vvthuan.jpg"/>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="xhr2-hn-xs-oo-en">
-                                            <div class="xhr2-hn-xs-oo-tm">
-                                                <div class="xhr2-hn-xs-oo-yj"></div>
-                                                <img class="xhr2-hn-xs-oo-hm" src="../web/icons/vvthuan.jpg"/>
+                                            <div class="xhr2-hn-xs-oo-en">
+                                                <div class="xhr2-hn-xs-oo-tm">
+                                                    <div class="xhr2-hn-xs-oo-yj">
+                                                        <i class="material-icons md-26 md-light">brightness_1</i>
+                                                        <i class="material-icons md-24 md_green">check_circle</i>
+                                                    </div>
+                                                    <img class="xhr2-hn-xs-oo-hm" src="../web/icons/vvthuan.jpg"/>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="xhr2-hn-xs-oo-en">
-                                            <div class="xhr2-hn-xs-oo-tm">
-                                                <div class="xhr2-hn-xs-oo-yj"></div>
-                                                <img class="xhr2-hn-xs-oo-hm" src="../web/icons/vvthuan.jpg"/>
+                                            <div class="xhr2-hn-xs-oo-en">
+                                                <div class="xhr2-hn-xs-oo-tm">
+                                                    <div class="xhr2-hn-xs-oo-yj">
+                                                        <i class="material-icons md-26 md-light">brightness_1</i>
+                                                        <i class="material-icons md-24 md_green">check_circle</i>
+                                                    </div>
+                                                    <img class="xhr2-hn-xs-oo-hm" src="../web/icons/vvthuan.jpg"/>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="xhr2-hn-xs-oo-en">
-                                            <div class="xhr2-hn-xs-oo-tm">
-                                                <div class="xhr2-hn-xs-oo-yj"></div>
-                                                <img class="xhr2-hn-xs-oo-hm" src="../web/icons/vvthuan.jpg"/>
+                                            <div class="xhr2-hn-xs-oo-en">
+                                                <div class="xhr2-hn-xs-oo-tm">
+                                                    <div class="xhr2-hn-xs-oo-yj">
+                                                        <i class="material-icons md-26 md-light">brightness_1</i>
+                                                        <i class="material-icons md-24 md_green">check_circle</i>
+                                                    </div>
+                                                    <img class="xhr2-hn-xs-oo-hm" src="../web/icons/vvthuan.jpg"/>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="xhr2-hn-xs-oo-en">
-                                            <div class="xhr2-hn-xs-oo-tm">
-                                                <div class="xhr2-hn-xs-oo-yj"></div>
-                                                <img class="xhr2-hn-xs-oo-hm" src="../web/icons/vvthuan.jpg"/>
+                                            <div class="xhr2-hn-xs-oo-en">
+                                                <div class="xhr2-hn-xs-oo-tm">
+                                                    <div class="xhr2-hn-xs-oo-yj">
+                                                        <i class="material-icons md-26 md-light">brightness_1</i>
+                                                        <i class="material-icons md-24 md_green">check_circle</i>
+                                                    </div>
+                                                    <img class="xhr2-hn-xs-oo-hm" src="../web/icons/vvthuan.jpg"/>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="xhr2-hn-xs-oo-en">
-                                            <div class="xhr2-hn-xs-oo-tm">
-                                                <div class="xhr2-hn-xs-oo-yj"></div>
-                                                <img class="xhr2-hn-xs-oo-hm" src="../web/icons/vvthuan.jpg"/>
-                                            </div>
-                                        </div>
-                                        <div class="xhr2-hn-xs-oo-en">
-                                            <div class="xhr2-hn-xs-oo-tm">
-                                                <div class="xhr2-hn-xs-oo-yj"></div>
-                                                <img class="xhr2-hn-xs-oo-hm" src="../web/icons/vvthuan.jpg"/>
+                                            <div class="xhr2-hn-xs-oo-en">
+                                                <div class="xhr2-hn-xs-oo-tm">
+                                                    <div class="xhr2-hn-xs-oo-yj">
+                                                        <i class="material-icons md-26 md-light">brightness_1</i>
+                                                        <i class="material-icons md-24 md_green">check_circle</i>
+                                                    </div>
+                                                    <img class="xhr2-hn-xs-oo-hm" src="../web/icons/vvthuan.jpg"/>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -137,8 +161,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary btn-sm disabled">Set as profile photo</button>
+                <button id="xhr2Cancel" type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
+                <button id="xhr2Ok" type="button" class="btn btn-primary btn-sm disabled">Set as profile photo</button>
             </div>
         </div>
     </div>
