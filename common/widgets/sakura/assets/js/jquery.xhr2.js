@@ -8,10 +8,10 @@
             id: '',
             url: '',
             dlg: 'dlgXhr2Upload',
-            curPhoto: null,
-            prePhoto: null,
-            xhr2Ok:null,
-            xhr2Cancel:null,
+            currentPhoto: null,
+            relatedPhoto: null,
+            xhr2Ok: null,
+            xhr2Cancel: null,
             init: function (options) {
 
                 yiiXhr2UploadView.id = options.id;
@@ -29,6 +29,9 @@
                 //init_photos_events
                 yiiXhr2UploadView.init_photos_events();
 
+                //init_upload_events
+                yiiXhr2UploadView.init_upload_events();
+
             },
             show_dialog: function () {
                 $('#' + yiiXhr2UploadView.dlg).modal({keyboard: false});
@@ -44,7 +47,7 @@
 
                             break;
                         case "#photoTab":
-                            if(yiiXhr2UploadView.curPhoto!=null){
+                            if (yiiXhr2UploadView.currentPhoto != null) {
                                 yiiXhr2UploadView.xhr2Ok.removeClass("disabled");
                             }
                             break;
@@ -53,19 +56,64 @@
             },
             init_photos_events: function () {
                 $('#' + yiiXhr2UploadView.dlg + ' div[class="xhr2-hn-xs-oo-tm"]').on('click', function (e) {
-                    yiiXhr2UploadView.curPhoto = $(this);
-                    if (yiiXhr2UploadView.curPhoto.hasClass("xhr2-active")) {
-                        yiiXhr2UploadView.curPhoto.removeClass("xhr2-active");
-                        yiiXhr2UploadView.prePhoto = yiiXhr2UploadView.curPhoto = null;
+                    yiiXhr2UploadView.currentPhoto = $(this);
+                    if (yiiXhr2UploadView.currentPhoto.hasClass("xhr2-active")) {
+                        yiiXhr2UploadView.currentPhoto.removeClass("xhr2-active");
+                        yiiXhr2UploadView.relatedPhoto = yiiXhr2UploadView.currentPhoto = null;
                         yiiXhr2UploadView.xhr2Ok.addClass("disabled");
                     } else {
-                        yiiXhr2UploadView.curPhoto.addClass("xhr2-active");
-                        if (yiiXhr2UploadView.prePhoto != null) {
-                            yiiXhr2UploadView.prePhoto.removeClass("xhr2-active");
+                        yiiXhr2UploadView.currentPhoto.addClass("xhr2-active");
+                        if (yiiXhr2UploadView.relatedPhoto != null) {
+                            yiiXhr2UploadView.relatedPhoto.removeClass("xhr2-active");
                         }
-                        yiiXhr2UploadView.prePhoto = yiiXhr2UploadView.curPhoto;
+                        yiiXhr2UploadView.relatedPhoto = yiiXhr2UploadView.currentPhoto;
                         yiiXhr2UploadView.xhr2Ok.removeClass("disabled");
                     }
+                });
+            },
+            init_upload_events: function () {
+
+
+                $('#' + yiiXhr2UploadView.dlg + ' input[id="hubInput"]').hup({
+                    accept: 'image/*, mpeg, nana, wmv'
+                }).on('fileListLoaded', function (event, data) {
+                    console.log(data);
+                }).on('fileTypeError', function (event, data) {
+                    console.log(data);
+                }).on('fileSizeError', function (event, data) {
+                    console.log(data);
+                }).on('fileReadProgress', function (event, data) {
+                    console.log(data);
+                }).on('fileReadPause', function (event, data) {
+                    console.log(data);
+                }).on('fileReadResume', function (event, data) {
+                    console.log(data);
+                }).on('fileReadFinished', function (event, data) {
+                    console.log(data);
+                }).on('fileReadAll', function (event, data) {
+                    console.log(data);
+                });
+
+                $('#' + yiiXhr2UploadView.dlg + ' div[id="hupDiv"]').hup({
+                    url: yiiXhr2UploadView.url,
+                    accept: 'image/*',
+                    max_file_size: 20971520
+                }).on('fileListLoaded', function (event, data) {
+                    console.log(data);
+                }).on('fileTypeError', function (event, data) {
+                    console.log(data);
+                }).on('fileSizeError', function (event, data) {
+                    console.log(data);
+                }).on('fileUploadProgress', function (event, data) {
+                    console.log(data);
+                }).on('fileUploadPause', function (event, data) {
+                    console.log(data);
+                }).on('fileUploadResume', function (event, data) {
+                    console.log(data);
+                }).on('fileUploadFinished', function (event, data) {
+                    console.log(data);
+                }).on('fileUploadAll', function (event, data) {
+                    console.log(data);
                 });
             },
         };

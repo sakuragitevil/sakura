@@ -49,7 +49,6 @@ NanoscrollerAsset::register($this);
             <?php echo $this->render('@app/views/layouts/header') ?>
             <?php echo Xhr2Upload::widget(['options' => [
                 'id' => 'profileIcon',
-                'url' => ''
             ]]); ?>
         <?php endif; ?>
         <?php echo Alert::widget() ?>

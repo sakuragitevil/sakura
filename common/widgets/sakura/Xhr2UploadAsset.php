@@ -22,6 +22,7 @@ class Xhr2UploadAsset extends AssetBundle
     ];
 
     public $js = [
+        'js/hup.min.js',
         'js/jquery.xhr2.js',
     ];
 

@@ -26,7 +26,7 @@
                     </div>
                     <div class="clearboth"></div>
                     <div class="tab-content">
-                        <div role="tabpanel" class="xhr2-hn-On-Zb-eb xhr2-pcursor tab-pane fade in active"
+                        <div id="hupDiv" role="tabpanel" class="xhr2-hn-On-Zb-eb xhr2-pcursor tab-pane fade in active"
                              id="uploadTab">
                             <div class="xhr2-hn-Rn-Qn">
                                 <div class="xhr2-hn-eb">
@@ -39,8 +39,11 @@
                                             <div class="xhr2-hn-Vt-qu">
                                                 <div class="xhr2-hn-Vt-ru">— or —</div>
                                             </div>
-                                            <button type="button" class="btn btn-default btn-sm">Select a photo from
-                                                your computer
+                                            <button type="button" class="btn btn-default btn-sm">
+                                                Select a photo from your computer
+                                                <form>
+                                                    <input type="file" id="hubInput"/>
+                                                </form>
                                             </button>
                                         </div>
                                     </div>
