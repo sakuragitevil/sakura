@@ -2,6 +2,9 @@
 
 namespace backend\helpers\flow;
 
+use backend\helpers\flow\File;
+use backend\helpers\flow\ConfigInterface;
+use backend\helpers\flow\RequestInterface;
 /**
  * Class Basic
  *

@@ -2,53 +2,13 @@
 
 namespace backend\helpers\flow;
 
+use Yii;
+
 class Request implements RequestInterface
 {
-    /**
-     * Request parameters
-     *
-     * @var array
-     */
-    protected $params;
 
-    /**
-     * File
-     *
-     * @var array
-     */
-    protected $file;
+    public function __construct(){}
 
-    /**
-     * Constructor
-     *
-     * @param array|null $params
-     * @param array|null $file
-     */
-    public function __construct($params = null, $file = null)
-    {
-        if ($params === null) {
-            $params = $_REQUEST;
-        }
-
-        if ($file === null && isset($_FILES['file'])) {
-            $file = $_FILES['file'];
-        }
-
-        $this->params = $params;
-        $this->file = $file;
-    }
-
-    /**
-     * Get parameter value
-     *
-     * @param string $name
-     *
-     * @return string|int|null
-     */
-    protected function getParam($name)
-    {
-        return isset($this->params[$name]) ? $this->params[$name] : null;
-    }
 
     /**
      * Get uploaded file name
@@ -57,7 +17,7 @@ class Request implements RequestInterface
      */
     public function getFileName()
     {
-        return $this->getParam('flowFilename');
+        return Yii::$app->request->getBodyParam("flowFilename");
     }
 
     /**
@@ -67,7 +27,7 @@ class Request implements RequestInterface
      */
     public function getTotalSize()
     {
-        return $this->getParam('flowTotalSize');
+        return Yii::$app->request->getBodyParam("flowTotalSize");
     }
 
     /**
@@ -77,7 +37,7 @@ class Request implements RequestInterface
      */
     public function getIdentifier()
     {
-        return $this->getParam('flowIdentifier');
+        return Yii::$app->request->getBodyParam("flowIdentifier");
     }
 
     /**
@@ -87,7 +47,7 @@ class Request implements RequestInterface
      */
     public function getRelativePath()
     {
-        return $this->getParam('flowRelativePath');
+        return Yii::$app->request->getBodyParam("flowRelativePath");
     }
 
     /**
@@ -97,7 +57,7 @@ class Request implements RequestInterface
      */
     public function getTotalChunks()
     {
-        return $this->getParam('flowTotalChunks');
+        return Yii::$app->request->getBodyParam("flowTotalChunks");
     }
 
     /**
@@ -107,7 +67,7 @@ class Request implements RequestInterface
      */
     public function getDefaultChunkSize()
     {
-        return $this->getParam('flowChunkSize');
+        return Yii::$app->request->getBodyParam("flowChunkSize");
     }
 
     /**
@@ -117,7 +77,7 @@ class Request implements RequestInterface
      */
     public function getCurrentChunkNumber()
     {
-        return $this->getParam('flowChunkNumber');
+        return Yii::$app->request->getBodyParam("flowChunkNumber");
     }
 
     /**
@@ -127,7 +87,7 @@ class Request implements RequestInterface
      */
     public function getCurrentChunkSize()
     {
-        return $this->getParam('flowCurrentChunkSize');
+        return Yii::$app->request->getBodyParam("flowCurrentChunkSize");
     }
 
     /**
