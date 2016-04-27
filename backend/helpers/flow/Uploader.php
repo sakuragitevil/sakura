@@ -35,7 +35,6 @@ class Uploader
                 unlink($path);
             }
         }
-
         closedir($handle);
     }
 }

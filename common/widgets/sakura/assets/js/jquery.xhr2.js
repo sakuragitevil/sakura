@@ -97,7 +97,7 @@
                     // Handle progress for both the file and the overall upload
                     var xhr2Progress = $('#' + yiiXhr2UploadView.dlg + ' div[id="xhr2Progress"]');
                     xhr2Progress.find('div[class="xhr2-Pr-Tu"] span').text(Math.floor(file.progress() * 100));
-                    xhr2Progress.find('div[class="progress-bar"]').css({width: Math.floor(xhr2Flow.progress() * 100) + '%'});
+                    xhr2Progress.find('div[role="progressbar"]').css({width: Math.floor(xhr2Flow.progress() * 100) + '%'});
                 });
                 xhr2Flow.on('fileAdded', function (file, event) {
                     console.log(file, event);
@@ -106,8 +106,11 @@
                     $('#' + yiiXhr2UploadView.dlg + ' div[id="uploadError"]').hide();
                 });
                 xhr2Flow.on('complete', function(){
-                    $('#' + yiiXhr2UploadView.dlg + ' div[id="dropTarget"]').show();
-                    $('#' + yiiXhr2UploadView.dlg + ' div[id="xhr2Progress"]').hide();
+                    setTimeout(function() {
+                        $('#' + yiiXhr2UploadView.dlg + ' div[id="dropTarget"]').show();
+                        $('#' + yiiXhr2UploadView.dlg + ' div[id="xhr2Progress"]').hide();
+                    }, 2000);
+
                 });
                 xhr2Flow.on('fileError', function (file, message) {
 
