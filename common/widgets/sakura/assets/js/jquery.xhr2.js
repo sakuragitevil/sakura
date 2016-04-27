@@ -74,47 +74,6 @@
             init_upload_events: function () {
 
 
-                $('#' + yiiXhr2UploadView.dlg + ' input[id="hubInput"]').hup({
-                    accept: 'image/*, mpeg, nana, wmv'
-                }).on('fileListLoaded', function (event, data) {
-                    console.log(data);
-                }).on('fileTypeError', function (event, data) {
-                    console.log(data);
-                }).on('fileSizeError', function (event, data) {
-                    console.log(data);
-                }).on('fileReadProgress', function (event, data) {
-                    console.log(data);
-                }).on('fileReadPause', function (event, data) {
-                    console.log(data);
-                }).on('fileReadResume', function (event, data) {
-                    console.log(data);
-                }).on('fileReadFinished', function (event, data) {
-                    console.log(data);
-                }).on('fileReadAll', function (event, data) {
-                    console.log(data);
-                });
-
-                $('#' + yiiXhr2UploadView.dlg + ' div[id="hupDiv"]').hup({
-                    url: yiiXhr2UploadView.url,
-                    accept: 'image/*',
-                    max_file_size: 20971520
-                }).on('fileListLoaded', function (event, data) {
-                    console.log(data);
-                }).on('fileTypeError', function (event, data) {
-                    console.log(data);
-                }).on('fileSizeError', function (event, data) {
-                    console.log(data);
-                }).on('fileUploadProgress', function (event, data) {
-                    console.log(data);
-                }).on('fileUploadPause', function (event, data) {
-                    console.log(data);
-                }).on('fileUploadResume', function (event, data) {
-                    console.log(data);
-                }).on('fileUploadFinished', function (event, data) {
-                    console.log(data);
-                }).on('fileUploadAll', function (event, data) {
-                    console.log(data);
-                });
             },
         };
 

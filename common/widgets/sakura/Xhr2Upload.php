@@ -20,6 +20,7 @@ class Xhr2Upload extends \yii\bootstrap\Widget
     public function init()
     {
         parent::init();
+        $this->options['url'] = Yii\helpers\Url::to("filehandler/upload");
         $this->registerClientEvents();
     }
 
