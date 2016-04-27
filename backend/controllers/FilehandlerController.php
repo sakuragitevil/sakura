@@ -8,7 +8,7 @@ use yii\filters\VerbFilter;
 use yii\helpers\Json;
 
 /**
- * Site controller
+ * Filehandler controller
  */
 class FilehandlerController extends Controller
 {
@@ -25,14 +25,14 @@ class FilehandlerController extends Controller
                     [
                         'actions' => ['upload'],
                         'allow' => true,
-//                        'roles' => ['@'],
+                        'roles' => ['@'],
                     ],
                 ],
             ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'upload' => ['put'],
+                    'upload' => ['post', 'get'],
                 ],
             ],
         ];

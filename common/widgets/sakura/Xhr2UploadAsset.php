@@ -22,7 +22,7 @@ class Xhr2UploadAsset extends AssetBundle
     ];
 
     public $js = [
-        'js/dropzone.js',
+        'js/flow.min.js',
         'js/jquery.xhr2.js',
     ];
 

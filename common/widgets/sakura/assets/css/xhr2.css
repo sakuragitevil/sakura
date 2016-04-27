@@ -221,3 +221,35 @@
     height: 130px;
     transform: rotate(0deg);
 }
+
+.xhr2-hn-Rn-Pr{
+    width: 898px;
+    height: 350px;
+    padding-top: 100px;
+}
+
+.xhr2-Pr{
+    width: 500px;
+    margin: auto;
+}
+.xhr2-Pr > .progress{
+    border-radius: 0px;
+    border: 1px solid #B9B9B9;
+    height: 15px;
+    padding: 1px;
+}
+
+.xhr2-Pr-Tu{
+    display: inline-block;
+    font-size: 14px;
+    color: #222;
+    margin-bottom: 3px;
+}
+.xhr2-alert{
+
+    width: 600px;
+    margin: auto;
+    margin-top: 5px;
+    padding: 5px;
+    text-align: center;
+}
