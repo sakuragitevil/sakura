@@ -1,8 +1,8 @@
 <?php
 
-namespace backend\helpers\mongo;
+namespace backend\helpers\flow\mongo;
 
-use backend\helpers\FileOpenException;
+use backend\helpers\flow\FileOpenException;
 
 /**
  * @codeCoverageIgnore

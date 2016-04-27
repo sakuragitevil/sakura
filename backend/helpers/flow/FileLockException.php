@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\helpers;
+namespace backend\helpers\flow;
 
 class FileLockException extends \Exception
 {
