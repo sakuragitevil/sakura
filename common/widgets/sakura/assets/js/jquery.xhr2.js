@@ -80,7 +80,7 @@
                     target: yiiXhr2UploadView.url,
                     query: {_csrf: yiiXhr2UploadView.csrfToken},
                     singleFile: true,
-                    uploadMethod: 'POST',
+                    allowDuplicateUploads: true,
                 });
 
                 xhr2Flow.assignBrowse(document.getElementById('browseButton'));
@@ -90,6 +90,8 @@
                     xhr2Flow.upload();
                 });
                 xhr2Flow.on('uploadStart', function () {
+                    var xhr2Progress = $('#' + yiiXhr2UploadView.dlg + ' div[id="xhr2Progress"]');
+                    xhr2Progress.find('div[role="progressbar"]').css({width: '0%'});
                     $('#' + yiiXhr2UploadView.dlg + ' div[id="dropTarget"]').hide();
                     $('#' + yiiXhr2UploadView.dlg + ' div[id="xhr2Progress"]').show();
                 });

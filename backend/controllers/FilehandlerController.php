@@ -81,7 +81,7 @@ class FilehandlerController extends Controller
                 return;
             }
         }
-        if ($file->validateFile() && $file->save($appPath . '/upload')) {
+        if ($file->validateFile() && $file->save($appPath . '/upload/documents')) {
             // File upload was completed
             Yii::$app->response->setStatusCode(201);//Created
             Yii::$app->response->send();
