@@ -28,7 +28,7 @@
                     <div class="clearboth"></div>
                     <div class="tab-content">
                         <div id="uploadTab" role="tabpanel" class="xhr2-hn-On-Zb-eb tab-pane fade in active">
-                            <div id="dropTarget" class="xhr2-hn-Rn-Qn">
+                            <div id="dropTarget" class="xhr2-hn-Rn-Qn" style="display: none">
                                 <div id="uploadError" class="xhr2-alert alert alert-danger" role="alert" style="display: none">
                                     <strong>There was an upload error.</strong><br>
                                     <span></span>
@@ -56,6 +56,11 @@
                                     <div class="progress">
                                         <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="xhr2-crImg" style="display: block">
+                                <div class="xhr2-ig-ct img-container">
+                                    <img src="../web/icons/Chrysanthemum.jpg" alt="Picture">
                                 </div>
                             </div>
                         </div>

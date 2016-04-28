@@ -35,6 +35,9 @@
                 //init_upload_events
                 yiiXhr2UploadView.init_upload_events();
 
+                //init_crop_events
+                yiiXhr2UploadView.init_crop_events();
+
             },
             show_dialog: function () {
                 $('#' + yiiXhr2UploadView.dlg).modal({keyboard: false});
@@ -128,6 +131,41 @@
                 });
 
             },
+            init_crop_events: function () {
+                var Cropper = window.Cropper;
+                var console = window.console || { log: function () {} };
+                var container = document.querySelector('.img-container');
+                var image = container.getElementsByTagName('img').item(0);
+
+                var options = {
+                    aspectRatio: 1 / 1,
+                    preview: '.img-preview',
+                    build: function () {
+                        console.log('build');
+                    },
+                    built: function () {
+                        console.log('built');
+                    },
+                    cropstart: function (e) {
+                        console.log('cropstart', e.detail.action);
+                    },
+                    cropmove: function (e) {
+                        console.log('cropmove', e.detail.action);
+                    },
+                    cropend: function (e) {
+                        console.log('cropend', e.detail.action);
+                    },
+                    crop: function (e) {
+                        var data = e.detail;
+
+                        console.log('crop');
+                    },
+                    zoom: function (e) {
+                        console.log('zoom', e.detail.ratio);
+                    }
+                };
+                var cropper = new Cropper(image, options);
+            }
         };
 
         //Call functions
