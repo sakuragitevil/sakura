@@ -2,6 +2,8 @@
 
 namespace backend\helpers\flow;
 
+use backend\helpers\flow\FileOpenException;
+
 class Uploader
 {
     /**

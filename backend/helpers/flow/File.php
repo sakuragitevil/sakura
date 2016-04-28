@@ -24,7 +24,7 @@ class File
     /**
      * Constructor
      *
-     * @param ConfigInterface  $config
+     * @param ConfigInterface $config
      * @param RequestInterface $request
      */
     public function __construct(ConfigInterface $config, RequestInterface $request = null)
@@ -58,7 +58,7 @@ class File
      */
     public function getChunkPath($index)
     {
-        return $this->config->getTempDir().DIRECTORY_SEPARATOR.$this->identifier.'_'.$index;
+        return $this->config->getTempDir() . DIRECTORY_SEPARATOR . $this->identifier . '_' . $index;
     }
 
     /**
@@ -146,9 +146,10 @@ class File
      */
     public function save($destination)
     {
-        $fh = fopen($destination, 'wb');
+        $fullFilePath = $destination . DIRECTORY_SEPARATOR . $this->request->getFileName();
+        $fh = fopen($fullFilePath, 'wb');
         if (!$fh) {
-            throw new FileOpenException('failed to open destination file: '.$destination);
+            throw new FileOpenException('failed to open destination file: ' . $destination);
         }
 
         if (!flock($fh, LOCK_EX | LOCK_NB, $blocked)) {
@@ -161,7 +162,7 @@ class File
             }
             // @codeCoverageIgnoreEnd
 
-            throw new FileLockException('failed to lock file: '.$destination);
+            throw new FileLockException('failed to lock file: ' . $destination);
         }
 
         $totalChunks = $this->request->getTotalChunks();
@@ -174,7 +175,7 @@ class File
                 $chunk = fopen($file, "rb");
 
                 if (!$chunk) {
-                    throw new FileOpenException('failed to open chunk: '.$file);
+                    throw new FileOpenException('failed to open chunk: ' . $file);
                 }
 
                 if ($preProcessChunk !== null) {

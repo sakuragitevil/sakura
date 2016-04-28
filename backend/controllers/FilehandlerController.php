@@ -60,14 +60,15 @@ class FilehandlerController extends Controller
         $config = new Config();
         $config->setTempDir($appPath . "/upload/chunks_temp_folder");
 
-        $file = new File();
+        $file = new File($config);
 
         if (Yii::$app->request->isGet) {
             if ($file->checkChunk()) {
-                header("HTTP/1.1 200 Ok");
-//                $headers = Yii::$app->response->headers;
+                Yii::$app->response->setStatusCode(200);//OK
+                Yii::$app->response->send();
             } else {
-                header("HTTP/1.1 204 No Content");
+                Yii::$app->response->setStatusCode(204);//No Content
+                Yii::$app->response->send();
                 return;
             }
         } else {
@@ -75,14 +76,19 @@ class FilehandlerController extends Controller
                 $file->saveChunk();
             } else {
                 // error, invalid chunk upload request, retry
-                header("HTTP/1.1 400 Bad Request");
+                Yii::$app->response->setStatusCode(400);//Bad request
+                Yii::$app->response->send();
                 return;
             }
         }
         if ($file->validateFile() && $file->save($appPath . '/upload')) {
             // File upload was completed
+            Yii::$app->response->setStatusCode(201);//Created
+            Yii::$app->response->send();
         } else {
             // This is not a final chunk, continue to upload
+            Yii::$app->response->setStatusCode(100);//Continue
+            Yii::$app->response->send();
         }
 
     }

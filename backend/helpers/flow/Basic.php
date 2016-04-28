@@ -2,6 +2,7 @@
 
 namespace backend\helpers\flow;
 
+use Yii;
 use backend\helpers\flow\File;
 use backend\helpers\flow\ConfigInterface;
 use backend\helpers\flow\RequestInterface;
@@ -30,12 +31,13 @@ class Basic
 
         $file = new File($config, $request);
 
-        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+        if (Yii::$app->request->isGet) {
             if ($file->checkChunk()) {
-                header("HTTP/1.1 200 Ok");
+                Yii::$app->response->setStatusCode(200);
+                Yii::$app->response->send();
             } else {
-                // The 204 response MUST NOT include a message-body, and thus is always terminated by the first empty line after the header fields.
-                header("HTTP/1.1 204 No Content");
+                Yii::$app->response->setStatusCode(204);
+                Yii::$app->response->send();
                 return false;
             }
         } else {
@@ -43,7 +45,8 @@ class Basic
                 $file->saveChunk();
             } else {
                 // error, invalid chunk upload request, retry
-                header("HTTP/1.1 400 Bad Request");
+                Yii::$app->response->setStatusCode(400);
+                Yii::$app->response->send();
                 return false;
             }
         }

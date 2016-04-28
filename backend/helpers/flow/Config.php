@@ -58,7 +58,7 @@ class Config implements ConfigInterface
      */
     public function getHashNameCallback()
     {
-        return isset($this->config['hashNameCallback']) ? $this->config['hashNameCallback'] : '\Flow\Config::hashNameCallback';
+        return isset($this->config['hashNameCallback']) ? $this->config['hashNameCallback'] : 'backend\helpers\flow\Config::hashNameCallback';
     }
 
     /**

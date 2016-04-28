@@ -158,7 +158,7 @@ class MongoFile extends File
         $chunksCollection = $this->config->getGridFs()->chunks;
         $indexKeys = ['files_id' => 1, 'n' => 1];
         $indexOptions = ['unique' => true, 'background' => true];
-        if(method_exists($chunksCollection, 'createIndex')) { // only available for PECL mongo >= 1.5.0
+        if (method_exists($chunksCollection, 'createIndex')) { // only available for PECL mongo >= 1.5.0
             $chunksCollection->createIndex($indexKeys, $indexOptions);
         } else {
             $chunksCollection->ensureIndex($indexKeys, $indexOptions);
