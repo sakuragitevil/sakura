@@ -80,6 +80,7 @@
                     target: yiiXhr2UploadView.url,
                     query: {_csrf: yiiXhr2UploadView.csrfToken},
                     singleFile: true,
+                    accept: 'image/*',
                     allowDuplicateUploads: true,
                 });
 
@@ -107,8 +108,8 @@
                 xhr2Flow.on('fileSuccess', function (file, message) {
                     $('#' + yiiXhr2UploadView.dlg + ' div[id="uploadError"]').hide();
                 });
-                xhr2Flow.on('complete', function(){
-                    setTimeout(function() {
+                xhr2Flow.on('complete', function () {
+                    setTimeout(function () {
                         $('#' + yiiXhr2UploadView.dlg + ' div[id="dropTarget"]').show();
                         $('#' + yiiXhr2UploadView.dlg + ' div[id="xhr2Progress"]').hide();
                     }, 2000);
