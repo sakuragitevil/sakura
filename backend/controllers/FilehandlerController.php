@@ -81,9 +81,27 @@ class FilehandlerController extends Controller
                 return;
             }
         }
-        if ($file->validateFile() && $file->save($appPath . '/upload/documents')) {
+        $savePath = "";
+        $fileMode = $file->getMode();
+        switch($fileMode){
+            case "avatar":
+                $savePath = $appPath . '/upload/avatars/avatar_temp_folder';
+                break;
+            default:
+                $savePath = $appPath . '/upload/documents';
+                break;
+        };
+        if ($file->validateFile() && $file->save($savePath)) {
             // File upload was completed
-            Yii::$app->response->setStatusCode(201);//Created
+            switch($fileMode){
+                case "avatar":
+                    Yii::$app->response->data = ["message"=> "The requested resource was not found."];
+                    Yii::$app->response->setStatusCode(201);//Created
+                    break;
+                default:
+                    Yii::$app->response->setStatusCode(201);//Created
+                    break;
+            };
             Yii::$app->response->send();
         } else {
             // This is not a final chunk, continue to upload
@@ -92,6 +110,4 @@ class FilehandlerController extends Controller
         }
 
     }
-
-
 }

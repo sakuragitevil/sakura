@@ -73,4 +73,11 @@ interface RequestInterface
      * @return bool
      */
     public function isFustyFlowRequest();
+
+    /**
+     * Get current mode upload
+     *
+     * @return string|null
+     */
+    public function getMode();
 }

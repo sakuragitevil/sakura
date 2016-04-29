@@ -10,11 +10,14 @@ use yii\web\AngularAsset;
 use common\widgets\Alert;
 use common\widgets\sakura\Xhr2Upload;
 use common\widgets\sakura\Xhr2UploadAsset;
+use common\widgets\sakura\AjaxWaiting;
+use common\widgets\sakura\AjaxWaitingAsset;
 
 AppAsset::register($this);
 AngularAsset::register($this);
 Xhr2UploadAsset::register($this);
 NanoscrollerAsset::register($this);
+AjaxWaitingAsset::register($this);
 
 ?>
 <?php $this->beginPage() ?>
@@ -31,6 +34,7 @@ NanoscrollerAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody() ?>
+<?php echo AjaxWaiting::widget();?>
 <div class="wrap">
     <div class="container-fluid">
         <?php if (!\Yii::$app->user->isGuest): ?>
@@ -49,6 +53,7 @@ NanoscrollerAsset::register($this);
             <?php echo $this->render('@app/views/layouts/header') ?>
             <?php echo Xhr2Upload::widget(['options' => [
                 'id' => 'profileIcon',
+                'mode' => 'avatar',
             ]]); ?>
         <?php endif; ?>
         <?php echo Alert::widget() ?>

@@ -231,4 +231,14 @@ class File
     {
         return move_uploaded_file($filePath, $destinationPath);
     }
+
+    /**
+     * Get current mode upload
+     *
+     * @return string|null
+     */
+    public function getMode()
+    {
+        return $this->request->getMode();
+    }
 }

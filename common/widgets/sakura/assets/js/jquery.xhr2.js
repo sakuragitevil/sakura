@@ -7,6 +7,7 @@
         var yiiXhr2UploadView = {
             id: '',
             url: '',
+            mode: '',
             csrfToken: '',
             dlg: 'dlgXhr2Upload',
             currentPhoto: null,
@@ -17,6 +18,7 @@
 
                 yiiXhr2UploadView.id = options.id;
                 yiiXhr2UploadView.url = options.url;
+                yiiXhr2UploadView.mode = options.mode;
                 yiiXhr2UploadView.csrfToken = yii.getCsrfToken();
 
                 yiiXhr2UploadView.xhr2Ok = $("#xhr2Ok");
@@ -35,9 +37,6 @@
                 //init_upload_events
                 yiiXhr2UploadView.init_upload_events();
 
-                //init_crop_events
-                yiiXhr2UploadView.init_crop_events();
-
             },
             show_dialog: function () {
                 $('#' + yiiXhr2UploadView.dlg).modal({keyboard: false});
@@ -50,7 +49,8 @@
                     $('#' + yiiXhr2UploadView.dlg + ' .xhr2-scroll').nanoScroller();
                     switch ($(e.target).attr("href")) {
                         case "#uploadTab":
-
+                            //init_crop_events
+                            yiiXhr2UploadView.init_crop_events();
                             break;
                         case "#photoTab":
                             if (yiiXhr2UploadView.currentPhoto != null) {
@@ -81,7 +81,7 @@
 
                 var xhr2Flow = new Flow({
                     target: yiiXhr2UploadView.url,
-                    query: {_csrf: yiiXhr2UploadView.csrfToken},
+                    query: {_csrf: yiiXhr2UploadView.csrfToken, mode: yiiXhr2UploadView.mode},
                     singleFile: true,
                     accept: 'image/*',
                     allowDuplicateUploads: true,
@@ -94,6 +94,7 @@
                     xhr2Flow.upload();
                 });
                 xhr2Flow.on('uploadStart', function () {
+                    window.waiting.show();
                     var xhr2Progress = $('#' + yiiXhr2UploadView.dlg + ' div[id="xhr2Progress"]');
                     xhr2Progress.find('div[role="progressbar"]').css({width: '0%'});
                     $('#' + yiiXhr2UploadView.dlg + ' div[id="dropTarget"]').hide();
@@ -110,11 +111,13 @@
                 });
                 xhr2Flow.on('fileSuccess', function (file, message) {
                     $('#' + yiiXhr2UploadView.dlg + ' div[id="uploadError"]').hide();
+                    console.log(message);
                 });
                 xhr2Flow.on('complete', function () {
                     setTimeout(function () {
                         $('#' + yiiXhr2UploadView.dlg + ' div[id="dropTarget"]').show();
                         $('#' + yiiXhr2UploadView.dlg + ' div[id="xhr2Progress"]').hide();
+                        window.waiting.hide();
                     }, 2000);
 
                 });
@@ -133,39 +136,44 @@
             },
             init_crop_events: function () {
                 var Cropper = window.Cropper;
-                var console = window.console || { log: function () {} };
                 var container = document.querySelector('.img-container');
                 var image = container.getElementsByTagName('img').item(0);
 
                 var options = {
                     aspectRatio: 1 / 1,
+                    viewMode: 3,
+                    zoomOnWheel: false,
                     preview: '.img-preview',
-                    build: function () {
-                        console.log('build');
-                    },
-                    built: function () {
-                        console.log('built');
-                    },
-                    cropstart: function (e) {
-                        console.log('cropstart', e.detail.action);
-                    },
-                    cropmove: function (e) {
-                        console.log('cropmove', e.detail.action);
-                    },
-                    cropend: function (e) {
-                        console.log('cropend', e.detail.action);
-                    },
-                    crop: function (e) {
-                        var data = e.detail;
-
-                        console.log('crop');
-                    },
-                    zoom: function (e) {
-                        console.log('zoom', e.detail.ratio);
-                    }
                 };
                 var cropper = new Cropper(image, options);
-            }
+
+                var imgSrc, imgW, imgH;
+                function myFunction(image){
+                    var img = new Image();
+                    img.src = image;
+                    img.onload = function() {
+                        return {
+                            src:image,
+                            width:this.width,
+                            height:this.height};
+                    }
+                    return img;
+                }
+                var x = myFunction('../web/icons/Chrysanthemum.jpg');
+                //Waiting for the image loaded. Otherwise, system returned 0 as both width and height.
+                x.addEventListener('load',function(){
+                    imgSrc = x.src;
+                    imgW = x.width;
+                    imgH = x.height;
+                });
+                x.addEventListener('load',function(){
+                    console.log(imgW+'x'+imgH);//276x110
+                });
+
+            },
+            cal_crop_options: function () {
+
+            },
         };
 
         //Call functions

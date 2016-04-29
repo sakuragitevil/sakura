@@ -150,4 +150,14 @@ class Request implements RequestInterface
     {
         return false;
     }
+
+    /**
+     * Get current mode upload
+     *
+     * @return string|null
+     */
+    public function getMode()
+    {
+        return $this->getParam('mode');
+    }
 }
