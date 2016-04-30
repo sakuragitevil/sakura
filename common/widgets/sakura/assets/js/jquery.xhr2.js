@@ -111,14 +111,16 @@
                 });
                 xhr2Flow.on('fileSuccess', function (file, message) {
                     $('#' + yiiXhr2UploadView.dlg + ' div[id="uploadError"]').hide();
-                    console.log(message);
+                    if(message!=""){
+                        console.log(JSON.parse(message).width);
+                    }
                 });
                 xhr2Flow.on('complete', function () {
                     setTimeout(function () {
                         $('#' + yiiXhr2UploadView.dlg + ' div[id="dropTarget"]').show();
                         $('#' + yiiXhr2UploadView.dlg + ' div[id="xhr2Progress"]').hide();
                         window.waiting.hide();
-                    }, 2000);
+                    }, 1000);
 
                 });
                 xhr2Flow.on('fileError', function (file, message) {
@@ -147,28 +149,7 @@
                 };
                 var cropper = new Cropper(image, options);
 
-                var imgSrc, imgW, imgH;
-                function myFunction(image){
-                    var img = new Image();
-                    img.src = image;
-                    img.onload = function() {
-                        return {
-                            src:image,
-                            width:this.width,
-                            height:this.height};
-                    }
-                    return img;
-                }
-                var x = myFunction('../web/icons/Chrysanthemum.jpg');
-                //Waiting for the image loaded. Otherwise, system returned 0 as both width and height.
-                x.addEventListener('load',function(){
-                    imgSrc = x.src;
-                    imgW = x.width;
-                    imgH = x.height;
-                });
-                x.addEventListener('load',function(){
-                    console.log(imgW+'x'+imgH);//276x110
-                });
+
 
             },
             cal_crop_options: function () {

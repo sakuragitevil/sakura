@@ -241,4 +241,14 @@ class File
     {
         return $this->request->getMode();
     }
+
+    /**
+     * Get uploaded file name
+     *
+     * @return string|null
+     */
+    public function getFileName()
+    {
+        return $this->request->getFileName();
+    }
 }

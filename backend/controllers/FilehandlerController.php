@@ -83,7 +83,7 @@ class FilehandlerController extends Controller
         }
         $savePath = "";
         $fileMode = $file->getMode();
-        switch($fileMode){
+        switch ($fileMode) {
             case "avatar":
                 $savePath = $appPath . '/upload/avatars/avatar_temp_folder';
                 break;
@@ -93,9 +93,20 @@ class FilehandlerController extends Controller
         };
         if ($file->validateFile() && $file->save($savePath)) {
             // File upload was completed
-            switch($fileMode){
+            switch ($fileMode) {
                 case "avatar":
-                    Yii::$app->response->data = ["message"=> "The requested resource was not found."];
+
+                    list($width, $height) = getimagesize($savePath . DIRECTORY_SEPARATOR . $file->getFileName());
+
+                    $content = [
+                        "width" => $width,
+                        "height" => $height,
+                        "filePath" => $savePath . DIRECTORY_SEPARATOR . $file->getFileName(),
+                    ];
+
+                    Yii::$app->response->format = "html";
+                    Yii::$app->response->headers->set("conten-type", "text/html; charset=UTF-8");
+                    Yii::$app->response->content = Json::encode($content);
                     Yii::$app->response->setStatusCode(201);//Created
                     break;
                 default:
