@@ -7,15 +7,20 @@
         var yiiXhr2UploadView = {
             id: '',
             url: '',
+            mode: '',
+            csrfToken: '',
             dlg: 'dlgXhr2Upload',
-            curPhoto: null,
-            prePhoto: null,
-            xhr2Ok:null,
-            xhr2Cancel:null,
+            currentPhoto: null,
+            relatedPhoto: null,
+            xhr2Ok: null,
+            xhr2Cancel: null,
             init: function (options) {
 
                 yiiXhr2UploadView.id = options.id;
                 yiiXhr2UploadView.url = options.url;
+                yiiXhr2UploadView.mode = options.mode;
+                yiiXhr2UploadView.csrfToken = yii.getCsrfToken();
+
                 yiiXhr2UploadView.xhr2Ok = $("#xhr2Ok");
                 yiiXhr2UploadView.xhr2Cancel = $("#xhr2Cancel");
 
@@ -29,6 +34,9 @@
                 //init_photos_events
                 yiiXhr2UploadView.init_photos_events();
 
+                //init_upload_events
+                yiiXhr2UploadView.init_upload_events();
+
             },
             show_dialog: function () {
                 $('#' + yiiXhr2UploadView.dlg).modal({keyboard: false});
@@ -41,10 +49,11 @@
                     $('#' + yiiXhr2UploadView.dlg + ' .xhr2-scroll').nanoScroller();
                     switch ($(e.target).attr("href")) {
                         case "#uploadTab":
-
+                            //init_crop_events
+                            yiiXhr2UploadView.init_crop_events();
                             break;
                         case "#photoTab":
-                            if(yiiXhr2UploadView.curPhoto!=null){
+                            if (yiiXhr2UploadView.currentPhoto != null) {
                                 yiiXhr2UploadView.xhr2Ok.removeClass("disabled");
                             }
                             break;
@@ -53,20 +62,117 @@
             },
             init_photos_events: function () {
                 $('#' + yiiXhr2UploadView.dlg + ' div[class="xhr2-hn-xs-oo-tm"]').on('click', function (e) {
-                    yiiXhr2UploadView.curPhoto = $(this);
-                    if (yiiXhr2UploadView.curPhoto.hasClass("xhr2-active")) {
-                        yiiXhr2UploadView.curPhoto.removeClass("xhr2-active");
-                        yiiXhr2UploadView.prePhoto = yiiXhr2UploadView.curPhoto = null;
+                    yiiXhr2UploadView.currentPhoto = $(this);
+                    if (yiiXhr2UploadView.currentPhoto.hasClass("xhr2-active")) {
+                        yiiXhr2UploadView.currentPhoto.removeClass("xhr2-active");
+                        yiiXhr2UploadView.relatedPhoto = yiiXhr2UploadView.currentPhoto = null;
                         yiiXhr2UploadView.xhr2Ok.addClass("disabled");
                     } else {
-                        yiiXhr2UploadView.curPhoto.addClass("xhr2-active");
-                        if (yiiXhr2UploadView.prePhoto != null) {
-                            yiiXhr2UploadView.prePhoto.removeClass("xhr2-active");
+                        yiiXhr2UploadView.currentPhoto.addClass("xhr2-active");
+                        if (yiiXhr2UploadView.relatedPhoto != null) {
+                            yiiXhr2UploadView.relatedPhoto.removeClass("xhr2-active");
                         }
-                        yiiXhr2UploadView.prePhoto = yiiXhr2UploadView.curPhoto;
+                        yiiXhr2UploadView.relatedPhoto = yiiXhr2UploadView.currentPhoto;
                         yiiXhr2UploadView.xhr2Ok.removeClass("disabled");
                     }
                 });
+            },
+            init_upload_events: function () {
+
+                var xhr2Flow = new Flow({
+                    target: yiiXhr2UploadView.url,
+                    query: {_csrf: yiiXhr2UploadView.csrfToken, mode: yiiXhr2UploadView.mode},
+                    singleFile: true,
+                    accept: 'image/*',
+                    allowDuplicateUploads: true,
+                });
+
+                xhr2Flow.assignBrowse(document.getElementById('browseButton'));
+                xhr2Flow.assignDrop(document.getElementById('dropTarget'));
+
+                xhr2Flow.on('filesSubmitted', function (file) {
+                    xhr2Flow.upload();
+                });
+                xhr2Flow.on('uploadStart', function () {
+                    window.waiting.show();
+                    var xhr2Progress = $('#' + yiiXhr2UploadView.dlg + ' div[id="xhr2Progress"]');
+                    xhr2Progress.find('div[role="progressbar"]').css({width: '0%'});
+                    $('#' + yiiXhr2UploadView.dlg + ' div[id="dropTarget"]').hide();
+                    $('#' + yiiXhr2UploadView.dlg + ' div[id="xhr2Progress"]').show();
+                });
+                xhr2Flow.on('fileProgress', function (file) {
+                    // Handle progress for both the file and the overall upload
+                    var xhr2Progress = $('#' + yiiXhr2UploadView.dlg + ' div[id="xhr2Progress"]');
+                    xhr2Progress.find('div[class="xhr2-Pr-Tu"] span').text(Math.floor(file.progress() * 100));
+                    xhr2Progress.find('div[role="progressbar"]').css({width: Math.floor(xhr2Flow.progress() * 100) + '%'});
+                });
+                xhr2Flow.on('fileAdded', function (file, event) {
+                    console.log(file, event);
+                });
+                xhr2Flow.on('fileSuccess', function (file, message) {
+                    $('#' + yiiXhr2UploadView.dlg + ' div[id="uploadError"]').hide();
+                    console.log(message);
+                });
+                xhr2Flow.on('complete', function () {
+                    setTimeout(function () {
+                        $('#' + yiiXhr2UploadView.dlg + ' div[id="dropTarget"]').show();
+                        $('#' + yiiXhr2UploadView.dlg + ' div[id="xhr2Progress"]').hide();
+                        window.waiting.hide();
+                    }, 2000);
+
+                });
+                xhr2Flow.on('fileError', function (file, message) {
+
+                    $('#' + yiiXhr2UploadView.dlg + ' div[id="dropTarget"]').show();
+                    $('#' + yiiXhr2UploadView.dlg + ' div[id="xhr2Progress"]').hide();
+
+                    $('#' + yiiXhr2UploadView.dlg + ' div[id="uploadError"]').show();
+                    $('#' + yiiXhr2UploadView.dlg + ' div[id="uploadError"] span').text(message);
+                });
+                xhr2Flow.on('catchAll', function () {
+                    console.log.apply(console, arguments);
+                });
+
+            },
+            init_crop_events: function () {
+                var Cropper = window.Cropper;
+                var container = document.querySelector('.img-container');
+                var image = container.getElementsByTagName('img').item(0);
+
+                var options = {
+                    aspectRatio: 1 / 1,
+                    viewMode: 3,
+                    zoomOnWheel: false,
+                    preview: '.img-preview',
+                };
+                var cropper = new Cropper(image, options);
+
+                var imgSrc, imgW, imgH;
+                function myFunction(image){
+                    var img = new Image();
+                    img.src = image;
+                    img.onload = function() {
+                        return {
+                            src:image,
+                            width:this.width,
+                            height:this.height};
+                    }
+                    return img;
+                }
+                var x = myFunction('../web/icons/Chrysanthemum.jpg');
+                //Waiting for the image loaded. Otherwise, system returned 0 as both width and height.
+                x.addEventListener('load',function(){
+                    imgSrc = x.src;
+                    imgW = x.width;
+                    imgH = x.height;
+                });
+                x.addEventListener('load',function(){
+                    console.log(imgW+'x'+imgH);//276x110
+                });
+
+            },
+            cal_crop_options: function () {
+
             },
         };
 

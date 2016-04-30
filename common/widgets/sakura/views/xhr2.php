@@ -1,4 +1,5 @@
-<div id="dlgXhr2Upload" class="modal fade xhr2Upload" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div id="dlgXhr2Upload" class="modal fade xhr2Upload" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     xmlns="http://www.w3.org/1999/html">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -26,9 +27,12 @@
                     </div>
                     <div class="clearboth"></div>
                     <div class="tab-content">
-                        <div role="tabpanel" class="xhr2-hn-On-Zb-eb xhr2-pcursor tab-pane fade in active"
-                             id="uploadTab">
-                            <div class="xhr2-hn-Rn-Qn">
+                        <div id="uploadTab" role="tabpanel" class="xhr2-hn-On-Zb-eb tab-pane fade in active">
+                            <div id="dropTarget" class="xhr2-hn-Rn-Qn" style="display: block">
+                                <div id="uploadError" class="xhr2-alert alert alert-danger" role="alert" style="display: none">
+                                    <strong>There was an upload error.</strong><br>
+                                    <span></span>
+                                </div>
                                 <div class="xhr2-hn-eb">
                                     <div class="xhr2-hn-Vt">
                                         <div class="xhr2-hn-Vt-nu">
@@ -39,11 +43,24 @@
                                             <div class="xhr2-hn-Vt-qu">
                                                 <div class="xhr2-hn-Vt-ru">— or —</div>
                                             </div>
-                                            <button type="button" class="btn btn-default btn-sm">Select a photo from
-                                                your computer
+                                            <button id="browseButton" type="button" class="btn btn-default btn-sm">
+                                                Select a photo from your computer
                                             </button>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                            <div id="xhr2Progress" class="xhr2-hn-Rn-Pr" style="display: none">
+                                <div class="xhr2-Pr">
+                                    <div class="xhr2-Pr-Tu">Uploading...<span>0</span>%</div>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="xhr2-crImg" style="display: none">
+                                <div class="xhr2-ig-ct img-container">
+                                    <img src="../web/icons/Chrysanthemum.jpg" alt="Picture">
                                 </div>
                             </div>
                         </div>

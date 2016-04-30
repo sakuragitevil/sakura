@@ -8,6 +8,7 @@
 namespace common\widgets\sakura;
 
 use Yii;
+use yii\helpers\Url;
 use yii\helpers\Json;
 
 class Xhr2Upload extends \yii\bootstrap\Widget
@@ -20,6 +21,7 @@ class Xhr2Upload extends \yii\bootstrap\Widget
     public function init()
     {
         parent::init();
+        $this->options['url'] = Url::to(["filehandler/upload"]);
         $this->registerClientEvents();
     }
 
