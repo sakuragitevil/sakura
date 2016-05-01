@@ -58,9 +58,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="xhr2-crImg" style="display: none">
+                            <div id="xhr2Cropper" class="xhr2-crImg" style="display: none">
                                 <div class="xhr2-ig-ct img-container">
-                                    <img src="../web/icons/Chrysanthemum.jpg" alt="Picture">
+                                    <img src="" alt="Picture">
                                 </div>
                             </div>
                         </div>

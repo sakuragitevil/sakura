@@ -101,7 +101,7 @@ class FilehandlerController extends Controller
                     $content = [
                         "width" => $width,
                         "height" => $height,
-                        "filePath" => $savePath . DIRECTORY_SEPARATOR . $file->getFileName(),
+                        "srcPath" => Yii::getAlias("@avatarTempUrl") . DIRECTORY_SEPARATOR . $file->getFileName(),
                     ];
 
                     Yii::$app->response->format = "html";

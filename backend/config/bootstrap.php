@@ -1,1 +1,2 @@
 <?php
+Yii::setAlias("@avatarTempUrl", ".." . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "backend" . DIRECTORY_SEPARATOR . "upload" . DIRECTORY_SEPARATOR . "avatars" . DIRECTORY_SEPARATOR . "avatar_temp_folder");

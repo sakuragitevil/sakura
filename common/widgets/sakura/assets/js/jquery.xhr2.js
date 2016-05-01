@@ -13,6 +13,7 @@
             currentPhoto: null,
             relatedPhoto: null,
             xhr2Ok: null,
+            cropper: null,
             xhr2Cancel: null,
             init: function (options) {
 
@@ -49,8 +50,7 @@
                     $('#' + yiiXhr2UploadView.dlg + ' .xhr2-scroll').nanoScroller();
                     switch ($(e.target).attr("href")) {
                         case "#uploadTab":
-                            //init_crop_events
-                            yiiXhr2UploadView.init_crop_events();
+
                             break;
                         case "#photoTab":
                             if (yiiXhr2UploadView.currentPhoto != null) {
@@ -85,6 +85,8 @@
                     singleFile: true,
                     accept: 'image/*',
                     allowDuplicateUploads: true,
+                    prioritizeFirstAndLastChunk: true,
+                    simultaneousUploads: 1,
                 });
 
                 xhr2Flow.assignBrowse(document.getElementById('browseButton'));
@@ -110,17 +112,36 @@
                     console.log(file, event);
                 });
                 xhr2Flow.on('fileSuccess', function (file, message) {
+
                     $('#' + yiiXhr2UploadView.dlg + ' div[id="uploadError"]').hide();
-                    if(message!=""){
-                        console.log(JSON.parse(message).width);
+                    if (message != "" && yiiXhr2UploadView.mode == "avatar") {
+
+                        $('#' + yiiXhr2UploadView.dlg + ' div[id="dropTarget"]').hide();
+                        $('#' + yiiXhr2UploadView.dlg + ' div[id="xhr2Cropper"]').show();
+
+                        var response = JSON.parse(message);
+                        var cropContainer = yiiXhr2UploadView.cal_crop_container(response.width, response.height);
+
+                        //init_crop_events
+                        yiiXhr2UploadView.init_crop_events(cropContainer, response.srcPath);
                     }
-                });
-                xhr2Flow.on('complete', function () {
+
                     setTimeout(function () {
                         $('#' + yiiXhr2UploadView.dlg + ' div[id="dropTarget"]').show();
                         $('#' + yiiXhr2UploadView.dlg + ' div[id="xhr2Progress"]').hide();
+
+                        if (message != "" && yiiXhr2UploadView.mode == "avatar") {
+                            $('#' + yiiXhr2UploadView.dlg + ' div[id="dropTarget"]').hide();
+                            $('#' + yiiXhr2UploadView.dlg + ' div[id="xhr2Cropper"]').show();
+                        }
+
                         window.waiting.hide();
                     }, 1000);
+
+
+                });
+                xhr2Flow.on('complete', function () {
+
 
                 });
                 xhr2Flow.on('fileError', function (file, message) {
@@ -136,24 +157,40 @@
                 });
 
             },
-            init_crop_events: function () {
+            init_crop_events: function (cropContainer, srcPath) {
                 var Cropper = window.Cropper;
                 var container = document.querySelector('.img-container');
+                $(container).css({width: cropContainer.width, height: cropContainer.height});
                 var image = container.getElementsByTagName('img').item(0);
-
+                $(image).attr("src", srcPath);
                 var options = {
                     aspectRatio: 1 / 1,
                     viewMode: 3,
-                    zoomOnWheel: false,
-                    preview: '.img-preview',
+                    zoomable: false
                 };
-                var cropper = new Cropper(image, options);
-
-
-
+                if (yiiXhr2UploadView.cropper != null) {
+                    yiiXhr2UploadView.cropper.destroy();
+                }
+                yiiXhr2UploadView.cropper = new Cropper(image, options);
             },
-            cal_crop_options: function () {
+            cal_crop_container: function (imgWidth, imgHeight) {
+                var maxImgSize = 300;
+                var newImgSize = {width: 0, height: 0};
 
+                if (imgWidth <= maxImgSize && imgHeight <= maxImgSize) {
+                    newImgSize.width = imgWidth;
+                    newImgSize.height = imgHeight;
+                    return newImgSize;
+                }
+
+                if (imgWidth >= imgHeight) {
+                    newImgSize.width = maxImgSize;
+                    newImgSize.height = Math.ceil(maxImgSize * (imgHeight / imgWidth));
+                } else {
+                    newImgSize.height = maxImgSize;
+                    newImgSize.width = Math.ceil(maxImgSize * (imgWidth / imgHeight));
+                }
+                return newImgSize;
             },
         };
 
