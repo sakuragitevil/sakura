@@ -40,7 +40,7 @@
                     if (yiiXhr2UploadView.isUploadTab) {
 
                     } else if (yiiXhr2UploadView.isYourPhotoTab) {
-                        
+
                     }
 
                 });
