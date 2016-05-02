@@ -12,6 +12,7 @@
             dlg: 'dlgXhr2Upload',
             currentPhoto: null,
             relatedPhoto: null,
+            xhr2Message: '',
             xhr2Ok: null,
             cropper: null,
             xhr2Cancel: null,
@@ -108,40 +109,35 @@
                     xhr2Progress.find('div[class="xhr2-Pr-Tu"] span').text(Math.floor(file.progress() * 100));
                     xhr2Progress.find('div[role="progressbar"]').css({width: Math.floor(xhr2Flow.progress() * 100) + '%'});
                 });
-                xhr2Flow.on('fileAdded', function (file, event) {
-                    console.log(file, event);
-                });
                 xhr2Flow.on('fileSuccess', function (file, message) {
 
                     $('#' + yiiXhr2UploadView.dlg + ' div[id="uploadError"]').hide();
-                    if (message != "" && yiiXhr2UploadView.mode == "avatar") {
-
-                        $('#' + yiiXhr2UploadView.dlg + ' div[id="dropTarget"]').hide();
-                        $('#' + yiiXhr2UploadView.dlg + ' div[id="xhr2Cropper"]').show();
-
-                        var response = JSON.parse(message);
-                        var cropContainer = yiiXhr2UploadView.cal_crop_container(response.width, response.height);
-
-                        //init_crop_events
-                        yiiXhr2UploadView.init_crop_events(cropContainer, response.srcPath);
-                    }
-
-                    setTimeout(function () {
-                        $('#' + yiiXhr2UploadView.dlg + ' div[id="dropTarget"]').show();
-                        $('#' + yiiXhr2UploadView.dlg + ' div[id="xhr2Progress"]').hide();
-
-                        if (message != "" && yiiXhr2UploadView.mode == "avatar") {
-                            $('#' + yiiXhr2UploadView.dlg + ' div[id="dropTarget"]').hide();
-                            $('#' + yiiXhr2UploadView.dlg + ' div[id="xhr2Cropper"]').show();
-                        }
-
-                        window.waiting.hide();
-                    }, 1000);
-
+                    yiiXhr2UploadView.xhr2Message = message;
 
                 });
                 xhr2Flow.on('complete', function () {
 
+
+                    setTimeout(function () {
+
+                        $('#' + yiiXhr2UploadView.dlg + ' div[id="xhr2Progress"]').hide();
+
+                        if (yiiXhr2UploadView.xhr2Message != "" && yiiXhr2UploadView.mode == "avatar") {
+
+                            var xhr2MessageObj = JSON.parse(yiiXhr2UploadView.xhr2Message);
+                            var cropContainer = yiiXhr2UploadView.cal_crop_container(xhr2MessageObj.width, xhr2MessageObj.height);
+
+                            //init_crop_events
+                            yiiXhr2UploadView.init_crop_events(cropContainer, xhr2MessageObj.srcPath);
+
+                            $('#' + yiiXhr2UploadView.dlg + ' div[id="xhr2Cropper"]').show();
+                        }else{
+                            $('#' + yiiXhr2UploadView.dlg + ' div[id="dropTarget"]').show();
+                        }
+                        yiiXhr2UploadView.xhr2Ok.removeClass('disabled');
+
+                        window.waiting.hide();
+                    }, 1000);
 
                 });
                 xhr2Flow.on('fileError', function (file, message) {
@@ -162,6 +158,7 @@
                 var container = document.querySelector('.img-container');
                 $(container).css({width: cropContainer.width, height: cropContainer.height});
                 var image = container.getElementsByTagName('img').item(0);
+                $(image).css({width: cropContainer.width, height: cropContainer.height});
                 $(image).attr("src", srcPath);
                 var options = {
                     aspectRatio: 1 / 1,

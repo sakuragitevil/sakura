@@ -18,7 +18,7 @@ class Xhr2UploadAsset extends AssetBundle
 {
     public $sourcePath = '@common/widgets/sakura/assets';
     public $css = [
-        'css/xhr2.css',
+        'css/jquery.xhr2.css',
         'css/cropper.min.css',
     ];
 

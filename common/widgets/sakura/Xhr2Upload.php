@@ -31,7 +31,7 @@ class Xhr2Upload extends \yii\bootstrap\Widget
     public function run()
     {
         parent::run();
-        echo $this->render("xhr2", $this->options);
+        echo $this->render("xhr2Upload", $this->options);
     }
 
     public function registerClientEvents()
