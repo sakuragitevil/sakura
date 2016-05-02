@@ -16,6 +16,8 @@
             xhr2Ok: null,
             cropper: null,
             xhr2Cancel: null,
+            isUploadTab: false,
+            isYourPhotoTab: false,
             init: function (options) {
 
                 yiiXhr2UploadView.id = options.id;
@@ -30,6 +32,19 @@
                     yiiXhr2UploadView.show_dialog();
                 });
 
+                yiiXhr2UploadView.xhr2Ok.on('click', function () {
+                    if (yiiXhr2UploadView.xhr2Ok.hasClass('disabled')) {
+                        return false;
+                    }
+
+                    if (yiiXhr2UploadView.isUploadTab) {
+
+                    } else if (yiiXhr2UploadView.isYourPhotoTab) {
+                        
+                    }
+
+                });
+
                 //init tabs events
                 yiiXhr2UploadView.init_tab_events();
 
@@ -39,10 +54,31 @@
                 //init_upload_events
                 yiiXhr2UploadView.init_upload_events();
 
+                //init_crop_form_events
+                yiiXhr2UploadView.init_crop_form_events();
+
             },
             show_dialog: function () {
+
+                yiiXhr2UploadView.reset_form();
+
                 $('#' + yiiXhr2UploadView.dlg).modal({keyboard: false});
                 $('#' + yiiXhr2UploadView.dlg).modal('show');
+            },
+            reset_form: function () {
+
+                $('#' + yiiXhr2UploadView.dlg + ' div[id="dropTarget"]').show();
+                $('#' + yiiXhr2UploadView.dlg + ' div[id="uploadError"]').hide();
+                $('#' + yiiXhr2UploadView.dlg + ' div[id="xhr2Progress"]').hide();
+                $('#' + yiiXhr2UploadView.dlg + ' div[id="xhr2Cropper"]').hide();
+                yiiXhr2UploadView.xhr2Ok.addClass("disabled");
+
+                $('#' + yiiXhr2UploadView.dlg + ' div[id="photoTab"]').removeClass('active');
+                $('#' + yiiXhr2UploadView.dlg + ' div[id="uploadTab"]').addClass('active');
+
+                yiiXhr2UploadView.isUploadTab = true;
+                yiiXhr2UploadView.isYourPhotoTab = false;
+
             },
             init_tab_events: function () {
                 $('#' + yiiXhr2UploadView.dlg + ' a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
@@ -50,10 +86,13 @@
                     $(e.target).find("div.xhr2-a-li").addClass("xhr2-a-li-w");
                     $('#' + yiiXhr2UploadView.dlg + ' .xhr2-scroll').nanoScroller();
                     switch ($(e.target).attr("href")) {
-                        case "#uploadTab":
-
+                        case "#photoTab":
+                            yiiXhr2UploadView.isUploadTab = true;
+                            yiiXhr2UploadView.isYourPhotoTab = false;
                             break;
                         case "#photoTab":
+                            yiiXhr2UploadView.isUploadTab = false;
+                            yiiXhr2UploadView.isYourPhotoTab = true;
                             if (yiiXhr2UploadView.currentPhoto != null) {
                                 yiiXhr2UploadView.xhr2Ok.removeClass("disabled");
                             }
@@ -131,7 +170,7 @@
                             yiiXhr2UploadView.init_crop_events(cropContainer, xhr2MessageObj.srcPath);
 
                             $('#' + yiiXhr2UploadView.dlg + ' div[id="xhr2Cropper"]').show();
-                        }else{
+                        } else {
                             $('#' + yiiXhr2UploadView.dlg + ' div[id="dropTarget"]').show();
                         }
                         yiiXhr2UploadView.xhr2Ok.removeClass('disabled');
@@ -152,6 +191,28 @@
                     console.log.apply(console, arguments);
                 });
 
+            },
+            init_crop_form_events: function () {
+                //init cropper back button
+                $('#' + yiiXhr2UploadView.dlg + ' div[id="cropBack"]').on('click', function () {
+                    $('#' + yiiXhr2UploadView.dlg + ' div[id="dropTarget"]').show();
+                    $('#' + yiiXhr2UploadView.dlg + ' div[id="uploadError"]').hide();
+                    $('#' + yiiXhr2UploadView.dlg + ' div[id="xhr2Progress"]').hide();
+                    $('#' + yiiXhr2UploadView.dlg + ' div[id="xhr2Cropper"]').hide();
+                    yiiXhr2UploadView.xhr2Ok.addClass("disabled");
+                });
+
+                $('#' + yiiXhr2UploadView.dlg + ' div[id="cropRotateLeft"]').on('click', function () {
+                    if (yiiXhr2UploadView.cropper != null) {
+                        yiiXhr2UploadView.cropper.rotate(-90);
+                    }
+                });
+
+                $('#' + yiiXhr2UploadView.dlg + ' div[id="cropRotateRight"]').on('click', function () {
+                    if (yiiXhr2UploadView.cropper != null) {
+                        yiiXhr2UploadView.cropper.rotate(90);
+                    }
+                });
             },
             init_crop_events: function (cropContainer, srcPath) {
                 var Cropper = window.Cropper;
@@ -187,6 +248,13 @@
                     newImgSize.height = maxImgSize;
                     newImgSize.width = Math.ceil(maxImgSize * (imgWidth / imgHeight));
                 }
+
+                //optimize img size
+                if (newImgSize.height < maxImgSize) {
+                    newImgSize.height = maxImgSize;
+                    newImgSize.width = Math.ceil(maxImgSize * (imgWidth / imgHeight));
+                }
+
                 return newImgSize;
             },
         };

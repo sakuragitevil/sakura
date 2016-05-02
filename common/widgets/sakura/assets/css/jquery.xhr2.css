@@ -276,5 +276,51 @@
 .xhr2-crImg > .img-container{
     background-color: #f7f7f7;
     margin-bottom: 20px;
-    margin: auto;
+}
+.xhr2-iL, .xhr2-iR{
+    width: 140px;
+    height: 24px;
+    min-width: 140px;
+    min-height: 24px;
+    line-height: 24px;
+    cursor: pointer;
+}
+
+.xhr2-iL > .xhr2-iLi{
+    width: 30px;
+    height: 24px;
+    float: left;
+}
+
+.xhr2-iL i, .xhr2-iR i{
+    color: #9C9898;
+}
+
+.xhr2-iL:hover, .xhr2-iR:hover{
+    background-color: #eee;
+}
+
+.xhr2-iL > .xhr2-iLs{
+    width: 40px;
+    height: 24px;
+    float: left;
+}
+
+.xhr2-iR > .xhr2-iRi{
+    width: 30px;
+    height: 24px;
+    float: left;
+}
+.xhr2-iR > .xhr2-iRs{
+    width: 40px;
+    height: 24px;
+    float: left;
+}
+
+.xhr2-crBk{
+    cursor: pointer;
+}
+
+.xhr2-crBk i{
+    color: #9C9898;
 }

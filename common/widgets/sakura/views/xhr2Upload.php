@@ -59,13 +59,32 @@
                                 </div>
                             </div>
                             <div id="xhr2Cropper" class="xhr2-crImg" style="display: none">
-                                <div class="xhr2-ig-ct img-container">
-                                    <img src="" alt="Picture">
+                                <div class="row-fluid">
+                                    <div class="col-sm-1 col-md-1 col-xs-1" align="left">
+                                        <div id="cropBack" class="xhr2-crBk">
+                                            <i class="material-icons">arrow_back</i>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-8 col-md-8 col-xs-8" align="right">
+                                        <div class="img-container">
+                                            <img src="" alt="Picture">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-3 col-xs-3" align="left">
+                                        <div id="cropRotateLeft" class="xhr2-iL">
+                                            <div class="xhr2-iLi"><i class="material-icons">undo</i></div>
+                                            <div class="xhr2-iLs">LEFT</div>
+                                        </div>
+                                        <div id="cropRotateRight" class="xhr2-iR">
+                                            <div class="xhr2-iRi"><i class="material-icons">redo</i></div>
+                                            <div class="xhr2-iRs">RIGHT</div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="clearboth"></div>
-                        <div role="tabpanel" class="xhr2-hn-On-Zb-eb tab-pane fade" id="photoTab">
+                        <div id="photoTab" role="tabpanel" class="xhr2-hn-On-Zb-eb tab-pane fade">
                             <div class="xhr2-hn-Rn-Qn">
                                 <div class="nano xhr2-scroll" id="authvv">
                                     <div class="nano-content">
