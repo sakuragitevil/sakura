@@ -8,3 +8,16 @@
     cursor: wait;
     z-index: 9999;
 }
+
+.ajax-waiting-gif{
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.ajax-waiting-gif > img{
+    width: 100%;
+    height: 100%;
+}

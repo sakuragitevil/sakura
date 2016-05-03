@@ -23,10 +23,10 @@ class FilehandlerController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['upload'],
+                'only' => ['upload', 'cropimage'],
                 'rules' => [
                     [
-                        'actions' => ['upload'],
+                        'actions' => ['upload', 'cropimage'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -36,6 +36,7 @@ class FilehandlerController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'upload' => ['post', 'get'],
+                    'cropimage' => ['post'],
                 ],
             ],
         ];
@@ -101,6 +102,7 @@ class FilehandlerController extends Controller
                     $content = [
                         "width" => $width,
                         "height" => $height,
+                        'filename' => $file->getFileName(),
                         "srcPath" => Yii::getAlias("@avatarTempUrl") . DIRECTORY_SEPARATOR . $file->getFileName(),
                     ];
 
@@ -120,5 +122,36 @@ class FilehandlerController extends Controller
             Yii::$app->response->send();
         }
 
+    }
+
+    public function actionCropimage()
+    {
+        $res = Yii::$app->params['response'];
+
+        try {
+            if (array_key_exists('cropdata', $_POST) && array_key_exists('imgdata', $_POST) && array_key_exists('cropboxdata', $_POST)) {
+
+                $appPath = Yii::getAlias("@app");
+
+                $cropdata = $_POST['cropdata'];
+                $imgdata = $_POST['imgdata'];
+                $cropBoxData = $_POST['cropboxdata'];
+
+                $nimg = imagecreatetruecolor($cropBoxData['width'], $cropBoxData['height']);
+                $im_src = imagecreatefromjpeg($appPath . '/upload/avatars/avatar_temp_folder/' . $imgdata['filename']);
+                if ($cropdata['rotate'] != 0) {
+                    $im_src = imagerotate($im_src, $cropdata['rotate'] * -1, 0);
+                }
+
+                imagecopyresampled($nimg, $im_src, 0, 0, $cropdata['x'], $cropdata['y'], $imgdata['width'], $imgdata['height'], $imgdata['naturalWidth'], $imgdata['naturalHeight']);
+                imagejpeg($nimg, $appPath . '/upload/avatars/' . $imgdata['filename'], 90);
+            }
+            $res['status'] = 'ok';
+        } catch (Exception $e) {
+            $res['status'] = 'ng';
+            $res['message'] = $e->getMessage();
+        }
+
+        return Json::encode($res);
     }
 }

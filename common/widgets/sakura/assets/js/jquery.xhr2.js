@@ -6,9 +6,11 @@
 
         var yiiXhr2UploadView = {
             id: '',
-            url: '',
+            uploadUrl: '',
+            cropUrl: '',
             mode: '',
             csrfToken: '',
+            filename: '',
             dlg: 'dlgXhr2Upload',
             currentPhoto: null,
             relatedPhoto: null,
@@ -21,7 +23,8 @@
             init: function (options) {
 
                 yiiXhr2UploadView.id = options.id;
-                yiiXhr2UploadView.url = options.url;
+                yiiXhr2UploadView.uploadUrl = options.uploadUrl;
+                yiiXhr2UploadView.cropUrl = options.cropUrl;
                 yiiXhr2UploadView.mode = options.mode;
                 yiiXhr2UploadView.csrfToken = yii.getCsrfToken();
 
@@ -37,8 +40,8 @@
                         return false;
                     }
 
-                    if (yiiXhr2UploadView.isUploadTab) {
-
+                    if (yiiXhr2UploadView.isUploadTab && yiiXhr2UploadView.cropper != null) {
+                        yiiXhr2UploadView.set_profile_photo();
                     } else if (yiiXhr2UploadView.isYourPhotoTab) {
 
                     }
@@ -120,7 +123,7 @@
             init_upload_events: function () {
 
                 var xhr2Flow = new Flow({
-                    target: yiiXhr2UploadView.url,
+                    target: yiiXhr2UploadView.uploadUrl,
                     query: {_csrf: yiiXhr2UploadView.csrfToken, mode: yiiXhr2UploadView.mode},
                     singleFile: true,
                     accept: 'image/*',
@@ -164,6 +167,7 @@
                         if (yiiXhr2UploadView.xhr2Message != "" && yiiXhr2UploadView.mode == "avatar") {
 
                             var xhr2MessageObj = JSON.parse(yiiXhr2UploadView.xhr2Message);
+                            yiiXhr2UploadView.filename = xhr2MessageObj.filename;
                             var cropContainer = yiiXhr2UploadView.cal_crop_container(xhr2MessageObj.width, xhr2MessageObj.height);
 
                             //init_crop_events
@@ -256,6 +260,36 @@
                 }
 
                 return newImgSize;
+            },
+            set_profile_photo: function () {
+                window.waiting.show();
+
+                var cropData = yiiXhr2UploadView.cropper.getData();
+
+                var imgData = yiiXhr2UploadView.cropper.getImageData();
+                imgData.filename = yiiXhr2UploadView.filename;
+
+                var cropBoxData = yiiXhr2UploadView.cropper.getCropBoxData();
+
+                setTimeout(function () {
+                    $.ajax({
+                        type: 'POST',
+                        url: yiiXhr2UploadView.cropUrl,
+                        async: false,
+                        dataType: 'json',
+                        data: {cropdata: cropData, cropboxdata : cropBoxData, imgdata: imgData},
+                        success: function (json) {
+                            if (json.status == 'ok') {
+
+                            } else {
+
+                            }
+                        },
+                        complete: function () {
+                            window.waiting.hide();
+                        }
+                    });
+                }, 0);
             },
         };
 
