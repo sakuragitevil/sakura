@@ -144,6 +144,7 @@ class FilehandlerController extends Controller
 
                 imagecopyresampled($nimg, $im_src, 0, 0, $cropdata['x'], $cropdata['y'], $imgdata['width'], $imgdata['height'], $imgdata['naturalWidth'], $imgdata['naturalHeight']);
                 imagejpeg($nimg, FileManager::getAvatarPath($imgdata['filename']), 90);
+                imagejpeg($nimg, FileManager::getAvatarWebPath($imgdata['filename']), 90);
 
                 $res['data'] = ['avatarUrl' => FileManager::getAvatarUrl($imgdata['filename'])];
                 unlink(FileManager::getAvatarTempPath($imgdata['filename']));

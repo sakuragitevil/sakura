@@ -8,7 +8,11 @@ class FileManager
 {
     public static function getAvatarPath($fileName = '')
     {
-        return Yii::getAlias('@app') . DIRECTORY_SEPARATOR . Yii::getAlias('@avatarPath') . DIRECTORY_SEPARATOR . Yii::$app->user->identity->web_folder . DIRECTORY_SEPARATOR . $fileName;
+        $path = Yii::getAlias('@app') . DIRECTORY_SEPARATOR . Yii::getAlias('@avatarPath') . DIRECTORY_SEPARATOR . Yii::$app->user->identity->web_folder;
+        if (!file_exists($path)) {
+            mkdir($path, 0777, true);
+        }
+        return $path . DIRECTORY_SEPARATOR . $fileName;
     }
 
     public static function getAvatarTempPath($fileName = '')
@@ -19,9 +23,18 @@ class FileManager
         return $path;
     }
 
+    public static function getAvatarWebPath($fileName = '')
+    {
+        $path = Yii::getAlias('@app') . DIRECTORY_SEPARATOR . Yii::getAlias('@avatarWebPath') . DIRECTORY_SEPARATOR . Yii::$app->user->identity->web_folder;
+        if (!file_exists($path)) {
+            mkdir($path, 0777, true);
+        }
+        return $path . DIRECTORY_SEPARATOR . $fileName;
+    }
+
     public static function getAvatarUrl($fileName = '')
     {
-        return Yii::getAlias("@avatarUrl") . DIRECTORY_SEPARATOR . $fileName;
+        return Yii::getAlias("@avatarUrl") . DIRECTORY_SEPARATOR . Yii::$app->user->identity->web_folder . DIRECTORY_SEPARATOR . $fileName;
     }
 
     public static function getAvataTemprUrl($fileName = '')
