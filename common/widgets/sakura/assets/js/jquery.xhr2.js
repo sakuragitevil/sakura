@@ -8,6 +8,7 @@
             id: '',
             uploadUrl: '',
             cropUrl: '',
+            yourPhotoUrl: '',
             mode: '',
             csrfToken: '',
             fileName: '',
@@ -20,13 +21,15 @@
             xhr2Cancel: null,
             isUploadTab: false,
             isYourPhotoTab: false,
+            isYourPhotoQuery: false,
             init: function (options) {
 
                 yiiXhr2UploadView.id = options.id;
-                yiiXhr2UploadView.uploadUrl = options.uploadUrl;
-                yiiXhr2UploadView.cropUrl = options.cropUrl;
                 yiiXhr2UploadView.mode = options.mode;
+                yiiXhr2UploadView.cropUrl = options.cropUrl;
+                yiiXhr2UploadView.uploadUrl = options.uploadUrl;
                 yiiXhr2UploadView.csrfToken = yii.getCsrfToken();
+                yiiXhr2UploadView.yourPhotoUrl = options.yourPhotoUrl;
 
                 yiiXhr2UploadView.xhr2Ok = $("#xhr2Ok");
                 yiiXhr2UploadView.xhr2Cancel = $("#xhr2Cancel");
@@ -43,7 +46,7 @@
                     if (yiiXhr2UploadView.isUploadTab && yiiXhr2UploadView.cropper != null) {
                         yiiXhr2UploadView.set_profile_photo();
                     } else if (yiiXhr2UploadView.isYourPhotoTab) {
-
+                        yiiXhr2UploadView.query_your_photo();
                     }
 
                 });
@@ -52,7 +55,7 @@
                 yiiXhr2UploadView.init_tab_events();
 
                 //init_photos_events
-                yiiXhr2UploadView.init_photos_events();
+                //yiiXhr2UploadView.init_photos_events();
 
                 //init_upload_events
                 yiiXhr2UploadView.init_upload_events();
@@ -90,7 +93,7 @@
                     $(e.target).find("div.xhr2-a-li").addClass("xhr2-a-li-w");
                     $('#' + yiiXhr2UploadView.dlg + ' .xhr2-scroll').nanoScroller();
                     switch ($(e.target).attr("href")) {
-                        case "#photoTab":
+                        case "#uploadTab":
                             yiiXhr2UploadView.isUploadTab = true;
                             yiiXhr2UploadView.isYourPhotoTab = false;
                             break;
@@ -99,6 +102,9 @@
                             yiiXhr2UploadView.isYourPhotoTab = true;
                             if (yiiXhr2UploadView.currentPhoto != null) {
                                 yiiXhr2UploadView.xhr2Ok.removeClass("disabled");
+                            }
+                            if(!yiiXhr2UploadView.isYourPhotoQuery){
+                                yiiXhr2UploadView.query_your_photo();
                             }
                             break;
                     }
@@ -268,7 +274,7 @@
 
                 var imgData = yiiXhr2UploadView.cropper.getImageData();
                 imgData.fileName = yiiXhr2UploadView.fileName;
-                imgData.oldFileName = $(".cmhd-ac-mk img").attr('src').replace(/\\/g,'/').replace(/.*\//, '');
+                imgData.oldFileName = $(".cmhd-ac-mk img").attr('src').replace(/\\/g, '/').replace(/.*\//, '');
 
                 setTimeout(function () {
                     $.ajax({
@@ -282,6 +288,29 @@
                                 $(".cmhd-ac-mk img").attr('src', json.data.avatarUrl);
                                 $(".cmhd-gb_lb img").attr('src', json.data.avatarUrl);
                                 yiiXhr2UploadView.close_dialog();
+                            } else {
+
+                            }
+                        },
+                        complete: function () {
+                            window.waiting.hide();
+                        }
+                    });
+                }, 0);
+            },
+            query_your_photo: function () {
+
+                window.waiting.show();
+                setTimeout(function () {
+                    $.ajax({
+                        type: 'POST',
+                        url: yiiXhr2UploadView.yourPhotoUrl,
+                        async: false,
+                        dataType: 'json',
+                        success: function (json) {
+                            if (json.status == 'ok') {
+
+                                //yiiXhr2UploadView.isYourPhotoQuery = true;
                             } else {
 
                             }

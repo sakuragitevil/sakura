@@ -12,6 +12,7 @@
 CREATE DATABASE IF NOT EXISTS `sakura`;
 GRANT ALL PRIVILEGES ON `sakura`.* TO 'root'@'localhost' IDENTIFIED BY 'root';
 USE `sakura`;
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
 	`username` VARCHAR(255) NOT NULL COLLATE 'utf8_unicode_ci',

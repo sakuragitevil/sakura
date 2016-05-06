@@ -24,10 +24,10 @@ class FilehandlerController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['upload', 'cropimage'],
+                'only' => ['upload', 'cropimage', 'yourphoto'],
                 'rules' => [
                     [
-                        'actions' => ['upload', 'cropimage'],
+                        'actions' => ['upload', 'cropimage', 'yourphoto'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -38,6 +38,7 @@ class FilehandlerController extends Controller
                 'actions' => [
                     'upload' => ['post', 'get'],
                     'cropimage' => ['post'],
+                    'yourphoto' => ['post'],
                 ],
             ],
         ];
@@ -166,5 +167,18 @@ class FilehandlerController extends Controller
         }
 
         return Json::encode($res);
+    }
+
+    public function actionYourphoto()
+    {
+        $res = Yii::$app->params['response'];
+        try {
+            $res['data'] = FileManager::getAllAvatar();
+            $res['status'] = 'ok';
+        } catch (Exception $e) {
+            $res['status'] = 'ng';
+            $res['message'] = $e->getMessage();
+        }
+        return json_encode($res);
     }
 }

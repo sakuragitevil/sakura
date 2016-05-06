@@ -65,11 +65,11 @@ class FileManager
 
     public static function getAllAvatar()
     {
+        $files = [];
         $path = Yii::getAlias("@app") . DIRECTORY_SEPARATOR . Yii::getAlias("@avatarPath") . DIRECTORY_SEPARATOR . Yii::$app->user->identity->web_folder;
         if (file_exists($path)) {
-            $files = glob($path . "images/*.*");
+            $files = array_diff(scandir($path, SCANDIR_SORT_DESCENDING), ['..', '.']);
         }
-        $abc = [];
-
+        return $files;
     }
 }
