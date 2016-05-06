@@ -12,6 +12,7 @@
 CREATE DATABASE IF NOT EXISTS `sakura`;
 GRANT ALL PRIVILEGES ON `sakura`.* TO 'root'@'localhost' IDENTIFIED BY 'root';
 USE `sakura`;
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
 	`username` VARCHAR(255) NOT NULL COLLATE 'utf8_unicode_ci',
@@ -22,9 +23,10 @@ CREATE TABLE `user` (
 	`password_reset_token` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
 	`email` VARCHAR(255) NOT NULL COLLATE 'utf8_unicode_ci',
 	`phone` VARCHAR(255) NOT NULL COLLATE 'utf8_unicode_ci',
-	`pic` LONGBLOB NOT NULL,
+	`avatar` LONGTEXT NOT NULL COLLATE 'utf8_unicode_ci',
 	`about` LONGTEXT NOT NULL COLLATE 'utf8_unicode_ci',
 	`status` SMALLINT(6) NOT NULL DEFAULT '10',
+	`web_folder` VARCHAR(255) NOT NULL COLLATE 'utf8_unicode_ci',
 	`created_at` INT(11) NOT NULL,
 	`updated_at` INT(11) NOT NULL,
 	PRIMARY KEY (`id`),
@@ -33,4 +35,4 @@ CREATE TABLE `user` (
 	UNIQUE INDEX `password_reset_token` (`password_reset_token`)
 )
 COLLATE='utf8_unicode_ci' ENGINE=InnoDB;
-INSERT INTO `user`(`username`,`firstname`,`lastname`,`auth_key`,`password_hash`,`email`,`status`,`created_at`,`updated_at`) VALUES("admin","Van Thuan","Vu","caDLcrAwhiYBR5Zba-AZLYxm-WvLwb6-","$2y$13$2zU368UOL98r40IgllgnKepo1df0bEtA4R53.yDdgYnMSJPC1APKO","sakura@gmail.com",10,1459473465,1459473465);
+INSERT INTO `user`(`username`,`firstname`,`lastname`,`auth_key`,`password_hash`,`email`,`status`,`web_folder`,`created_at`,`updated_at`) VALUES("admin","Van Thuan","Vu","caDLcrAwhiYBR5Zba-AZLYxm-WvLwb6-","$2y$13$2zU368UOL98r40IgllgnKepo1df0bEtA4R53.yDdgYnMSJPC1APKO","sakura@gmail.com",10,MD5(NOW()),1459473465,1459473465);

@@ -5,10 +5,11 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
+use yii\helpers\Json;
 use backend\helpers\flow\Config;
 use backend\helpers\flow\File;
-
-use yii\helpers\Json;
+use backend\helpers\FileManager;
+use backend\models\UserForm;
 
 /**
  * Filehandler controller
@@ -23,10 +24,10 @@ class FilehandlerController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['upload'],
+                'only' => ['upload', 'cropimage', 'yourphoto'],
                 'rules' => [
                     [
-                        'actions' => ['upload'],
+                        'actions' => ['upload', 'cropimage', 'yourphoto'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -36,6 +37,8 @@ class FilehandlerController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'upload' => ['post', 'get'],
+                    'cropimage' => ['post'],
+                    'yourphoto' => ['post'],
                 ],
             ],
         ];
@@ -55,10 +58,8 @@ class FilehandlerController extends Controller
 
     public function actionUpload()
     {
-        $appPath = Yii::getAlias("@app");
-
         $config = new Config();
-        $config->setTempDir($appPath . "/upload/chunks_temp_folder");
+        $config->setTempDir(FileManager::getChunksTempPath());
 
         $file = new File($config);
 
@@ -82,20 +83,36 @@ class FilehandlerController extends Controller
             }
         }
         $savePath = "";
-        $fileMode = $file->getMode();
-        switch($fileMode){
+        $fileName = "";
+        $uploadMode = $file->getMode();
+        switch ($uploadMode) {
             case "avatar":
-                $savePath = $appPath . '/upload/avatars/avatar_temp_folder';
+                $fileName = date('Ymdhisa') . '.' . $file->getFileExtension();
+                $savePath = FileManager::getAvatarTempPath();
                 break;
             default:
-                $savePath = $appPath . '/upload/documents';
+                $fileName = $file->getFileName();
+                $savePath = FileManager::getDocumentPath();
                 break;
         };
-        if ($file->validateFile() && $file->save($savePath)) {
+
+        if ($file->validateFile() && $file->save($savePath, $fileName)) {
             // File upload was completed
-            switch($fileMode){
+            switch ($uploadMode) {
                 case "avatar":
-                    Yii::$app->response->data = ["message"=> "The requested resource was not found."];
+
+                    list($width, $height) = getimagesize(FileManager::getAvatarTempPath($fileName));
+
+                    $content = [
+                        "width" => $width,
+                        "height" => $height,
+                        'fileName' => $fileName,
+                        "srcPath" => FileManager::getAvataTemprUrl($fileName),
+                    ];
+
+                    Yii::$app->response->format = "html";
+                    Yii::$app->response->headers->set("conten-type", "text/html; charset=UTF-8");
+                    Yii::$app->response->content = Json::encode($content);
                     Yii::$app->response->setStatusCode(201);//Created
                     break;
                 default:
@@ -109,5 +126,59 @@ class FilehandlerController extends Controller
             Yii::$app->response->send();
         }
 
+    }
+
+    public function actionCropimage()
+    {
+        $res = Yii::$app->params['response'];
+
+        try {
+            if (array_key_exists('cropData', $_POST)
+                && array_key_exists('imgData', $_POST)
+                && array_key_exists('cropBoxData', $_POST)
+            ) {
+                $cropBoxData = $_POST['cropBoxData'];
+                $cropData = $_POST['cropData'];
+                $imgData = $_POST['imgData'];
+
+                $nimg = imagecreatetruecolor($cropBoxData['width'], $cropBoxData['height']);
+                $im_src = imagecreatefromjpeg(FileManager::getAvatarTempPath($imgData['fileName']));
+                if ($cropData['rotate'] != 0) {
+                    $im_src = imagerotate($im_src, $cropData['rotate'] * -1, 0);
+                }
+
+                imagecopyresampled($nimg, $im_src, 0, 0, $cropData['x'], $cropData['y'], $imgData['width'], $imgData['height'], $imgData['naturalWidth'], $imgData['naturalHeight']);
+                imagejpeg($nimg, FileManager::getAvatarPath($imgData['fileName']), 90);
+                imagejpeg($nimg, FileManager::getAvatarWebPath($imgData['fileName']), 90);
+
+                $res['data'] = ['avatarUrl' => FileManager::getAvatarUrl($imgData['fileName'])];
+                unlink(FileManager::getAvatarTempPath($imgData['fileName']));
+                if (array_key_exists('oldFileName', $imgData) && $imgData['oldFileName'] != 'default.png') {
+                    unlink(FileManager::getAvatarWebPath($imgData['oldFileName']));
+                }
+
+                $user = new UserForm();
+                $user->updateAvatar($imgData['fileName']);
+            }
+            $res['status'] = 'ok';
+        } catch (Exception $e) {
+            $res['status'] = 'ng';
+            $res['message'] = $e->getMessage();
+        }
+
+        return Json::encode($res);
+    }
+
+    public function actionYourphoto()
+    {
+        $res = Yii::$app->params['response'];
+        try {
+            $res['data'] = FileManager::getAllAvatar();
+            $res['status'] = 'ok';
+        } catch (Exception $e) {
+            $res['status'] = 'ng';
+            $res['message'] = $e->getMessage();
+        }
+        return json_encode($res);
     }
 }

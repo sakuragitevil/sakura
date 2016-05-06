@@ -441,6 +441,10 @@
                 var $ = this;
                 input.addEventListener('change', function (e) {
                     if (e.target.value) {
+                        if (!$.acceptValidate(e.target.files)) {
+                            $.fire('fileError', null, "Make sure to upload a JPG, GIF, or PNG file and try again.");
+                            return;
+                        }
                         $.addFiles(e.target.files, e);
                         e.target.value = '';
                     }

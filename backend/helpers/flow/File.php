@@ -136,6 +136,7 @@ class File
      * Merge all chunks to single file
      *
      * @param string $destination final file location
+     * @param string $fileName file name
      *
      *
      * @throws FileLockException
@@ -144,9 +145,13 @@ class File
      *
      * @return bool indicates if file was saved
      */
-    public function save($destination)
+    public function save($destination, $fileName = '')
     {
-        $fullFilePath = $destination . DIRECTORY_SEPARATOR . $this->request->getFileName();
+        if($fileName=='')
+            $fullFilePath = $destination . DIRECTORY_SEPARATOR . $this->request->getFileName();
+        else
+            $fullFilePath = $destination . DIRECTORY_SEPARATOR . $fileName;
+
         $fh = fopen($fullFilePath, 'wb');
         if (!$fh) {
             throw new FileOpenException('failed to open destination file: ' . $destination);
@@ -240,5 +245,25 @@ class File
     public function getMode()
     {
         return $this->request->getMode();
+    }
+
+    /**
+     * Get uploaded file name
+     *
+     * @return string|null
+     */
+    public function getFileName()
+    {
+        return $this->request->getFileName();
+    }
+
+    /**
+     * Get uploaded file etx name
+     *
+     * @return string|null
+     */
+    public function getFileExtension()
+    {
+        return $this->request->getFileExtension();
     }
 }
