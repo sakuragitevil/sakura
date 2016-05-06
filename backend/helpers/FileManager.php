@@ -55,11 +55,21 @@ class FileManager
     public static function getAvatar()
     {
         $path = Yii::getAlias("@avatarUrl") . DIRECTORY_SEPARATOR . "default.png";
-        $webPath = Yii::getAlias("@app") . DIRECTORY_SEPARATOR. Yii::getAlias("@avatarWebPath");
+        $webPath = Yii::getAlias("@app") . DIRECTORY_SEPARATOR . Yii::getAlias("@avatarWebPath");
         $webUserPath = $webPath . DIRECTORY_SEPARATOR . Yii::$app->user->identity->web_folder;
         if (file_exists($webUserPath . DIRECTORY_SEPARATOR . Yii::$app->user->identity->avatar)) {
             $path = Yii::getAlias("@avatarUrl") . DIRECTORY_SEPARATOR . Yii::$app->user->identity->web_folder . DIRECTORY_SEPARATOR . Yii::$app->user->identity->avatar;
         }
         return $path;
+    }
+
+    public static function getAllAvatar()
+    {
+        $path = Yii::getAlias("@app") . DIRECTORY_SEPARATOR . Yii::getAlias("@avatarPath") . DIRECTORY_SEPARATOR . Yii::$app->user->identity->web_folder;
+        if (file_exists($path)) {
+            $files = glob($path . "images/*.*");
+        }
+        $abc = [];
+
     }
 }
