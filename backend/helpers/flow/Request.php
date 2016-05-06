@@ -62,6 +62,16 @@ class Request implements RequestInterface
     }
 
     /**
+     * Get uploaded file extension
+     *
+     * @return string|null
+     */
+    public function getFileExtension()
+    {
+        return pathinfo($this->getFileName(), PATHINFO_EXTENSION);
+    }
+
+    /**
      * Get total file size in bytes
      *
      * @return int|null

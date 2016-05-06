@@ -12,6 +12,13 @@ interface RequestInterface
     public function getFileName();
 
     /**
+     * Get uploaded file extension
+     *
+     * @return string
+     */
+    public function getFileExtension();
+
+    /**
      * Get total file size in bytes
      *
      * @return int

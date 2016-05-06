@@ -10,7 +10,7 @@
             cropUrl: '',
             mode: '',
             csrfToken: '',
-            filename: '',
+            fileName: '',
             dlg: 'dlgXhr2Upload',
             currentPhoto: null,
             relatedPhoto: null,
@@ -166,7 +166,7 @@
                         if (yiiXhr2UploadView.xhr2Message != "" && yiiXhr2UploadView.mode == "avatar") {
 
                             var xhr2MessageObj = JSON.parse(yiiXhr2UploadView.xhr2Message);
-                            yiiXhr2UploadView.filename = xhr2MessageObj.filename;
+                            yiiXhr2UploadView.fileName = xhr2MessageObj.fileName;
                             var cropContainer = yiiXhr2UploadView.cal_crop_container(xhr2MessageObj.width, xhr2MessageObj.height);
 
                             //init_crop_events
@@ -264,11 +264,11 @@
                 window.waiting.show();
 
                 var cropData = yiiXhr2UploadView.cropper.getData();
+                var cropBoxData = yiiXhr2UploadView.cropper.getCropBoxData();
 
                 var imgData = yiiXhr2UploadView.cropper.getImageData();
-                imgData.filename = yiiXhr2UploadView.filename;
-
-                var cropBoxData = yiiXhr2UploadView.cropper.getCropBoxData();
+                imgData.fileName = yiiXhr2UploadView.fileName;
+                imgData.oldFileName = $(".cmhd-ac-mk img").attr('src').replace(/\\/g,'/').replace(/.*\//, '');
 
                 setTimeout(function () {
                     $.ajax({
@@ -276,7 +276,7 @@
                         url: yiiXhr2UploadView.cropUrl,
                         async: false,
                         dataType: 'json',
-                        data: {cropdata: cropData, cropboxdata: cropBoxData, imgdata: imgData},
+                        data: {cropData: cropData, cropBoxData: cropBoxData, imgData: imgData},
                         success: function (json) {
                             if (json.status == 'ok') {
                                 $(".cmhd-ac-mk img").attr('src', json.data.avatarUrl);

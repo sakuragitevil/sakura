@@ -7,6 +7,7 @@
  */
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Url;
+use backend\helpers\FileManager;
 
 $this->registerJsFile(Yii::$app->request->baseUrl . '/js/sakuraHeader.js', ['depends' => [\yii\web\AngularAsset::className()], 'position' => $this::POS_HEAD]);
 ?>
@@ -36,7 +37,7 @@ $this->registerJsFile(Yii::$app->request->baseUrl . '/js/sakuraHeader.js', ['dep
                     <content id="acIcon" class="xjKiLb" ng-click="openAccInfo()">
                         <span style="top: 11px">
                             <div class="cmhd-ac-mk">
-                                <img src="../../backend/upload/avatars/Jellyfish.jpg"/>
+                                <img src="<?php echo FileManager::getAvatar()?>"/>
                                 <canvas class="circle" width="32" height="32"></canvas>
                             </div>
                         </span>
@@ -52,7 +53,7 @@ $this->registerJsFile(Yii::$app->request->baseUrl . '/js/sakuraHeader.js', ['dep
                         <div class="cmhd-gb_hb">
                             <a id="profileIcon" class="cmhd-gb_ib cmhd-gb_kb" href="#" ng-click="closeAccInfo()">
                                 <div class="cmhd-gb_lb">
-                                    <img src="../../backend/upload/avatars/Jellyfish.jpg"/>
+                                    <img src="<?php echo FileManager::getAvatar()?>"/>
                                 </div>
                                 <span class="cmhd-gb_mb">Change</span>
                             </a>

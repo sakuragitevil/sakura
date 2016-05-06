@@ -5,11 +5,11 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
+use yii\helpers\Json;
 use backend\helpers\flow\Config;
 use backend\helpers\flow\File;
 use backend\helpers\FileManager;
-
-use yii\helpers\Json;
+use backend\models\UserForm;
 
 /**
  * Filehandler controller
@@ -82,27 +82,31 @@ class FilehandlerController extends Controller
             }
         }
         $savePath = "";
-        $fileMode = $file->getMode();
-        switch ($fileMode) {
+        $fileName = "";
+        $uploadMode = $file->getMode();
+        switch ($uploadMode) {
             case "avatar":
+                $fileName = date('Ymdhisa') . '.' . $file->getFileExtension();
                 $savePath = FileManager::getAvatarTempPath();
                 break;
             default:
+                $fileName = $file->getFileName();
                 $savePath = FileManager::getDocumentPath();
                 break;
         };
-        if ($file->validateFile() && $file->save($savePath)) {
+
+        if ($file->validateFile() && $file->save($savePath, $fileName)) {
             // File upload was completed
-            switch ($fileMode) {
+            switch ($uploadMode) {
                 case "avatar":
 
-                    list($width, $height) = getimagesize(FileManager::getAvatarTempPath($file->getFileName()));
+                    list($width, $height) = getimagesize(FileManager::getAvatarTempPath($fileName));
 
                     $content = [
                         "width" => $width,
                         "height" => $height,
-                        'filename' => $file->getFileName(),
-                        "srcPath" => FileManager::getAvataTemprUrl($file->getFileName()),
+                        'fileName' => $fileName,
+                        "srcPath" => FileManager::getAvataTemprUrl($fileName),
                     ];
 
                     Yii::$app->response->format = "html";
@@ -128,26 +132,32 @@ class FilehandlerController extends Controller
         $res = Yii::$app->params['response'];
 
         try {
-            if (array_key_exists('cropdata', $_POST)
-                && array_key_exists('imgdata', $_POST)
-                && array_key_exists('cropboxdata', $_POST)
+            if (array_key_exists('cropData', $_POST)
+                && array_key_exists('imgData', $_POST)
+                && array_key_exists('cropBoxData', $_POST)
             ) {
-                $cropdata = $_POST['cropdata'];
-                $imgdata = $_POST['imgdata'];
-                $cropBoxData = $_POST['cropboxdata'];
+                $cropBoxData = $_POST['cropBoxData'];
+                $cropData = $_POST['cropData'];
+                $imgData = $_POST['imgData'];
 
                 $nimg = imagecreatetruecolor($cropBoxData['width'], $cropBoxData['height']);
-                $im_src = imagecreatefromjpeg(FileManager::getAvatarTempPath($imgdata['filename']));
-                if ($cropdata['rotate'] != 0) {
-                    $im_src = imagerotate($im_src, $cropdata['rotate'] * -1, 0);
+                $im_src = imagecreatefromjpeg(FileManager::getAvatarTempPath($imgData['fileName']));
+                if ($cropData['rotate'] != 0) {
+                    $im_src = imagerotate($im_src, $cropData['rotate'] * -1, 0);
                 }
 
-                imagecopyresampled($nimg, $im_src, 0, 0, $cropdata['x'], $cropdata['y'], $imgdata['width'], $imgdata['height'], $imgdata['naturalWidth'], $imgdata['naturalHeight']);
-                imagejpeg($nimg, FileManager::getAvatarPath($imgdata['filename']), 90);
-                imagejpeg($nimg, FileManager::getAvatarWebPath($imgdata['filename']), 90);
+                imagecopyresampled($nimg, $im_src, 0, 0, $cropData['x'], $cropData['y'], $imgData['width'], $imgData['height'], $imgData['naturalWidth'], $imgData['naturalHeight']);
+                imagejpeg($nimg, FileManager::getAvatarPath($imgData['fileName']), 90);
+                imagejpeg($nimg, FileManager::getAvatarWebPath($imgData['fileName']), 90);
 
-                $res['data'] = ['avatarUrl' => FileManager::getAvatarUrl($imgdata['filename'])];
-                unlink(FileManager::getAvatarTempPath($imgdata['filename']));
+                $res['data'] = ['avatarUrl' => FileManager::getAvatarUrl($imgData['fileName'])];
+                unlink(FileManager::getAvatarTempPath($imgData['fileName']));
+                if (array_key_exists('oldFileName', $imgData) && $imgData['oldFileName'] != 'default.png') {
+                    unlink(FileManager::getAvatarWebPath($imgData['oldFileName']));
+                }
+
+                $user = new UserForm();
+                $user->updateAvatar($imgData['fileName']);
             }
             $res['status'] = 'ok';
         } catch (Exception $e) {
