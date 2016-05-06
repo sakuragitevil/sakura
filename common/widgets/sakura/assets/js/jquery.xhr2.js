@@ -62,11 +62,12 @@
 
             },
             show_dialog: function () {
-
                 yiiXhr2UploadView.reset_form();
-
                 $('#' + yiiXhr2UploadView.dlg).modal({keyboard: false});
                 $('#' + yiiXhr2UploadView.dlg).modal('show');
+            },
+            close_dialog: function () {
+                $('#' + yiiXhr2UploadView.dlg).modal('hide');
             },
             reset_form: function () {
 
@@ -134,7 +135,6 @@
 
                 xhr2Flow.assignBrowse(document.getElementById('browseButton'));
                 xhr2Flow.assignDrop(document.getElementById('dropTarget'));
-
                 xhr2Flow.on('filesSubmitted', function (file) {
                     xhr2Flow.upload();
                 });
@@ -158,7 +158,6 @@
 
                 });
                 xhr2Flow.on('complete', function () {
-
 
                     setTimeout(function () {
 
@@ -277,10 +276,12 @@
                         url: yiiXhr2UploadView.cropUrl,
                         async: false,
                         dataType: 'json',
-                        data: {cropdata: cropData, cropboxdata : cropBoxData, imgdata: imgData},
+                        data: {cropdata: cropData, cropboxdata: cropBoxData, imgdata: imgData},
                         success: function (json) {
                             if (json.status == 'ok') {
-
+                                $(".cmhd-ac-mk img").attr('src', json.data.avatarUrl);
+                                $(".cmhd-gb_lb img").attr('src', json.data.avatarUrl);
+                                yiiXhr2UploadView.close_dialog();
                             } else {
 
                             }

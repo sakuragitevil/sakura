@@ -19,8 +19,9 @@ use yii\web\IdentityInterface;
  * @property string $password_reset_token
  * @property string $email
  * @property string $phone
- * @property resource $pic
+ * @property resource $avatar
  * @property string $about
+ * @property integer $web_folder
  * @property integer $status
  * @property integer $created_at
  * @property integer $updated_at

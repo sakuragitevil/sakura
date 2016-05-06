@@ -1,6 +1,7 @@
 <?php
 $this->title = "Home";
 $this->registerCssFile(Yii::$app->request->baseUrl . '/css/home.css');
+echo Yii::getAlias('@avatarPath');
 ?>
 <div class="home-page">
     <div class="home-page-T-R">

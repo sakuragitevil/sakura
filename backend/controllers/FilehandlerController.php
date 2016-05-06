@@ -7,6 +7,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use backend\helpers\flow\Config;
 use backend\helpers\flow\File;
+use backend\helpers\FileManager;
 
 use yii\helpers\Json;
 
@@ -56,10 +57,8 @@ class FilehandlerController extends Controller
 
     public function actionUpload()
     {
-        $appPath = Yii::getAlias("@app");
-
         $config = new Config();
-        $config->setTempDir($appPath . "/upload/chunks_temp_folder");
+        $config->setTempDir(FileManager::getChunksTempPath());
 
         $file = new File($config);
 
@@ -86,10 +85,10 @@ class FilehandlerController extends Controller
         $fileMode = $file->getMode();
         switch ($fileMode) {
             case "avatar":
-                $savePath = $appPath . '/upload/avatars/avatar_temp_folder';
+                $savePath = FileManager::getAvatarTempPath();
                 break;
             default:
-                $savePath = $appPath . '/upload/documents';
+                $savePath = FileManager::getDocumentPath();
                 break;
         };
         if ($file->validateFile() && $file->save($savePath)) {
@@ -97,13 +96,13 @@ class FilehandlerController extends Controller
             switch ($fileMode) {
                 case "avatar":
 
-                    list($width, $height) = getimagesize($savePath . DIRECTORY_SEPARATOR . $file->getFileName());
+                    list($width, $height) = getimagesize(FileManager::getAvatarTempPath($file->getFileName()));
 
                     $content = [
                         "width" => $width,
                         "height" => $height,
                         'filename' => $file->getFileName(),
-                        "srcPath" => Yii::getAlias("@avatarTempUrl") . DIRECTORY_SEPARATOR . $file->getFileName(),
+                        "srcPath" => FileManager::getAvataTemprUrl($file->getFileName()),
                     ];
 
                     Yii::$app->response->format = "html";
@@ -129,22 +128,25 @@ class FilehandlerController extends Controller
         $res = Yii::$app->params['response'];
 
         try {
-            if (array_key_exists('cropdata', $_POST) && array_key_exists('imgdata', $_POST) && array_key_exists('cropboxdata', $_POST)) {
-
-                $appPath = Yii::getAlias("@app");
-
+            if (array_key_exists('cropdata', $_POST)
+                && array_key_exists('imgdata', $_POST)
+                && array_key_exists('cropboxdata', $_POST)
+            ) {
                 $cropdata = $_POST['cropdata'];
                 $imgdata = $_POST['imgdata'];
                 $cropBoxData = $_POST['cropboxdata'];
 
                 $nimg = imagecreatetruecolor($cropBoxData['width'], $cropBoxData['height']);
-                $im_src = imagecreatefromjpeg($appPath . '/upload/avatars/avatar_temp_folder/' . $imgdata['filename']);
+                $im_src = imagecreatefromjpeg(FileManager::getAvatarTempPath($imgdata['filename']));
                 if ($cropdata['rotate'] != 0) {
                     $im_src = imagerotate($im_src, $cropdata['rotate'] * -1, 0);
                 }
 
                 imagecopyresampled($nimg, $im_src, 0, 0, $cropdata['x'], $cropdata['y'], $imgdata['width'], $imgdata['height'], $imgdata['naturalWidth'], $imgdata['naturalHeight']);
-                imagejpeg($nimg, $appPath . '/upload/avatars/' . $imgdata['filename'], 90);
+                imagejpeg($nimg, FileManager::getAvatarPath($imgdata['filename']), 90);
+
+                $res['data'] = ['avatarUrl' => FileManager::getAvatarUrl($imgdata['filename'])];
+                unlink(FileManager::getAvatarTempPath($imgdata['filename']));
             }
             $res['status'] = 'ok';
         } catch (Exception $e) {

@@ -25,12 +25,16 @@
     z-index: 100;
     background-size: 32px;
     background-repeat: no-repeat;
-    background-image: url(../icons/vvthuan.jpg);
     -webkit-transition: opacity 0.075s;
     -moz-transition: opacity 0.075s;
     -ms-transition: opacity 0.075s;
     -o-transition: opacity 0.075s;
     transition: opacity 0.075s;
+    cursor: pointer;
+}
+.cmhd-ac-mk > img{
+    width: 100%;
+    height: 100%;
 }
 .cmhd-gb_Z:hover a {
     border: 1px solid #e5e5e5;
@@ -164,15 +168,15 @@
 
 .cmhd-gb_lb {
     -webkit-background-size: 96px 96px;
-    background-size: 96px 96px;
     border: none;
     vertical-align: top;
     height: 96px;
     width: 96px;
 }
 
-.cmhd-gbip {
-    background-image: url(../icons/vvthuan.jpg);
+.cmhd-gb_lb > img{
+    width: 100%;
+    height: 100%;
 }
 
 .cmhd-gb_mb {
