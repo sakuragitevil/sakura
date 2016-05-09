@@ -8,3 +8,5 @@ Yii::setAlias("@avatarTempPath", "web" . DIRECTORY_SEPARATOR . "avatars" . DIREC
 
 Yii::setAlias("@documentPath", "upload" . DIRECTORY_SEPARATOR . "documents");
 Yii::setAlias("@chunksTempPath", "upload" . DIRECTORY_SEPARATOR . "chunks_temp_folder");
+
+Yii::setAlias("@yourUrl", ".." . DIRECTORY_SEPARATOR . "upload" . DIRECTORY_SEPARATOR . "avatars");

@@ -128,6 +128,10 @@ class FilehandlerController extends Controller
 
     }
 
+    public function actionSetavatar(){
+
+    }
+
     public function actionCropimage()
     {
         $res = Yii::$app->params['response'];

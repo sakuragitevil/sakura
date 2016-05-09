@@ -88,17 +88,7 @@
                             <div class="xhr2-hn-Rn-Qn">
                                 <div class="nano xhr2-scroll" id="authvv">
                                     <div class="nano-content">
-                                        <div class="xhr2-hn-eb-up">
-                                            <div class="xhr2-hn-xs-oo-en">
-                                                <div class="xhr2-hn-xs-oo-tm">
-                                                    <div class="xhr2-hn-xs-oo-yj">
-                                                        <i class="material-icons md-26 md-light">brightness_1</i>
-                                                        <i class="material-icons md-24 md_green">check_circle</i>
-                                                    </div>
-                                                    <img class="xhr2-hn-xs-oo-hm" src=""/>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <div id="yourPhotoContent" class="xhr2-hn-eb-up"></div>
                                     </div>
                                 </div>
                             </div>

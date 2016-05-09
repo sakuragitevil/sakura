@@ -53,7 +53,7 @@ AjaxWaitingAsset::register($this);
             <?php echo $this->render('@app/views/layouts/header') ?>
             <?php echo Xhr2Upload::widget(['options' => [
                 'id' => 'profileIcon',
-                'mode' => 'avatar',
+                'uploadMode' => 'avatar',
             ]]); ?>
         <?php endif; ?>
         <?php echo Alert::widget() ?>
