@@ -1,10 +1,12 @@
 <?php
 namespace backend\models;
 
-use backend\helpers\Common;
-use common\models\User;
-use yii\base\Model;
 use Yii;
+use yii\base\Model;
+use yii\helpers\Json;
+use backend\helpers\Common;
+use backend\helpers\flow\Config;
+use backend\helpers\flow\File;
 
 /**
  * User form
@@ -72,5 +74,79 @@ class FilehandlerForm extends Model
 
         return $avatarUrl;
 
+    }
+
+    /**
+     * upload file
+     *
+     */
+    public function uploadFile(){
+        $config = new Config();
+        $config->setTempDir(Common::getChunksTempPath());
+
+        $file = new File($config);
+
+        if (Yii::$app->request->isGet) {
+            if ($file->checkChunk()) {
+                Yii::$app->response->setStatusCode(200);//OK
+                Yii::$app->response->send();
+            } else {
+                Yii::$app->response->setStatusCode(204);//No Content
+                Yii::$app->response->send();
+                return;
+            }
+        } else {
+            if ($file->validateChunk()) {
+                $file->saveChunk();
+            } else {
+                // error, invalid chunk upload request, retry
+                Yii::$app->response->setStatusCode(400);//Bad request
+                Yii::$app->response->send();
+                return;
+            }
+        }
+        $savePath = "";
+        $fileName = "";
+        $uploadMode = $file->getMode();
+        switch ($uploadMode) {
+            case "avatar":
+                $fileName = date('Ymdhisa') . '.' . $file->getFileExtension();
+                $savePath = Common::getAvatarTempPath();
+                break;
+            default:
+                $fileName = $file->getFileName();
+                $savePath = Common::getDocumentPath();
+                break;
+        };
+
+        if ($file->validateFile() && $file->save($savePath, $fileName)) {
+            // File upload was completed
+            switch ($uploadMode) {
+                case "avatar":
+
+                    list($width, $height) = getimagesize(Common::getAvatarTempPath($fileName));
+
+                    $content = [
+                        "width" => $width,
+                        "height" => $height,
+                        'fileName' => $fileName,
+                        "srcPath" => Common::getAvataTemprUrl($fileName),
+                    ];
+
+                    Yii::$app->response->format = "html";
+                    Yii::$app->response->headers->set("conten-type", "text/html; charset=UTF-8");
+                    Yii::$app->response->content = Json::encode($content);
+                    Yii::$app->response->setStatusCode(201);//Created
+                    break;
+                default:
+                    Yii::$app->response->setStatusCode(201);//Created
+                    break;
+            };
+            Yii::$app->response->send();
+        } else {
+            // This is not a final chunk, continue to upload
+            Yii::$app->response->setStatusCode(100);//Continue
+            Yii::$app->response->send();
+        }
     }
 }
