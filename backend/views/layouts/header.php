@@ -9,7 +9,7 @@ use yii\bootstrap\ActiveForm;
 use yii\helpers\Url;
 use backend\helpers\Common;
 
-$this->registerJsFile(Yii::$app->request->baseUrl . '/js/sakuraHeader.js', ['depends' => [\yii\web\AngularAsset::className()], 'position' => $this::POS_HEAD]);
+$this->registerJsFile(Yii::$app->request->baseUrl . '/js/sakuraHeader.js', ['depends' => [backend\assets\CommonAsset::className()], 'position' => $this::POS_END]);
 ?>
 
 <div ng-app="sakuraHeader" class="row-fluid cmhd">

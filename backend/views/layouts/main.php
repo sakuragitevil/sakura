@@ -4,19 +4,18 @@
 /* @var $content string */
 
 use backend\assets\AppAsset;
+use backend\assets\CommonAsset;
 use yii\helpers\Html;
-use yii\web\NanoscrollerAsset;
-use yii\web\AngularAsset;
 use common\widgets\Alert;
+
 use common\widgets\sakura\Xhr2Upload;
 use common\widgets\sakura\Xhr2UploadAsset;
 use common\widgets\sakura\AjaxWaiting;
 use common\widgets\sakura\AjaxWaitingAsset;
 
 AppAsset::register($this);
-AngularAsset::register($this);
+CommonAsset::register($this);
 Xhr2UploadAsset::register($this);
-NanoscrollerAsset::register($this);
 AjaxWaitingAsset::register($this);
 
 ?>
