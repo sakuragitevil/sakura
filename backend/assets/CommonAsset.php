@@ -18,7 +18,7 @@ use yii\web\View;
  */
 class CommonAsset extends AssetBundle
 {
-    public $sourcePath = '@backend/assets/sources';
+    public $sourcePath = '@backend/assets/bower';
     public $css = [
         'angular-1.5.3/angular-csp.css',
         'nanoscroller/nanoscroller.css',
