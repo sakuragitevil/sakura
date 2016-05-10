@@ -25,6 +25,7 @@ class CommonAsset extends AssetBundle
     ];
 
     public $js = [
+        'bootbox/bootbox.min.js',
         'angular-1.5.3/angular.min.js',
         'angular-1.5.3/angular-animate.min.js',
         'nanoscroller/jquery.nanoscroller.min.js',
