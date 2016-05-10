@@ -4,7 +4,7 @@ namespace backend\helpers;
 
 use Yii;
 
-class FileManager
+class Common
 {
     public static function getAvatarPath($fileName = '')
     {
@@ -52,7 +52,12 @@ class FileManager
         return Yii::getAlias("@app") . DIRECTORY_SEPARATOR . Yii::getAlias('@documentPath');
     }
 
-    public static function getAvatar()
+    /**
+     * get user's avatar.
+     *
+     * @return user avatar url
+     */
+    public static function getUserAvatar()
     {
         $path = Yii::getAlias("@avatarUrl") . DIRECTORY_SEPARATOR . "default.png";
         $webPath = Yii::getAlias("@app") . DIRECTORY_SEPARATOR . Yii::getAlias("@avatarWebPath");
@@ -63,7 +68,12 @@ class FileManager
         return $path;
     }
 
-    public static function getAllAvatar()
+    /**
+     * get all user's avatar.
+     *
+     * @return array url user's avatar
+     */
+    public static function getAllUserAvatar()
     {
         $files = [];
         $path = Yii::getAlias("@app") . DIRECTORY_SEPARATOR . Yii::getAlias("@avatarPath") . DIRECTORY_SEPARATOR . Yii::$app->user->identity->web_folder;

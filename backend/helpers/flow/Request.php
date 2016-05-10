@@ -168,6 +168,6 @@ class Request implements RequestInterface
      */
     public function getMode()
     {
-        return $this->getParam('mode');
+        return $this->getParam('uploadMode');
     }
 }

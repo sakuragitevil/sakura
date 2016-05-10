@@ -13,12 +13,13 @@
             csrfToken: '',
             fileName: '',
             dlg: 'dlgXhr2Upload',
+            cropper: null,
             currentPhoto: null,
             relatedPhoto: null,
             xhr2Message: '',
             xhr2Ok: null,
-            cropper: null,
             xhr2Cancel: null,
+            isCropper: false,
             isUploadTab: false,
             isYourPhotoTab: false,
             isYourPhotoQuery: false,
@@ -43,10 +44,10 @@
                         return false;
                     }
 
-                    if (yiiXhr2UploadView.isUploadTab && yiiXhr2UploadView.cropper != null) {
-                        yiiXhr2UploadView.set_profile_photo();
-                    } else if (yiiXhr2UploadView.isYourPhotoTab) {
-                        yiiXhr2UploadView.query_your_photo();
+                    if (yiiXhr2UploadView.isUploadTab && yiiXhr2UploadView.isCropper && yiiXhr2UploadView.cropper != null) {
+                        yiiXhr2UploadView.set_profile_photo(1);
+                    } else if (yiiXhr2UploadView.isYourPhotoTab && yiiXhr2UploadView.currentPhoto!=null) {
+                        yiiXhr2UploadView.set_profile_photo(2);
                     }
 
                 });
@@ -77,11 +78,16 @@
                 $('#' + yiiXhr2UploadView.dlg + ' div[id="xhr2Cropper"]').hide();
                 yiiXhr2UploadView.xhr2Ok.addClass("disabled");
 
-                $('#' + yiiXhr2UploadView.dlg + ' div[id="photoTab"]').removeClass('active');
-                $('#' + yiiXhr2UploadView.dlg + ' div[id="uploadTab"]').addClass('active');
+                $('#' + yiiXhr2UploadView.dlg + ' div[id="photoTab"]').removeClass('active').removeClass('in');
+                $('#' + yiiXhr2UploadView.dlg + ' div[id="uploadTab"]').addClass('active').addClass('in');
 
+                $('#' + yiiXhr2UploadView.dlg + ' a[href="#uploadTab"] div.xhr2-a-li').addClass("xhr2-a-li-w");
+                $('#' + yiiXhr2UploadView.dlg + ' a[href="#photoTab"] div.xhr2-a-li').removeClass("xhr2-a-li-w");
+
+                yiiXhr2UploadView.isCropper = false;
                 yiiXhr2UploadView.isUploadTab = true;
                 yiiXhr2UploadView.isYourPhotoTab = false;
+                yiiXhr2UploadView.isYourPhotoQuery = false;
 
             },
             init_tab_events: function () {
@@ -175,13 +181,13 @@
 
                             //init_crop_events
                             yiiXhr2UploadView.init_crop_events(cropContainer, xhr2MessageObj.srcPath);
+                            yiiXhr2UploadView.isCropper = true;
 
                             $('#' + yiiXhr2UploadView.dlg + ' div[id="xhr2Cropper"]').show();
+                            yiiXhr2UploadView.xhr2Ok.removeClass('disabled');
                         } else {
                             $('#' + yiiXhr2UploadView.dlg + ' div[id="dropTarget"]').show();
                         }
-                        yiiXhr2UploadView.xhr2Ok.removeClass('disabled');
-
                         window.waiting.hide();
                     }, 1000);
 
@@ -206,6 +212,7 @@
                     $('#' + yiiXhr2UploadView.dlg + ' div[id="uploadError"]').hide();
                     $('#' + yiiXhr2UploadView.dlg + ' div[id="xhr2Progress"]').hide();
                     $('#' + yiiXhr2UploadView.dlg + ' div[id="xhr2Cropper"]').hide();
+                    yiiXhr2UploadView.isCropper = false;
                     yiiXhr2UploadView.xhr2Ok.addClass("disabled");
                 });
 
@@ -283,7 +290,7 @@
 
                     var fileName = yiiXhr2UploadView.currentPhoto.find('img').attr('src').replace(/\\/g, '/').replace(/.*\//, '');
                     var oldFileName = $(".cmhd-ac-mk img").attr('src').replace(/\\/g, '/').replace(/.*\//, '');
-                    data = {avatarMode: avatarMode, fileName: filename, oldFileName: oldFileName};
+                    data = {avatarMode: avatarMode, fileName: fileName, oldFileName: oldFileName};
                 }
 
                 setTimeout(function () {

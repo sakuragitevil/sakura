@@ -22,8 +22,8 @@ class Xhr2Upload extends \yii\bootstrap\Widget
     {
         parent::init();
         $this->options['uploadUrl'] = Url::to(["filehandler/upload"]);
-        $this->options['avatarUrl'] = Url::to(["filehandler/cropimage"]);
-        $this->options['yourPhotoUrl'] = Url::to(["filehandler/yourphoto"]);
+        $this->options['avatarUrl'] = Url::to(["filehandler/set-avatar"]);
+        $this->options['yourPhotoUrl'] = Url::to(["filehandler/your-photo"]);
         $this->registerClientEvents();
     }
 

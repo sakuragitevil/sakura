@@ -1,6 +1,7 @@
 <?php
 namespace backend\controllers;
 
+use backend\models\FilehandlerForm;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -8,8 +9,7 @@ use yii\filters\VerbFilter;
 use yii\helpers\Json;
 use backend\helpers\flow\Config;
 use backend\helpers\flow\File;
-use backend\helpers\FileManager;
-use backend\models\UserForm;
+use backend\helpers\Common;
 
 /**
  * Filehandler controller
@@ -24,10 +24,10 @@ class FilehandlerController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['upload', 'cropimage', 'yourphoto'],
+                'only' => ['upload', 'set-avatar', 'your-photo'],
                 'rules' => [
                     [
-                        'actions' => ['upload', 'cropimage', 'yourphoto'],
+                        'actions' => ['upload', 'set-avatar', 'your-photo'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -37,8 +37,8 @@ class FilehandlerController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'upload' => ['post', 'get'],
-                    'cropimage' => ['post'],
-                    'yourphoto' => ['post'],
+                    'set-avatar' => ['post'],
+                    'your-photo' => ['post'],
                 ],
             ],
         ];
@@ -59,7 +59,7 @@ class FilehandlerController extends Controller
     public function actionUpload()
     {
         $config = new Config();
-        $config->setTempDir(FileManager::getChunksTempPath());
+        $config->setTempDir(Common::getChunksTempPath());
 
         $file = new File($config);
 
@@ -88,11 +88,11 @@ class FilehandlerController extends Controller
         switch ($uploadMode) {
             case "avatar":
                 $fileName = date('Ymdhisa') . '.' . $file->getFileExtension();
-                $savePath = FileManager::getAvatarTempPath();
+                $savePath = Common::getAvatarTempPath();
                 break;
             default:
                 $fileName = $file->getFileName();
-                $savePath = FileManager::getDocumentPath();
+                $savePath = Common::getDocumentPath();
                 break;
         };
 
@@ -101,13 +101,13 @@ class FilehandlerController extends Controller
             switch ($uploadMode) {
                 case "avatar":
 
-                    list($width, $height) = getimagesize(FileManager::getAvatarTempPath($fileName));
+                    list($width, $height) = getimagesize(Common::getAvatarTempPath($fileName));
 
                     $content = [
                         "width" => $width,
                         "height" => $height,
                         'fileName' => $fileName,
-                        "srcPath" => FileManager::getAvataTemprUrl($fileName),
+                        "srcPath" => Common::getAvataTemprUrl($fileName),
                     ];
 
                     Yii::$app->response->format = "html";
@@ -128,56 +128,34 @@ class FilehandlerController extends Controller
 
     }
 
-    public function actionSetavatar(){
-
-    }
-
-    public function actionCropimage()
+    public function actionSetAvatar()
     {
         $res = Yii::$app->params['response'];
-
         try {
-            if (array_key_exists('cropData', $_POST)
-                && array_key_exists('imgData', $_POST)
-                && array_key_exists('cropBoxData', $_POST)
-            ) {
-                $cropBoxData = $_POST['cropBoxData'];
-                $cropData = $_POST['cropData'];
-                $imgData = $_POST['imgData'];
 
-                $nimg = imagecreatetruecolor($cropBoxData['width'], $cropBoxData['height']);
-                $im_src = imagecreatefromjpeg(FileManager::getAvatarTempPath($imgData['fileName']));
-                if ($cropData['rotate'] != 0) {
-                    $im_src = imagerotate($im_src, $cropData['rotate'] * -1, 0);
-                }
-
-                imagecopyresampled($nimg, $im_src, 0, 0, $cropData['x'], $cropData['y'], $imgData['width'], $imgData['height'], $imgData['naturalWidth'], $imgData['naturalHeight']);
-                imagejpeg($nimg, FileManager::getAvatarPath($imgData['fileName']), 90);
-                imagejpeg($nimg, FileManager::getAvatarWebPath($imgData['fileName']), 90);
-
-                $res['data'] = ['avatarUrl' => FileManager::getAvatarUrl($imgData['fileName'])];
-                unlink(FileManager::getAvatarTempPath($imgData['fileName']));
-                if (array_key_exists('oldFileName', $imgData) && $imgData['oldFileName'] != 'default.png') {
-                    unlink(FileManager::getAvatarWebPath($imgData['oldFileName']));
-                }
-
-                $user = new UserForm();
-                $user->updateAvatar($imgData['fileName']);
+            if (!array_key_exists('avatarMode', $_POST)) {
+                $res['status'] = 'ng';
+                $res['message'] = "miss data";
+                goto end;
             }
+
+            $fhForm = new FilehandlerForm();
+            $res['data']['avatarUrl'] = $fhForm->setUserAvatar($_POST);
+
             $res['status'] = 'ok';
         } catch (Exception $e) {
             $res['status'] = 'ng';
             $res['message'] = $e->getMessage();
         }
-
+        end:
         return Json::encode($res);
     }
 
-    public function actionYourphoto()
+    public function actionYourPhoto()
     {
         $res = Yii::$app->params['response'];
         try {
-            $res['data'] = FileManager::getAllAvatar();
+            $res['data'] = Common::getAllUserAvatar();
             $res['status'] = 'ok';
         } catch (Exception $e) {
             $res['status'] = 'ng';
