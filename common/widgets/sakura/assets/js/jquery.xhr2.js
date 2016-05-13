@@ -84,6 +84,8 @@
                 $('#' + yiiXhr2UploadView.dlg + ' a[href="#uploadTab"] div.xhr2-a-li').addClass("xhr2-a-li-w");
                 $('#' + yiiXhr2UploadView.dlg + ' a[href="#photoTab"] div.xhr2-a-li').removeClass("xhr2-a-li-w");
 
+                yiiXhr2UploadView.currentPhoto = null;
+                yiiXhr2UploadView.relatedPhoto = null;
                 yiiXhr2UploadView.isCropper = false;
                 yiiXhr2UploadView.isUploadTab = true;
                 yiiXhr2UploadView.isYourPhotoTab = false;
@@ -100,6 +102,9 @@
                         case "#uploadTab":
                             yiiXhr2UploadView.isUploadTab = true;
                             yiiXhr2UploadView.isYourPhotoTab = false;
+                            if (yiiXhr2UploadView.currentPhoto != null) {
+                                yiiXhr2UploadView.xhr2Ok.addClass("disabled");
+                            }
                             break;
                         case "#photoTab":
                             yiiXhr2UploadView.isUploadTab = false;
