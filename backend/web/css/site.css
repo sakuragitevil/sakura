@@ -1,5 +1,6 @@
 /*@import '../fonts/google/roboto/google.roboto.font.css';*/
 @import '../fonts/google/material/google.material.font.css';
+
 html,
 body {
     height: 100%;
@@ -213,4 +214,17 @@ a.desc:after {
 .nano .nano-slider {
     background: #4184f3 !important;
     width: 6px !important;
+}
+
+.site-error{
+    position: relative;
+}
+
+.site-error .error-404{
+    width: 500px;
+    margin: 0 auto;
+}
+
+.site-error .error-404 > img{
+    width: 100%;
 }
