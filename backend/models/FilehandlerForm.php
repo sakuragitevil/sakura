@@ -4,10 +4,11 @@ namespace backend\models;
 use Yii;
 use yii\base\ErrorException;
 use yii\base\Model;
-//use yii\helpers\Json;
+use yii\helpers\Json;
 use backend\helpers\Common;
 use backend\helpers\flow\Config;
 use backend\helpers\flow\File;
+use yii\web\ErrorHandler;
 
 /**
  * User form
@@ -154,7 +155,13 @@ class FilehandlerForm extends Model
                 Yii::$app->response->send();
             }
         } catch (ErrorException $ex) {
-            echo $ex->getTraceAsString();
+            $res = [];
+            $res['message'] = $ex->getMessage();
+            $res['trace'] = $ex->getTraceAsString();
+            Yii::$app->response->format = 'json';
+            Yii::$app->response->content = Json::encode($res);
+            Yii::$app->response->statusCode = 500;
+            Yii::$app->response->send();
         }
     }
 }
