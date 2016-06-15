@@ -7,7 +7,6 @@ use backend\assets\AppAsset;
 use backend\assets\CommonAsset;
 use yii\helpers\Html;
 use common\widgets\Alert;
-
 use common\widgets\sakura\Xhr2Upload;
 use common\widgets\sakura\Xhr2UploadAsset;
 use common\widgets\sakura\AjaxWaiting;
@@ -27,8 +26,8 @@ AjaxWaitingAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-    <link href="../web/icons/sakura.ico" rel="shortcut icon" type="image/x-icon"/>
-    <link href="../web/css/icon.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo Yii::$app->request->baseUrl?>/icons/sakura.ico" rel="shortcut icon" type="image/x-icon"/>
+    <link href="<?php echo Yii::$app->request->baseUrl?>/css/icon.css" rel="stylesheet" type="text/css">
     <?php $this->head() ?>
 </head>
 <body>

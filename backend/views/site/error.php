@@ -12,7 +12,7 @@ $this->title = $name;
 <div class="site-error">
     <?php if ($exception->statusCode == 404): ?>
         <div class="error-404">
-            <img src="../web/icons/404.png"/>
+            <img src="<?php echo Yii::$app->request->baseUrl;?>/icons/404.png"/>
         </div>
     <?php endif; ?>
 </div>

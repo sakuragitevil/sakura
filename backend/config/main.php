@@ -35,16 +35,12 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
         'urlManager' => [
-            'class' => 'yii\web\UrlManager',
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'baseUrl' => '/backend',
-            'rules' => [
-            ],
+            'class' => 'backend\components\SUrlManager',
+            'languages' => ['vi', 'en', 'fr', 'de'],
+            'enableDefaultLanguageUrlCode' => true,
+            'enableLanguagePersistence' => false,
         ],
-        */
     ],
     'params' => $params,
 ];

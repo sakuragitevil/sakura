@@ -108,7 +108,7 @@ $this->registerJsFile(Yii::$app->request->baseUrl . '/js/sakuraHeader.js', ['dep
                                     <div class="cmhd-CQb">
                                         <div class="cmhd-Kza">All caught up!</div>
                                         <img class="cmhd-m4a"
-                                             src="../web/icons/social/2x_web/ic_notifications_88px.png"/>
+                                             src="<?php echo Yii::$app->request->baseUrl;?>/icons/social/2x_web/ic_notifications_88px.png"/>
                                     </div>
                                 </div>
                             </div>
@@ -126,20 +126,6 @@ $this->registerJsFile(Yii::$app->request->baseUrl . '/js/sakuraHeader.js', ['dep
                     </content>
                     <div id="appDlg" class="cmhd-gb_ha cmhd-gb_ga cmhd-gb_g cmhd-gb_ia" style="display: none;">
                         <ul class="cmhd-gb_ja">
-                            <li class="cmhd-gb_Z">
-                                <a class="cmhd-gb_O" href="#">
-                                    <div class="cmhd-gb_8"></div>
-                                    <div class="cmhd-gb_9"></div>
-                                    <div class="cmhd-gb_aa"></div>
-                                    <div class="cmhd-gb_ba"></div>
-                                    <span class="cmhd-gb_3">
-                                        <div class="cmhd-ac-mk-48">
-                                            <canvas class="circle" width="48" height="48"></canvas>
-                                        </div>
-                                    </span>
-                                    <span class="cmhd-gb_4">My Account</span>
-                                </a>
-                            </li>
                             <li class="cmhd-gb_Z">
                                 <a class="cmhd-gb_O" href="#">
                                     <div class="cmhd-gb_8"></div>
