@@ -18,6 +18,7 @@ return [
             'allowedIPs' => ['*'],
         ]
     ],
+    'homeUrl' => '/admin',
     'components' => [
         'user' => [
             'identityClass' => 'common\models\User',
@@ -34,6 +35,9 @@ return [
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
+        ],
+        'request' => [
+            'baseUrl' => '/admin',
         ],
         'urlManager' => [
             'class' => 'backend\components\SUrlManager',
