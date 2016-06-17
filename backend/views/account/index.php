@@ -6,7 +6,7 @@
  * Time: 3:49 PM
  */
 $this->registerCssFile(Yii::$app->request->baseUrl . '/css/account.css');
-$this->registerJsFile(Yii::$app->request->baseUrl . '/js/sakuraAccount.js', ['depends' => [\yii\web\NanoscrollerAsset::className()], 'position' => $this::POS_END]);
+$this->registerJsFile(Yii::$app->request->baseUrl . '/js/sakuraAccount.js', ['depends' => [backend\assets\CommonAsset::className()], 'position' => $this::POS_END]);
 $this->title = "My Account";
 ?>
 <div ng-app="sakuraAccount" class="acc_kgwWAf">

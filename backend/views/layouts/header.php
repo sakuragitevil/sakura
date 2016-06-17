@@ -7,9 +7,9 @@
  */
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Url;
-use backend\helpers\FileManager;
+use backend\helpers\Common;
 
-$this->registerJsFile(Yii::$app->request->baseUrl . '/js/sakuraHeader.js', ['depends' => [\yii\web\AngularAsset::className()], 'position' => $this::POS_HEAD]);
+$this->registerJsFile(Yii::$app->request->baseUrl . '/js/sakuraHeader.js', ['depends' => [backend\assets\CommonAsset::className()], 'position' => $this::POS_END]);
 ?>
 
 <div ng-app="sakuraHeader" class="row-fluid cmhd">
@@ -37,7 +37,7 @@ $this->registerJsFile(Yii::$app->request->baseUrl . '/js/sakuraHeader.js', ['dep
                     <content id="acIcon" class="xjKiLb" ng-click="openAccInfo()">
                         <span style="top: 11px">
                             <div class="cmhd-ac-mk">
-                                <img src="<?php echo FileManager::getAvatar()?>"/>
+                                <img src="<?php echo Common::getUserAvatar()?>"/>
                                 <canvas class="circle" width="32" height="32"></canvas>
                             </div>
                         </span>
@@ -53,7 +53,7 @@ $this->registerJsFile(Yii::$app->request->baseUrl . '/js/sakuraHeader.js', ['dep
                         <div class="cmhd-gb_hb">
                             <a id="profileIcon" class="cmhd-gb_ib cmhd-gb_kb" href="#" ng-click="closeAccInfo()">
                                 <div class="cmhd-gb_lb">
-                                    <img src="<?php echo FileManager::getAvatar()?>"/>
+                                    <img src="<?php echo Common::getUserAvatar()?>"/>
                                 </div>
                                 <span class="cmhd-gb_mb">Change</span>
                             </a>
@@ -108,7 +108,7 @@ $this->registerJsFile(Yii::$app->request->baseUrl . '/js/sakuraHeader.js', ['dep
                                     <div class="cmhd-CQb">
                                         <div class="cmhd-Kza">All caught up!</div>
                                         <img class="cmhd-m4a"
-                                             src="../web/icons/social/2x_web/ic_notifications_88px.png"/>
+                                             src="<?php echo Yii::$app->request->baseUrl;?>/icons/social/2x_web/ic_notifications_88px.png"/>
                                     </div>
                                 </div>
                             </div>
@@ -126,20 +126,6 @@ $this->registerJsFile(Yii::$app->request->baseUrl . '/js/sakuraHeader.js', ['dep
                     </content>
                     <div id="appDlg" class="cmhd-gb_ha cmhd-gb_ga cmhd-gb_g cmhd-gb_ia" style="display: none;">
                         <ul class="cmhd-gb_ja">
-                            <li class="cmhd-gb_Z">
-                                <a class="cmhd-gb_O" href="#">
-                                    <div class="cmhd-gb_8"></div>
-                                    <div class="cmhd-gb_9"></div>
-                                    <div class="cmhd-gb_aa"></div>
-                                    <div class="cmhd-gb_ba"></div>
-                                    <span class="cmhd-gb_3">
-                                        <div class="cmhd-ac-mk-48">
-                                            <canvas class="circle" width="48" height="48"></canvas>
-                                        </div>
-                                    </span>
-                                    <span class="cmhd-gb_4">My Account</span>
-                                </a>
-                            </li>
                             <li class="cmhd-gb_Z">
                                 <a class="cmhd-gb_O" href="#">
                                     <div class="cmhd-gb_8"></div>

@@ -7,27 +7,28 @@
         var yiiXhr2UploadView = {
             id: '',
             uploadUrl: '',
-            cropUrl: '',
+            avatarUrl: '',
             yourPhotoUrl: '',
-            mode: '',
+            uploadMode: '',
             csrfToken: '',
             fileName: '',
             dlg: 'dlgXhr2Upload',
+            cropper: null,
             currentPhoto: null,
             relatedPhoto: null,
             xhr2Message: '',
             xhr2Ok: null,
-            cropper: null,
             xhr2Cancel: null,
+            isCropper: false,
             isUploadTab: false,
             isYourPhotoTab: false,
             isYourPhotoQuery: false,
             init: function (options) {
 
                 yiiXhr2UploadView.id = options.id;
-                yiiXhr2UploadView.mode = options.mode;
-                yiiXhr2UploadView.cropUrl = options.cropUrl;
+                yiiXhr2UploadView.avatarUrl = options.avatarUrl;
                 yiiXhr2UploadView.uploadUrl = options.uploadUrl;
+                yiiXhr2UploadView.uploadMode = options.uploadMode;
                 yiiXhr2UploadView.csrfToken = yii.getCsrfToken();
                 yiiXhr2UploadView.yourPhotoUrl = options.yourPhotoUrl;
 
@@ -43,19 +44,16 @@
                         return false;
                     }
 
-                    if (yiiXhr2UploadView.isUploadTab && yiiXhr2UploadView.cropper != null) {
-                        yiiXhr2UploadView.set_profile_photo();
-                    } else if (yiiXhr2UploadView.isYourPhotoTab) {
-                        yiiXhr2UploadView.query_your_photo();
+                    if (yiiXhr2UploadView.isUploadTab && yiiXhr2UploadView.isCropper && yiiXhr2UploadView.cropper != null) {
+                        yiiXhr2UploadView.set_profile_photo(1);
+                    } else if (yiiXhr2UploadView.isYourPhotoTab && yiiXhr2UploadView.currentPhoto!=null) {
+                        yiiXhr2UploadView.set_profile_photo(2);
                     }
 
                 });
 
                 //init tabs events
                 yiiXhr2UploadView.init_tab_events();
-
-                //init_photos_events
-                //yiiXhr2UploadView.init_photos_events();
 
                 //init_upload_events
                 yiiXhr2UploadView.init_upload_events();
@@ -80,22 +78,33 @@
                 $('#' + yiiXhr2UploadView.dlg + ' div[id="xhr2Cropper"]').hide();
                 yiiXhr2UploadView.xhr2Ok.addClass("disabled");
 
-                $('#' + yiiXhr2UploadView.dlg + ' div[id="photoTab"]').removeClass('active');
-                $('#' + yiiXhr2UploadView.dlg + ' div[id="uploadTab"]').addClass('active');
+                $('#' + yiiXhr2UploadView.dlg + ' div[id="photoTab"]').removeClass('active').removeClass('in');
+                $('#' + yiiXhr2UploadView.dlg + ' div[id="uploadTab"]').addClass('active').addClass('in');
 
+                $('#' + yiiXhr2UploadView.dlg + ' a[href="#uploadTab"] div.xhr2-a-li').addClass("xhr2-a-li-w");
+                $('#' + yiiXhr2UploadView.dlg + ' a[href="#photoTab"] div.xhr2-a-li').removeClass("xhr2-a-li-w");
+
+                yiiXhr2UploadView.currentPhoto = null;
+                yiiXhr2UploadView.relatedPhoto = null;
+                yiiXhr2UploadView.isCropper = false;
                 yiiXhr2UploadView.isUploadTab = true;
                 yiiXhr2UploadView.isYourPhotoTab = false;
+                yiiXhr2UploadView.isYourPhotoQuery = false;
 
             },
             init_tab_events: function () {
                 $('#' + yiiXhr2UploadView.dlg + ' a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+
                     $(e.target).parent('div').find('div.xhr2-a-li-w').removeClass("xhr2-a-li-w");
                     $(e.target).find("div.xhr2-a-li").addClass("xhr2-a-li-w");
-                    $('#' + yiiXhr2UploadView.dlg + ' .xhr2-scroll').nanoScroller();
+
                     switch ($(e.target).attr("href")) {
                         case "#uploadTab":
                             yiiXhr2UploadView.isUploadTab = true;
                             yiiXhr2UploadView.isYourPhotoTab = false;
+                            if (yiiXhr2UploadView.currentPhoto != null) {
+                                yiiXhr2UploadView.xhr2Ok.addClass("disabled");
+                            }
                             break;
                         case "#photoTab":
                             yiiXhr2UploadView.isUploadTab = false;
@@ -103,7 +112,7 @@
                             if (yiiXhr2UploadView.currentPhoto != null) {
                                 yiiXhr2UploadView.xhr2Ok.removeClass("disabled");
                             }
-                            if(!yiiXhr2UploadView.isYourPhotoQuery){
+                            if (!yiiXhr2UploadView.isYourPhotoQuery) {
                                 yiiXhr2UploadView.query_your_photo();
                             }
                             break;
@@ -131,7 +140,7 @@
 
                 var xhr2Flow = new Flow({
                     target: yiiXhr2UploadView.uploadUrl,
-                    query: {_csrf: yiiXhr2UploadView.csrfToken, mode: yiiXhr2UploadView.mode},
+                    query: {_csrf: yiiXhr2UploadView.csrfToken, uploadMode: yiiXhr2UploadView.uploadMode},
                     singleFile: true,
                     accept: 'image/*',
                     allowDuplicateUploads: true,
@@ -169,7 +178,7 @@
 
                         $('#' + yiiXhr2UploadView.dlg + ' div[id="xhr2Progress"]').hide();
 
-                        if (yiiXhr2UploadView.xhr2Message != "" && yiiXhr2UploadView.mode == "avatar") {
+                        if (yiiXhr2UploadView.xhr2Message != "" && yiiXhr2UploadView.uploadMode == "avatar") {
 
                             var xhr2MessageObj = JSON.parse(yiiXhr2UploadView.xhr2Message);
                             yiiXhr2UploadView.fileName = xhr2MessageObj.fileName;
@@ -177,13 +186,13 @@
 
                             //init_crop_events
                             yiiXhr2UploadView.init_crop_events(cropContainer, xhr2MessageObj.srcPath);
+                            yiiXhr2UploadView.isCropper = true;
 
                             $('#' + yiiXhr2UploadView.dlg + ' div[id="xhr2Cropper"]').show();
+                            yiiXhr2UploadView.xhr2Ok.removeClass('disabled');
                         } else {
                             $('#' + yiiXhr2UploadView.dlg + ' div[id="dropTarget"]').show();
                         }
-                        yiiXhr2UploadView.xhr2Ok.removeClass('disabled');
-
                         window.waiting.hide();
                     }, 1000);
 
@@ -208,6 +217,7 @@
                     $('#' + yiiXhr2UploadView.dlg + ' div[id="uploadError"]').hide();
                     $('#' + yiiXhr2UploadView.dlg + ' div[id="xhr2Progress"]').hide();
                     $('#' + yiiXhr2UploadView.dlg + ' div[id="xhr2Cropper"]').hide();
+                    yiiXhr2UploadView.isCropper = false;
                     yiiXhr2UploadView.xhr2Ok.addClass("disabled");
                 });
 
@@ -266,28 +276,41 @@
 
                 return newImgSize;
             },
-            set_profile_photo: function () {
+            set_profile_photo: function (avatarMode) {
                 window.waiting.show();
 
-                var cropData = yiiXhr2UploadView.cropper.getData();
-                var cropBoxData = yiiXhr2UploadView.cropper.getCropBoxData();
+                var url = "";
+                var data = {};
+                if (avatarMode == 1) {//set your avatar with image which you crop from image are uploaded
 
-                var imgData = yiiXhr2UploadView.cropper.getImageData();
-                imgData.fileName = yiiXhr2UploadView.fileName;
-                imgData.oldFileName = $(".cmhd-ac-mk img").attr('src').replace(/\\/g, '/').replace(/.*\//, '');
+                    var cropData = yiiXhr2UploadView.cropper.getData();
+                    var cropBoxData = yiiXhr2UploadView.cropper.getCropBoxData();
+
+                    var imgData = yiiXhr2UploadView.cropper.getImageData();
+                    imgData.fileName = yiiXhr2UploadView.fileName;
+                    imgData.oldFileName = $(".cmhd-ac-mk img").attr('src').replace(/\\/g, '/').replace(/.*\//, '');
+                    data = {avatarMode: avatarMode, cropData: cropData, cropBoxData: cropBoxData, imgData: imgData}
+
+                } else if (avatarMode == 2) {//set your avatar with image which you choose from your image
+
+                    var fileName = yiiXhr2UploadView.currentPhoto.find('img').attr('src').replace(/\\/g, '/').replace(/.*\//, '');
+                    var oldFileName = $(".cmhd-ac-mk img").attr('src').replace(/\\/g, '/').replace(/.*\//, '');
+                    data = {avatarMode: avatarMode, fileName: fileName, oldFileName: oldFileName};
+                }
 
                 setTimeout(function () {
                     $.ajax({
                         type: 'POST',
-                        url: yiiXhr2UploadView.cropUrl,
+                        url: yiiXhr2UploadView.avatarUrl,
                         async: false,
                         dataType: 'json',
-                        data: {cropData: cropData, cropBoxData: cropBoxData, imgData: imgData},
+                        data: data,
                         success: function (json) {
                             if (json.status == 'ok') {
                                 $(".cmhd-ac-mk img").attr('src', json.data.avatarUrl);
                                 $(".cmhd-gb_lb img").attr('src', json.data.avatarUrl);
                                 yiiXhr2UploadView.close_dialog();
+                                yiiXhr2UploadView.isYourPhotoQuery = false;
                             } else {
 
                             }
@@ -309,8 +332,12 @@
                         dataType: 'json',
                         success: function (json) {
                             if (json.status == 'ok') {
-
-                                //yiiXhr2UploadView.isYourPhotoQuery = true;
+                                if (json.data.length > 0) {
+                                    yiiXhr2UploadView.show_your_photo(json.data);
+                                    yiiXhr2UploadView.init_photos_events();
+                                    $('#' + yiiXhr2UploadView.dlg + ' .xhr2-scroll').nanoScroller();
+                                }
+                                yiiXhr2UploadView.isYourPhotoQuery = true;
                             } else {
 
                             }
@@ -320,6 +347,16 @@
                         }
                     });
                 }, 0);
+            },
+            show_your_photo: function (yourPhoto) {
+                var yourPhotoContent = $('#' + yiiXhr2UploadView.dlg + ' div[id="yourPhotoContent"]');
+                yourPhotoContent.empty();
+
+                $.each(yourPhoto, function (index, value) {
+                    var div = $(document.createElement('div'));
+                    div.addClass('xhr2-hn-xs-oo-en').html('<div class="xhr2-hn-xs-oo-tm"><div class="xhr2-hn-xs-oo-yj"> <i class="material-icons md-26 md-light">brightness_1</i> <i class="material-icons md-24 md_green">check_circle</i> </div> <img class="xhr2-hn-xs-oo-hm" src="' + value + '"/> </div>');
+                    yourPhotoContent.append(div);
+                });
             },
         };
 

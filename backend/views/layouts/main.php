@@ -4,9 +4,8 @@
 /* @var $content string */
 
 use backend\assets\AppAsset;
+use backend\assets\CommonAsset;
 use yii\helpers\Html;
-use yii\web\NanoscrollerAsset;
-use yii\web\AngularAsset;
 use common\widgets\Alert;
 use common\widgets\sakura\Xhr2Upload;
 use common\widgets\sakura\Xhr2UploadAsset;
@@ -14,9 +13,8 @@ use common\widgets\sakura\AjaxWaiting;
 use common\widgets\sakura\AjaxWaitingAsset;
 
 AppAsset::register($this);
-AngularAsset::register($this);
+CommonAsset::register($this);
 Xhr2UploadAsset::register($this);
-NanoscrollerAsset::register($this);
 AjaxWaitingAsset::register($this);
 
 ?>
@@ -28,8 +26,8 @@ AjaxWaitingAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-    <link href="../web/icons/sakura.ico" rel="shortcut icon" type="image/x-icon"/>
-    <link href="../web/css/icon.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo Yii::$app->request->baseUrl?>/icons/sakura.ico" rel="shortcut icon" type="image/x-icon"/>
+    <link href="<?php echo Yii::$app->request->baseUrl?>/css/icon.css" rel="stylesheet" type="text/css">
     <?php $this->head() ?>
 </head>
 <body>
@@ -53,7 +51,7 @@ AjaxWaitingAsset::register($this);
             <?php echo $this->render('@app/views/layouts/header') ?>
             <?php echo Xhr2Upload::widget(['options' => [
                 'id' => 'profileIcon',
-                'mode' => 'avatar',
+                'uploadMode' => 'avatar',
             ]]); ?>
         <?php endif; ?>
         <?php echo Alert::widget() ?>
