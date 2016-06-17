@@ -9,6 +9,7 @@ $params = array_merge(
 return [
     'id' => 'app-backend',
     'name' => 'Sakura',
+    'language' => 'vi',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log', 'gii'],
@@ -49,7 +50,7 @@ return [
                 '<language:\w+>/<controller>/<action>/<id:\d+>' => '<controller>/<action>',
                 '<language:\w+>/<controller>/<action>' => '<controller>/<action>',
                 '<language:\w+>/<controller>' => '<controller>',
-                '<language:\w+>/'=>'site/index',
+                '<language:\w+>/' => 'site/index',
             ],
         ],
     ],

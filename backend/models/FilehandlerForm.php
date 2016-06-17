@@ -130,7 +130,7 @@ class FilehandlerForm extends Model
                 switch ($uploadMode) {
                     case "avatar":
 
-                        list($width, $height) = getimagesize(Common::getAvatarTempPath($fileNames));
+                        list($width, $height) = getimagesize(Common::getAvatarTempPath($fileName));
 
                         $content = [
                             "width" => $width,

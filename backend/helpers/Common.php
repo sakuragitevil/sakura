@@ -34,12 +34,12 @@ class Common
 
     public static function getAvatarUrl($fileName = '')
     {
-        return Yii::$app->request->baseUrl.Yii::getAlias("@avatarUrl") . DIRECTORY_SEPARATOR . Yii::$app->user->identity->web_folder . DIRECTORY_SEPARATOR . $fileName;
+        return Yii::$app->request->baseUrl . Yii::getAlias("@avatarUrl") . DIRECTORY_SEPARATOR . Yii::$app->user->identity->web_folder . DIRECTORY_SEPARATOR . $fileName;
     }
 
     public static function getAvataTemprUrl($fileName = '')
     {
-        return Yii::getAlias("@avatarTempUrl") . DIRECTORY_SEPARATOR . $fileName;
+        return Yii::$app->request->baseUrl . Yii::getAlias("@avatarTempUrl") . DIRECTORY_SEPARATOR . $fileName;
     }
 
     public static function getChunksTempPath()
@@ -65,7 +65,7 @@ class Common
         if (file_exists($webUserPath . DIRECTORY_SEPARATOR . Yii::$app->user->identity->avatar)) {
             $path = Yii::getAlias("@avatarUrl") . DIRECTORY_SEPARATOR . Yii::$app->user->identity->web_folder . DIRECTORY_SEPARATOR . Yii::$app->user->identity->avatar;
         }
-        return Yii::$app->request->baseUrl.$path;
+        return Yii::$app->request->baseUrl . $path;
     }
 
     /**
