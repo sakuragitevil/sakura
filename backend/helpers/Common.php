@@ -78,7 +78,7 @@ class Common
         $files = [];
         $path = Yii::getAlias("@app") . DIRECTORY_SEPARATOR . Yii::getAlias("@avatarPath") . DIRECTORY_SEPARATOR . Yii::$app->user->identity->web_folder;
         if (file_exists($path)) {
-            $yourUrl = Yii::getAlias("@yourUrl") . DIRECTORY_SEPARATOR . Yii::$app->user->identity->web_folder;
+            $yourUrl = Yii::$app->request->baseUrl . Yii::getAlias("@yourUrl") . DIRECTORY_SEPARATOR . Yii::$app->user->identity->web_folder;
             $files = array_diff(scandir($path, SCANDIR_SORT_DESCENDING), ['..', '.']);
             foreach ($files as $key => $file) {
                 $files[$key] = $yourUrl . DIRECTORY_SEPARATOR . $file;
