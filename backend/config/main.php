@@ -18,7 +18,7 @@ return [
             'allowedIPs' => ['*'],
         ]
     ],
-    'homeUrl' => '/sakura/admin',
+    'homeUrl' => '/admin',
     'components' => [
         'user' => [
             'identityClass' => 'common\models\User',
@@ -37,7 +37,7 @@ return [
             'errorAction' => 'site/error',
         ],
         'request' => [
-            'baseUrl' => '/sakura/admin',
+            'baseUrl' => '/admin',
         ],
         'urlManager' => [
             'class' => 'backend\components\ZUrlManager',

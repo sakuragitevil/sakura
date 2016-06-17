@@ -26,17 +26,12 @@ $this->registerJsFile(Yii::$app->request->baseUrl . '/js/sakuraLogin.js', ['depe
             <h1>SAKURA</h1>
         </div>
     </div>
-
-    <div class="site-login-bn">
-        <h2 class="site-login-h2">Sign in to add account </h2>
-    </div>
-
     <div class="site-login-cRd site-login-cs">
         <div class="site-login-cIrM">
             <canvas id="canvas" class="circle" width="96" height="96"></canvas>
         </div>
         <img id="back-arrow" class="site-login-bR" style="display: <?php echo $backArrowDisplay; ?>" aria-label="Back"
-             src="../web/icons/navigation/1x_web/ic_arrow_back_grey_24dp.png">
+             src="<?php echo Yii::$app->request->baseUrl;?>/icons/navigation/1x_web/ic_arrow_back_grey_24dp.png">
 
         <div class="row">
             <div class="col-lg-12">
