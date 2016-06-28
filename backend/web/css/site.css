@@ -1,4 +1,4 @@
-/*@import '../fonts/google/roboto/google.roboto.font.css';*/
+@import '../fonts/google/roboto/google.roboto.font.css';
 @import '../fonts/google/material/google.material.font.css';
 
 html,
@@ -6,8 +6,9 @@ body {
     height: 100%;
     margin: 0;
     width: 100%;
-    font-family: Roboto, Arial, sans-serif;
+    font-family: Roboto,RobotoDraft,'Helvetica Neue',arial,sans-serif;
     display: block;
+    -webkit-font-smoothing: antialiased;
 }
 
 .wrap {
@@ -99,7 +100,6 @@ a.asc:after, a.desc:after {
     position: relative;
     top: 1px;
     display: inline-block;
-    font-family: 'Glyphicons Halflings';
     font-style: normal;
     font-weight: normal;
     line-height: 1;

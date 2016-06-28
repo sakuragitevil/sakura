@@ -9,8 +9,8 @@ $this->registerCssFile(Yii::$app->request->baseUrl . '/css/account.css');
 $this->registerJsFile(Yii::$app->request->baseUrl . '/js/sakuraAccount.js', ['depends' => [backend\assets\CommonAsset::className()], 'position' => $this::POS_END]);
 $this->title = "My Account";
 ?>
-<div ng-app="sakuraAccount" class="acc_kgwWAf">
-    <div ng-controller="accountController as skAccount" class="acc_ibIQPb acc_op62rc acc_xFG3Re">
+<div id="skAccount" ng-controller="accountController as skAccount"  class="acc_kgwWAf" style="display: none;" data-ng-init="init()">
+    <div class="acc_ibIQPb acc_op62rc acc_xFG3Re">
         <div class="acc_FuZuF">
             <div class="acc_Yo">
                 <div class="acc_aJ">
@@ -20,7 +20,7 @@ $this->title = "My Account";
                                 <div>Welcome</div>
                             </div>
                             <div class="acc_mRrEd col-sm-10 col-md-10 col-lg-10">
-                                <h1>Sign-in & security</h1>
+                                <h1>{{frmTitle}}</h1>
                             </div>
                         </div>
                     </content>
@@ -28,12 +28,11 @@ $this->title = "My Account";
                         <div class="row-fluid">
                             <div class="acc_zkJiu col-sm-2 col-md-2 col-lg-2">
                                 <div class="acc_lg_5">
-                                    <a class="acc_nh Vr" href="#" ng-click="signInItem()">Sign-in & security</a>
+                                    <a class="acc_nh" ng-class="siClass" href="#" ng-click="signInItem()">Sign-in</a>
                                 </div>
                                 <div class="acc_lg_30">
-                                    <a class="acc_nh" href="#">Personal info & language</a>
-
-                                    <div class="acc_Vq">
+                                    <a class="acc_nh" ng-class="piClass" href="#" ng-click="personalInfoItem()">Personal info</a>
+                                    <div class="acc_Vq" style="display: none;">
                                         <a class="nh" href="#">Personal info</a>
                                         <a class="nh" href="#">Language</a>
                                     </div>
@@ -41,6 +40,54 @@ $this->title = "My Account";
                             </div>
                             <div class="acc_pUstR col-sm-10 col-md-10 col-lg-10 nano acc-scroll">
                                 <div class="nano-content">
+                                    <div class="acc_Ti_nE_Jl">
+                                        <h3 class="acc_ah" id="personalinfo" tabindex="-1">Signing in to Sakura</h3>
+                                        <div class="acc_dN">
+                                            <div class="acc_Wx">
+                                                <div class="acc_wt">
+                                                    Control your password and account access, along with backup options if you get locked out of your account.
+                                                </div>
+                                                <div>
+                                                    <div class="acc_qE">
+                                                        Make sure you choose a strong password
+                                                    </div>
+                                                    <div class="acc_pE">
+                                                        A strong password contains a mix of numbers, letters, and symbols. It is hard to guess, does not resemble a real word, and is only used for this account.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="acc_zt">
+                                                <div class="acc_LptvFf acc_HXWVj">
+                                                    <div class="acc_S4Qdid">
+                                                        <div class="acc_fIKlOc">
+                                                            <div class="acc_UNioge"></div>
+                                                            <div class="acc_upRLX">
+                                                                Password & sign-in method
+                                                            </div>
+                                                            <div class="acc_LGyQ6d">
+                                                                <b>Note: </b>To change these settings, you will need to confirm your password.
+                                                            </div>
+                                                        </div>
+                                                        <div class="acc_fIKlOc">
+                                                            <div class="acc_UNioge"></div>
+                                                            <div class="acc_s7GJtb">
+                                                                <div class="acc_iXbi7e">
+                                                                    <div class="acc_vbekj">
+                                                                        <h5 class="acc_upRLX">Password</h5>
+                                                                    </div>
+                                                                    <div class="acc_yiTjAe">Last changed: March 7, 10:11 AM</div>
+                                                                </div>
+                                                                <div class="acc_L5ZFod">
+                                                                    <i class="material-icons md-24 md-dark">navigate_next</i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearboth"></div>
                                     <div class="acc_Ti_nE_Jl">
                                         <h3 class="acc_ah" id="personalinfo" tabindex="-1">Your personal info</h3>
                                         <div class="acc_dN">
@@ -145,44 +192,6 @@ $this->title = "My Account";
                                                                     </div>
                                                                     <div class="acc_yiTjAe">
                                                                         <div class="acc_Dna"></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="acc_L5ZFod">
-                                                                    <i class="material-icons md-24 md-dark">navigate_next</i>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="clearboth"></div>
-                                    <div class="acc_Ti_nE_Jl">
-                                        <h3 class="acc_ah" id="personalinfo" tabindex="-1">Language</h3>
-                                        <div class="acc_dN">
-                                            <div class="acc_Wx">
-                                                <div class="acc_wt">
-                                                    Set Sakura services on the web to work in the language of your choice.
-                                                </div>
-                                            </div>
-                                            <div class="acc_zt">
-                                                <div class="acc_LptvFf acc_HXWVj">
-                                                    <div class="acc_S4Qdid">
-                                                        <div class="acc_O5Nvec">
-                                                            <img src="../web/icons/language_2x.png">
-                                                        </div>
-                                                    </div>
-                                                    <div class="acc_S4Qdid">
-                                                        <div class="acc_fIKlOc">
-                                                            <div class="acc_UNioge"></div>
-                                                            <div class="acc_s7GJtb">
-                                                                <div class="acc_iXbi7e">
-                                                                    <div class="acc_vbekj">
-                                                                        <h5 class="acc_upRLX">Language</h5>
-                                                                    </div>
-                                                                    <div class="acc_yiTjAe">
-                                                                        <div class="acc_Dna">English (United States)</div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="acc_L5ZFod">

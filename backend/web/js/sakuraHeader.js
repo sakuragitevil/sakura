@@ -3,8 +3,7 @@
  */
 
 (function () {
-    var sakuraHeader = angular.module("sakuraHeader", []);
-    sakuraHeader.controller("headerController", function ($scope, $http) {
+    sakuraAngular.controller("headerController", function ($scope, $http) {
 
         //Initialization
         $scope.openAccInfoStatus = 0;

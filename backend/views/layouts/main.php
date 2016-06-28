@@ -26,13 +26,16 @@ AjaxWaitingAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-    <link href="<?php echo Yii::$app->request->baseUrl?>/icons/sakura.ico" rel="shortcut icon" type="image/x-icon"/>
-    <link href="<?php echo Yii::$app->request->baseUrl?>/css/icon.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo Yii::$app->request->baseUrl ?>/icons/sakura.ico" rel="shortcut icon" type="image/x-icon"/>
+    <link href="<?php echo Yii::$app->request->baseUrl ?>/css/icon.css" rel="stylesheet" type="text/css">
     <?php $this->head() ?>
+    <script>
+        var sakuraAngular = angular.module("sakuraAngular", []);
+    </script>
 </head>
-<body>
+<body ng-app="sakuraAngular">
 <?php $this->beginBody() ?>
-<?php echo AjaxWaiting::widget();?>
+<?php echo AjaxWaiting::widget(); ?>
 <div class="wrap">
     <div class="container-fluid">
         <?php if (!\Yii::$app->user->isGuest): ?>
@@ -40,7 +43,7 @@ AjaxWaitingAsset::register($this);
                 <div class="g-Qx">
                     <div class="g-Qx-eb X5yjGb">
                         <div class="kFx1Ae-xdwExf-eb-m">
-                            <img id=":0.la" class="kFx1Ae-xdwExf-eb"
+                            <img class="kFx1Ae-xdwExf-eb"
                                  src="https://lh3.googleusercontent.com/4zsirp7PvHet1HV-6JWjLsTbzNkAFOJo9coBYcLXgt5WK7A-2zo3ShS4zDs-OKElEDgsgv_IdJNWRmk=w1920-h1080-p-k-nd-no">
                         </div>
                     </div>

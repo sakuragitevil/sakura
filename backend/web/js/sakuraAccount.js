@@ -3,17 +3,34 @@
  */
 
 (function () {
-    var sakuraAccount = angular.module("sakuraAccount", []);
-    sakuraAccount.controller("accountController", function ($scope, $http) {
+    sakuraAngular.controller("accountController", function ($scope, $http) {
 
         //Initialization
+        $scope.frmTitle = '';
+        $scope.siClass = '';
+        $scope.piClass = '';
+
+        $scope.init = function () {
+
+            $scope.frmTitle = 'Sign-in';
+            $scope.siClass = 'Vr';
+            $scope.piClass = '';
+
+            $("#skAccount").show();
+            $(".acc-scroll").nanoScroller();
+        };
 
         // Event handlers
         $scope.signInItem = function () {
-            alert("OK");
+            $scope.siClass = 'Vr';
+            $scope.piClass = '';
+            $scope.frmTitle = 'Sign-in';
         };
 
+        $scope.personalInfoItem = function () {
+            $scope.siClass = '';
+            $scope.piClass = 'Vr';
+            $scope.frmTitle = 'Personal info';
+        };
     });
-
-    $(".acc-scroll").nanoScroller();
 })();

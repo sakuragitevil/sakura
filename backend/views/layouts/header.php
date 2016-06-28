@@ -12,8 +12,8 @@ use backend\helpers\Common;
 $this->registerJsFile(Yii::$app->request->baseUrl . '/js/sakuraHeader.js', ['depends' => [backend\assets\CommonAsset::className()], 'position' => $this::POS_END]);
 ?>
 
-<div ng-app="sakuraHeader" class="row-fluid cmhd">
-    <div ng-controller="headerController as skHeader" class="col-sm-12 col-md-12 col-lg-12 noLRpadding">
+<div ng-controller="headerController as skHeader" class="row-fluid cmhd">
+    <div class="col-sm-12 col-md-12 col-lg-12 noLRpadding">
         <div class="row-fluid">
             <div class="col-sm-5 col-md-5 col-lg-5 noLRpadding">
                 <div class="div-inline-left" style="min-width: 24px">
