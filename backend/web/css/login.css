@@ -1,3 +1,6 @@
+.form-group {
+    margin-bottom: 0 !important;
+}
 
 .site-login-bn {
     text-align: center;
@@ -12,19 +15,14 @@
     margin-bottom: 20px;
 }
 
-.site-login-cs {
-    height: 280px;
-    width: 320px;
-    padding: 40px 40px;
-    position: relative;
-    overflow: hidden;
-}
-
 .site-login-cRd {
     background-color: #f7f7f7;
-    padding: 20px 25px 30px;
+
     margin: 0 auto 25px;
+    position: relative;
+    overflow: hidden;
     width: 330px;
+    height: 300px;
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
     border-radius: 2px;
@@ -34,27 +32,36 @@
     margin-bottom: 20px;
 }
 
+.site-login-cRbd {
+    width: 100%;
+    height: 100%;
+    padding: 0px 25px 30px;
+}
+
 .site-login-cIrM {
     display: block;
-    height: 96px;
-    width: 96px;
+    height: 90px;
+    width: 90px;
     overflow: hidden;
     border-radius: 50%;
     margin-left: auto;
     margin-right: auto;
     z-index: 100;
-    margin-bottom: 10px;
-    background-size: 96px;
-    background-repeat: no-repeat;
-    background-image: url(../icons/avatar_2x.png);
-    -webkit-transition: opacity 0.075s;
-    -moz-transition: opacity 0.075s;
-    -ms-transition: opacity 0.075s;
-    -o-transition: opacity 0.075s;
-    transition: opacity 0.075s;
 }
 
-.site-login-cTr{
+.site-login-cIrM i {
+    font-size: 90px;
+    color: #b9b9b9;
+}
+
+.site-login-cIrM img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-left: 10px;
+}
+
+.site-login-cTr {
     border: 0;
     height: 83px;
 }
@@ -83,12 +90,21 @@
     cursor: pointer;
 }
 
-.site-login-emDpl {
+.signin-card #profile-name {
+    color: #000;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+    min-height: 1em;
+}
+
+.signin-card #email-display {
     display: block;
     padding: 0px 8px;
     color: rgb(64, 64, 64);
-    line-height: initial;
-    margin-bottom: 16px;
+    line-height: 2;
+    margin-bottom: 10px;
     font-size: 14px;
     text-align: center;
     overflow: hidden;
@@ -97,4 +113,55 @@
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
+}
+
+.site-login-lug {
+    padding: 3px;
+}
+
+.site-login-lug button {
+    height: 25px;
+    width: 25px;
+    text-align: center;
+    background-color: #00af9d;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 2px;
+    cursor: pointer;
+    border: none;
+    padding: 0;
+    text-transform: uppercase;
+}
+
+.site-login-lug ul {
+    min-width: 25px;
+    width: 25px;
+    top: 25px;
+    right: 3px;
+    left: 299px;
+    background-color: #00af9d;
+    border-radius: 2px;
+}
+
+.site-login-lug ul li {
+    width: 23px;
+    list-style: none;
+    text-align: center;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.site-login-lug ul li.divider {
+    margin: 0;
+}
+
+.site-login-lug button:hover {
+    color: #424242;
+}
+
+.site-login-lug ul li:hover {
+    color: #424242;
 }

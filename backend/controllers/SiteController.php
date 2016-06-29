@@ -1,6 +1,7 @@
 <?php
 namespace backend\controllers;
 
+use backend\helpers\Common;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -23,7 +24,7 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'error'],
+                        'actions' => ['login', 'error', 'language'],
                         'allow' => true,
                     ],
                     [
@@ -84,7 +85,13 @@ class SiteController extends Controller
 
             $res = Yii::$app->params['response'];
             if ($model->load($post) && $model->validateEmail($model->email)) {
+
+                $user = $model->userProfile();
+
                 $res['status'] = 'ok';
+                $res['data']['profileName'] = $user->firstname . ' ' . $user->lastname;
+                $res['data']['profileAvatar'] = Common::getAvatarOf($user);
+
             } else {
                 $res['status'] = 'ng';
                 $res['message'] = $model->getErrors($model->email);
@@ -105,8 +112,35 @@ class SiteController extends Controller
 
     public function actionLogout()
     {
+        $language = Yii::$app->session->get('language');
         Yii::$app->user->logout();
 
+        Yii::$app->session->set('language', $language);
+        Yii::$app->language = $language;
         return $this->goHome();
+    }
+
+    public function actionLanguage()
+    {
+        $res = Yii::$app->params['response'];
+
+        $post = Yii::$app->request->post();
+        if (!array_key_exists('language', $post)) {
+            $res['status'] = 'ng';
+            $res['message'] = "Incorrect language";
+            return Json::encode($res);
+        }
+
+        $language = Yii::$app->params['language'];
+        if (!array_key_exists($post['language'], $language)) {
+            $res['status'] = 'ng';
+            $res['message'] = "The system does not support " . strtoupper($post['language']) . " language";
+            return Json::encode($res);
+        }
+
+        $res['status'] = 'ok';
+        Yii::$app->session->set('language', $post['language']);
+        Yii::$app->language = $post['language'];
+        return Json::encode($res);
     }
 }

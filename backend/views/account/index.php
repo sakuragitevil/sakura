@@ -9,8 +9,8 @@ $this->registerCssFile(Yii::$app->request->baseUrl . '/css/account.css');
 $this->registerJsFile(Yii::$app->request->baseUrl . '/js/sakuraAccount.js', ['depends' => [backend\assets\CommonAsset::className()], 'position' => $this::POS_END]);
 $this->title = "My Account";
 ?>
-<div id="skAccount" ng-controller="accountController as skAccount"  class="acc_kgwWAf" style="display: none;" data-ng-init="init()">
-    <div class="acc_ibIQPb acc_op62rc acc_xFG3Re">
+<div ng-controller="accountController as skAccount" class="acc_kgwWAf" data-ng-init="init()">
+    <div class="acc_ibIQPb acc_op62rc acc_xFG3Re" ng-show="display">
         <div class="acc_FuZuF">
             <div class="acc_Yo">
                 <div class="acc_aJ">
@@ -40,7 +40,7 @@ $this->title = "My Account";
                             </div>
                             <div class="acc_pUstR col-sm-10 col-md-10 col-lg-10 nano acc-scroll">
                                 <div class="nano-content">
-                                    <div class="acc_Ti_nE_Jl">
+                                    <div id="siTop" class="acc_Ti_nE_Jl">
                                         <h3 class="acc_ah" id="personalinfo" tabindex="-1">Signing in to Sakura</h3>
                                         <div class="acc_dN">
                                             <div class="acc_Wx">
@@ -88,7 +88,7 @@ $this->title = "My Account";
                                         </div>
                                     </div>
                                     <div class="clearboth"></div>
-                                    <div class="acc_Ti_nE_Jl">
+                                    <div id="piTop" class="acc_Ti_nE_Jl">
                                         <h3 class="acc_ah" id="personalinfo" tabindex="-1">Your personal info</h3>
                                         <div class="acc_dN">
                                             <div class="acc_Wx">

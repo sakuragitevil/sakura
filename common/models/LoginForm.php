@@ -51,8 +51,8 @@ class LoginForm extends Model
     }
 
     /**
-     * Validates the password.
-     * This method serves as the inline validation for password.
+     * Validates the email.
+     * This method serves as the inline validation for email.
      *
      * @param string $attribute the attribute currently being validated
      * @param array $params the additional name-value pairs given in the rule
@@ -101,6 +101,16 @@ class LoginForm extends Model
             $this->_user = User::findByEmail($this->email);
         }
 
+        return $this->_user;
+    }
+
+    /**
+     * Finds user
+     *
+     * @return User|null
+     */
+    public function userProfile()
+    {
         return $this->_user;
     }
 }

@@ -3,6 +3,7 @@
 namespace backend\helpers;
 
 use Yii;
+use yii\web\User;
 
 class Common
 {
@@ -69,6 +70,22 @@ class Common
     }
 
     /**
+     * get user's avatar.
+     *
+     * @return user avatar url
+     */
+    public static function getAvatarOf($user)
+    {
+        $avatarUrl = '';
+        $webPath = Yii::getAlias("@app") . DIRECTORY_SEPARATOR . Yii::getAlias("@avatarWebPath");
+        $webUserPath = $webPath . DIRECTORY_SEPARATOR . $user->web_folder;
+        if (file_exists($webUserPath . DIRECTORY_SEPARATOR . $user->avatar)) {
+            $avatarUrl = Yii::$app->request->baseUrl . Yii::getAlias("@avatarUrl") . DIRECTORY_SEPARATOR . $user->web_folder . DIRECTORY_SEPARATOR . $user->avatar;
+        }
+        return $avatarUrl;
+    }
+
+    /**
      * get all user's avatar.
      *
      * @return array url user's avatar
@@ -85,5 +102,13 @@ class Common
             }
         }
         return $files;
+    }
+
+    public static function language()
+    {
+        if (Yii::$app->session->has('language'))
+            return Yii::$app->session->get('language');
+        else
+            return Yii::$app->language;
     }
 }

@@ -6,6 +6,7 @@
     sakuraAngular.controller("accountController", function ($scope, $http) {
 
         //Initialization
+        $scope.display = false;
         $scope.frmTitle = '';
         $scope.siClass = '';
         $scope.piClass = '';
@@ -16,7 +17,7 @@
             $scope.siClass = 'Vr';
             $scope.piClass = '';
 
-            $("#skAccount").show();
+            $scope.display = true;
             $(".acc-scroll").nanoScroller();
         };
 
@@ -25,12 +26,14 @@
             $scope.siClass = 'Vr';
             $scope.piClass = '';
             $scope.frmTitle = 'Sign-in';
+            $(".acc-scroll").nanoScroller({scroll: 'top'});
         };
 
         $scope.personalInfoItem = function () {
             $scope.siClass = '';
             $scope.piClass = 'Vr';
             $scope.frmTitle = 'Personal info';
+            $(".acc-scroll").nanoScroller({scrollTo: $("#piTop")});
         };
     });
 })();

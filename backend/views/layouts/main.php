@@ -3,6 +3,7 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
+use backend\helpers\Common;
 use backend\assets\AppAsset;
 use backend\assets\CommonAsset;
 use yii\helpers\Html;
@@ -20,7 +21,7 @@ AjaxWaitingAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>">
+<html lang="<?php echo Common::language(); ?>">
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
