@@ -108,7 +108,13 @@ class Common
     {
         if (Yii::$app->session->has('language'))
             return Yii::$app->session->get('language');
+        else if(isset(Yii::$app->request->cookies['language']))
+            return Yii::$app->request->cookies['language']->value;
         else
             return Yii::$app->language;
+    }
+
+    public static function parseUri(){
+
     }
 }

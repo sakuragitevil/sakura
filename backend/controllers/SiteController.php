@@ -1,18 +1,20 @@
 <?php
 namespace backend\controllers;
 
-use backend\helpers\Common;
 use Yii;
 use yii\filters\AccessControl;
-use yii\web\Controller;
+
 use common\models\LoginForm;
 use yii\filters\VerbFilter;
 use yii\helpers\Json;
 
+use backend\components\ZController;
+use backend\helpers\Common;
+
 /**
  * Site controller
  */
-class SiteController extends Controller
+class SiteController extends ZController
 {
     /**
      * @inheritdoc
@@ -102,7 +104,14 @@ class SiteController extends Controller
 
         //Login action
         if ($model->load($post) && $model->login()) {
-            return $this->goBack();
+            Yii::$app->response->cookies->add(
+                new \yii\web\Cookie([
+                    'name' => 'language',
+                    'value' => Common::language(),
+                    'expire' => time() + 86400 * 365,
+                ])
+            );
+            return $this->goHome();
         } else {
             return $this->render('login', [
                 'model' => $model,
@@ -141,6 +150,13 @@ class SiteController extends Controller
         $res['status'] = 'ok';
         Yii::$app->session->set('language', $post['language']);
         Yii::$app->language = $post['language'];
+        Yii::$app->response->cookies->add(
+            new \yii\web\Cookie([
+                'name' => 'language',
+                'value' => $post['language'],
+                'expire' => time() + 86400 * 365,
+            ])
+        );
         return Json::encode($res);
     }
 }

@@ -117,4 +117,3 @@ $(".site-login-lug li").on("click", function () {
         $("#profileAvatar").show();
     }
 })();
-

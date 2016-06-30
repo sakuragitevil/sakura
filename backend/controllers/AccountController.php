@@ -3,15 +3,14 @@ namespace backend\controllers;
 
 use Yii;
 use yii\filters\AccessControl;
-use yii\web\Controller;
-use common\models\LoginForm;
 use yii\filters\VerbFilter;
-use yii\helpers\Json;
+use backend\components\ZController;
+
 
 /**
  * Site controller
  */
-class AccountController extends Controller
+class AccountController extends ZController
 {
     /**
      * @inheritdoc

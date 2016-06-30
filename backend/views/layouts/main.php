@@ -30,6 +30,8 @@ AjaxWaitingAsset::register($this);
     <link href="<?php echo Yii::$app->request->baseUrl ?>/icons/sakura.ico" rel="shortcut icon" type="image/x-icon"/>
     <link href="<?php echo Yii::$app->request->baseUrl ?>/css/icon.css" rel="stylesheet" type="text/css">
     <?php $this->head() ?>
+    <?php $this->registerJsFile(Yii::$app->request->baseUrl . '/js/common.js', ['depends' => [backend\assets\CommonAsset::className()], 'position' => $this::POS_END]); ?>
+
     <script>
         var sakuraAngular = angular.module("sakuraAngular", []);
     </script>
